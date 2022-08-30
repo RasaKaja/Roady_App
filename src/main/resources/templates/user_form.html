@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="icon" type="image/x-icon" href="roady_logo.jpg">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit user</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container text-center">
+  <div>
+    <h1>My Profile</h1>
+  </div>
+
+  <div>
+    <form th:action="@{/users/save}" method="post"
+          style="max-width: 600px; margin: 0 auto;"
+          th:object="${user}">
+      <input type="hidden" th:field="*{id}"/>
+      <div class="m-3">
+        <div class="form-group row">
+          <label class="col-form-label col-4">E-mail</label>
+          <div class="col-8">
+            <input type="email" class="form-control" th:field="*{email}" required/>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <label class="col-form-label col-4">Password</label>
+          <div class="col-8">
+            <input type="password" class="form-control" th:field="*{password}" required minlength="4" maxlength="10"/>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <label class="col-form-label col-4">First Name</label>
+          <div class="col-8">
+            <input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="20"/>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <label class="col-form-label col-4" >Last Name</label>
+          <div class="col-8">
+            <input type="text" class="form-control" th:field="*{lastName}" required minlength="2" maxlength="20"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-4" >Phone</label>
+          <div class="col-8">
+            <input type="text" class="form-control" th:field="*{phoneNumber}" required minlength="2" maxlength="20"/>
+          </div>
+        </div>
+        <br>
+<!--        <div class="form-group row">-->
+<!--          <label class="col-form-label col-4" >Assigned Roles</label>-->
+<!--          <div class="col-8">-->
+<!--            <th:block th:each="role : ${listRoles}">-->
+<!--              <input type="checkbox" th:field="*{roles}"-->
+<!--                     th:value="${role.id}"-->
+<!--                     th:text="${role.name}" class="m-2"/>-->
+<!--            </th:block>-->
+<!--          </div>-->
+<!--        </div>-->
+        <br>
+        <div>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>
