@@ -23,6 +23,27 @@ public class CustomUserDetails implements UserDetails {
         return user.getPassword();
     }
 
+
+    public String getFirstName() {
+        return user.getFirstName();
+    }
+
+
+    public String getLastName() {
+        return user.getLastName();
+    }
+
+    public String getPhoneNumber() {
+        return user.getPhoneNumber();
+    }
+
+    public Double getAvrRating() {
+        return user.getAvrRating();
+    }
+
+    public Long getId() {
+        return user.getId();
+    }
     @Override
     public String getUsername() {
         return user.getEmail();

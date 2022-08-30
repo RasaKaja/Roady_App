@@ -2,6 +2,7 @@ package com.roady.app;
 
 import com.roady.app.entities.User;
 import com.roady.app.repositories.UserRepository;
+import com.roady.app.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -35,4 +36,28 @@ public class UserRepositoryTests {
 
         assertThat(existsUser.getEmail()).isEqualTo(user.getEmail());
     }
+
+    @Test
+    public void testFindUserByEmail(){
+        String email = "rasa@email.com";
+        User user = userRepository.findUserByEmail(email);
+
+        assertThat(user).isNotNull();
+    }
+
+    @Test
+    public void testUpdateUser(){
+        User user = userRepository.getReferenceById(1l);
+        user.setEmail("rasa@email.com");
+        user.setPassword("1111");
+        user.setFirstName("Rasa");
+        user.setLastName("Kaja");
+        user.setPhoneNumber("111-555-111");
+
+        User saverUser = userRepository.save(user);
+
+        assertThat(saverUser.getLastName().equals(user));
+    }
+
+
 }
