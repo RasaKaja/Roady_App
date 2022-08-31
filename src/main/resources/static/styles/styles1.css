@@ -1,0 +1,80 @@
+#pageContent {
+    display:grid;
+    /*	grid-template-columns:10% auto 10%;*/
+}
+@media screen and (min-width:900px) {
+    #pageContent {
+        grid-template-columns: auto 50% auto;
+        grid-template-areas: "firstNav Content secondNav";
+        height: 40rem;
+    }
+}
+
+@media screen and (max-width:899px) {
+    #pageContent {
+        grid-template-columns:0% auto 0%;
+        grid-template-areas: "firstNav Content secondNav";
+
+    }
+}
+
+#secondNav {
+    background-color: navy;
+    grid-area:secondNav;
+}
+
+div.logo img {
+    width: 100%;
+    margin-top: 10%;
+
+
+
+}
+
+#firstNav {
+    grid-area:firstNav;
+    background-color: navy;
+}
+
+#footer,  #header{
+    background-color: navy;
+    text-align: center;
+    width: -moz-fit-content;
+    border-color: cornflowerblue;
+    padding: 2rem;
+    -webkit-text-fill-color: azure;
+}
+
+#Content {
+    grid-area:Content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+
+
+}
+
+#PageContent{
+    background-color: #b5b5f3;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+label.login{
+    border: gray;
+    background-color: lightgrey;
+}
+
+input{
+    padding: 5px;
+    width: auto;
+}
+
+#registerButton, #loginButton{
+    width: 100%;
+    padding: 5px;
+}
+
