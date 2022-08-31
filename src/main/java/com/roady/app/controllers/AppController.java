@@ -1,5 +1,6 @@
 package com.roady.app.controllers;
 
+import com.roady.app.entities.Car;
 import com.roady.app.entities.CustomUserDetails;
 import com.roady.app.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,16 @@ public class AppController {
     @Autowired
     private UserController userController;
 
+    @Autowired
+    private CarController carController;
+
+// HOME
     @GetMapping("")
     public String viewHomePage() {
         return "index";
     }
 
+// USERS
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         userController.showRegistrationForm(model);
@@ -30,15 +36,15 @@ public class AppController {
 
     @PostMapping("/process_register")
     public String processRegistration(User user){
-        userController.processRegistration(user);
+        userController.saveUser(user);
         return "register_success";
     }
 
-//    @GetMapping("/users")
-//    public String viewUsersList(Model model){
-//        userController.viewUsersList(model);
-//        return "users";
-//    }
+    @GetMapping("/users")
+    public String viewUsersList(Model model){
+        userController.viewUsersList(model);
+        return "users";
+    }
 
     @GetMapping("/profile")
     public String viewUserProfile(Model model){
@@ -63,6 +69,7 @@ public class AppController {
         model.addAttribute("user", user);
         return "my_info";
     }
+
 //    @GetMapping("/profile/edit{id}")  //("/users/edit/{id}")
 //    public String editUser(@PathVariable("id") Long id, Model model){
 //        userController.showUserById(id, model);
@@ -75,5 +82,11 @@ public class AppController {
         return "redirect:/profile";
     }
 
+// CARS
+//    @GetMapping
+//    public String viewAllCarsList(Model model){
+//        carController.viewAllCarsList(model);
+//        return "allCars";
+//    }
 
 }
