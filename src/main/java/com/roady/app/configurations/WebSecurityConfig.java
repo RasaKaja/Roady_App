@@ -47,7 +47,7 @@ public class WebSecurityConfig {
                 .and()
                 .formLogin()
                 .usernameParameter("email")
-                .defaultSuccessUrl("/profile")
+                .defaultSuccessUrl("/user_profile")
                 .permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll();

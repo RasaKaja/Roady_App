@@ -27,7 +27,9 @@ public class User {
     @Column(updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @CreationTimestamp
     private Timestamp registeredAt;
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    @PrimaryKeyJoinColumn
-//    private Car car;
+    // this will by default create Foreign key column in User class, and default name will be "car_id"
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "carId", nullable = true)
+    private Car car;
 }

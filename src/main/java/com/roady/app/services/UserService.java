@@ -7,7 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -19,14 +18,7 @@ public class UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public List<User> listAll(){
-        return userRepository.findAll();
-    }
-
-    public User getById(Long id){
-        return userRepository.findById(id).get();
-    }
-
+// C R U D operations
     public void saveUser(User user){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
@@ -34,4 +26,17 @@ public class UserService {
 
         userRepository.save(user);
     }
+
+    public List<User> listAll(){
+        return userRepository.findAll();
+    }
+
+    public User getUserById(Long id){
+        return userRepository.findById(id).get();
+    }
+
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
+    }
+
 }

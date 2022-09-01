@@ -10,9 +10,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -25,22 +23,24 @@ class CarRepositoryTest {
     private UserRepository userRepository;
     @Autowired
     private TestEntityManager entityManager;
-//    @Autowired
-//    private User user;
 
     @Test
     public void testAddCar(){
+        User user = userRepository.getReferenceById(1l);
+
         Car car = new Car();
         car.setPlateNumber("ABC123");
         car.setAvailableSeats(2);
-        User driverId = userRepository.getReferenceById(4l);
-        car.setDriverId(driverId);
+        car.setCarType("AUDI");
+        car.setUser(user);
 
         Car savedCar = carRepository.save(car);
-        Car existsCar = entityManager.find(Car.class, savedCar.getDriverId());
+        Car existsCar = entityManager.find(Car.class, savedCar.getId());
+
+        user.setCar(existsCar);
+        userRepository.save(user);
 
         assertThat(existsCar.getPlateNumber().equals(car.getPlateNumber()));
-
     }
 }
 

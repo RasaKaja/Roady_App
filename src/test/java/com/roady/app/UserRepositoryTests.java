@@ -2,14 +2,13 @@ package com.roady.app;
 
 import com.roady.app.entities.User;
 import com.roady.app.repositories.UserRepository;
-import com.roady.app.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
@@ -25,11 +24,13 @@ public class UserRepositoryTests {
     @Test
     public void testCreateUser(){
         User user = new User();
-        user.setEmail("rasa@email.com");
-        user.setPassword("1234");
-        user.setFirstName("Rasa");
-        user.setLastName("Kaja");
-        user.setPhoneNumber("123456789");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode("1234");
+        user.setPassword(encodedPassword);
+        user.setEmail("ruta@email.com");
+        user.setFirstName("Ruta");
+        user.setLastName("Baira");
+        user.setPhoneNumber("125-136-852");
 
         User savedUser = userRepository.save(user);
         User existsUser = entityManager.find(User.class, savedUser.getId());
@@ -58,6 +59,5 @@ public class UserRepositoryTests {
 
         assertThat(saverUser.getLastName().equals(user));
     }
-
 
 }

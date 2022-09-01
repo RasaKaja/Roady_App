@@ -15,10 +15,12 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    public void viewAllCarsList(Model model){
-        List<Car> carList = carService.allCarsList();
-        model.addAttribute("carList", carList);
-    }
+//    @GetMapping
+//    public String viewAllCarsList(Model model){
+//        List<Car> carList = carService.allCarsList();
+//        model.addAttribute("carList", carList);
+//        return "allCars";
+//    }
 
 
 }
