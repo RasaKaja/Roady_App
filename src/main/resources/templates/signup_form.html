@@ -1,65 +1,113 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="icon" type="image/x-icon" href="roady_logo.jpg">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Registration</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+  <title>Registration successful</title>
+  <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
+
+  <link rel="stylesheet" href="../static/styles/styles1.css" >
+  <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+
+
+<!--  <script>-->
+<!--    function validate(){-->
+
+<!--      var a = document.getElementByName("password").value;-->
+<!--      var b = document.getElementByName("cPassword").value;-->
+<!--      if (a!=b) {-->
+<!--        alert("Passwords do no match");-->
+<!--        return false;-->
+<!--      }-->
+<!--    }-->
+<!--  </script>-->
+
+
 </head>
 <body>
-<div class="container text-center">
-  <div>
-    <h1>User Registration - Sign Up</h1>
+<div id="header"><h1>Welcome to the Roady!</h1></div>
+
+<div id="pageContent">
+
+  <div id="firstNav">
+    <div class="logo">
+      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+    </div>
   </div>
 
-  <div>
-    <form th:action="@{/process_register}" method="post"
-          style="max-width: 600px; margin: 0 auto;"
-          th:object="${user}">
-      <div class="m-3">
-        <div class="form-group row">
-          <label class="col-form-label col-4">E-mail</label>
-          <div class="col-8">
-            <input type="email" class="form-control" th:field="*{email}" required/>
-          </div>
-        </div>
-        <br>
-        <div class="form-group row">
-          <label class="col-form-label col-4">Password</label>
-          <div class="col-8">
-            <input type="password" class="form-control" th:field="*{password}" required minlength="4" maxlength="10"/>
-          </div>
-        </div>
-        <br>
-        <div class="form-group row">
-          <label class="col-form-label col-4">First Name</label>
-          <div class="col-8">
-            <input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="20"/>
-          </div>
-        </div>
-        <br>
-        <div class="form-group row">
-          <label class="col-form-label col-4" >Last Name</label>
-          <div class="col-8">
-            <input type="text" class="form-control" th:field="*{lastName}" required minlength="2" maxlength="20"/>
-          </div>
-        </div>
-        <br>
-        <div class="form-group row">
-          <label class="col-form-label col-4" >Phone Number</label>
-          <div class="col-8">
-            <input type="text" class="form-control" th:field="*{phoneNumber}" required minlength="5" maxlength="20"/>
-          </div>
-        </div>
-        <br>
-        <div>
-          <button type="submit" class="btn btn-primary">Sign Up</button>
-        </div>
+  <div id="Content">
 
+
+    <div >
+      <div>
+        <h1 style="-webkit-text-fill-color: #24052d; text-align: center">User Registration - Sign Up</h1>
       </div>
-    </form>
+
+      <div >
+        <form th:action="@{/process_register}" method="post"
+              style="max-width: 500px; margin: 0 auto"
+              th:object="${user}" >
+
+          <div >
+            <div >
+              <label >E-mail</label>
+              <input type="email" class="form-control" th:field="*{email}" required/>
+            </div>
+            <br>
+            <!--right now does nothing-->
+            <div>
+              <label>Password</label>
+              <input type="password" name="password" th:field="*{password}" required minlength="4" maxlength="10" />
+            </div><br>
+            <div>
+              <label>Confirm Password</label>
+              <input type="password" name="cPassword" required minlength="4" maxlength="10"  />
+            </div><br>
+
+            <div >
+              <label >First Name</label>
+              <input type="text"  th:field="*{firstName}" required minlength="2" maxlength="20"/>
+              </div> <br>
+
+            <div>
+              <label >Last Name</label>
+              <input type="text"  th:field="*{lastName}" required minlength="2" maxlength="20"/>
+            </div><br>
+
+            <div >
+              <label >Phone Number</label>
+              <input type="text"  th:field="*{phoneNumber}" required minlength="5" maxlength="20"/>
+            </div><br>
+            <div>
+              <button id="signupButton" type="submit" >Sign Up</button>
+            </div>
+
+          </div>
+
+          <div >
+            <p style="text-align: center">Already have an account? <a href="/login" style="text-decoration: underline">Sign in</a></p>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+
+
+
+
+    <br><br>
   </div>
 
+  <div id="secondNav">
+    <div class="logo">
+      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+    </div>
+  </div>
+</div>
+
+<div id="footer">
+  <p>Copyrights: Forest Team Active users: Available rides: </p>
 </div>
 
 </body>
