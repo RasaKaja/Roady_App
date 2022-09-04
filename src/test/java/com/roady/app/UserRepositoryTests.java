@@ -25,12 +25,12 @@ public class UserRepositoryTests {
     public void testCreateUser(){
         User user = new User();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode("1234");
+        String encodedPassword = passwordEncoder.encode("12345");
         user.setPassword(encodedPassword);
-        user.setEmail("ruta@email.com");
-        user.setFirstName("Ruta");
-        user.setLastName("Baira");
-        user.setPhoneNumber("125-136-852");
+        user.setEmail("zydre@email.com");
+        user.setFirstName("Zydre");
+        user.setLastName("Test");
+        user.setPhoneNumber("125-377-000");
 
         User savedUser = userRepository.save(user);
         User existsUser = entityManager.find(User.class, savedUser.getId());
