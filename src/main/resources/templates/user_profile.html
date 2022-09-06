@@ -1,76 +1,89 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<link rel="icon" type="image/x-icon" href="roady_logo.jpg">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>User profile</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  <title>Roady</title>
+  <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
+
+  <link rel="stylesheet" href="../static/styles/style1.css" >
+  <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+
 </head>
 <body>
-<div class="container text-center">
-  <div>
-    <form th:action="@{/logout}" method="post">
-      <p>
-        Welcome <b>[[${#request.userPrincipal.principal.FullName}]]</b>
-        <!--                    This line should show the role of the current User near the name, at the bottom-->
-        <span sec:authentification="principal.authorities"></span>
+<div id="header"><h1>Welcome to the Roady!</h1>
+
+  <!-- needs revision-->
+  <form th:action="@{/logout}" method="post">
+    <div style="margin-right: 5%">
+      <a class="likeButton" th:href="@{/my_info}" >My profile</a>
+      <a class="likeButton" type="submit" >Logout</a>
+    </div>
+
+
+    <!--      <input type="submit" value="Sign Out"/>-->
+  </form>
+
+</div>
+
+<div id="pageContent">
+
+  <div id="firstNav">
+    <div class="logo">
+      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+    </div>
+  </div>
+
+  <div id="Content">
+    <div >
+<!--      <div >-->
+<!--        <form th:action="@{/logout}" method="post">-->
+
+<!--          <a class="likeButton" th:href="@{/my_info}" >My profile</a>-->
+
+<!--          <a class="likeButton"  >Logout</a>-->
+
+<!--          &lt;!&ndash;      <input type="submit" value="Sign Out"/>&ndash;&gt;-->
+<!--        </form>-->
+
+<!--      </div>-->
+
+      <p> Welcome !! add name
+
       </p>
-      <a class="btn btn-primary" th:href="@{/my_info}" role="button">My profile</a>
 
-      <button type="button" class="btn btn-danger">Logout</button>
+<!--      <div>-->
+<!--        <img src="/static/images/logo.png"  alt="Roady logo">-->
+<!--      </div>-->
+      <div>
+        <h3>What is your plan for today?</h3>
+      </div>
+      <div>
 
-<!--      <input type="submit" value="Sign Out"/>-->
-    </form>
+        <a class="likeButton"  >Looking for a ride</a>
+        <a class="likeButton"  >Offering a ride</a>
 
+<!--        <button type="button" class="btn btn-success">Looking for a ride</button>-->
+<!--        <button type="button" class="btn btn-danger">Offering a ride</button>-->
+      </div>
+
+    </div>
+
+</div>
+
+
+  <div id="secondNav">
+    <div class="logo">
+      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+    </div>
   </div>
-  <div>
-    <h1>Welcome to the ROADY</h1>
-  </div>
-  <div>
-    <img src="roady_logo.jpg" class="img-fluid" alt="Roady_logo">
-  </div>
-  <div>
-    <h3>What is your plan for today?</h3>
-  </div>
-  <div>
-    <button type="button" class="btn btn-success">Looking for a ride</button>
-    <button type="button" class="btn btn-danger">Offering a ride</button>
-  </div>
-<!--  <div>-->
-<!--    <table class="table table-striped table-bordered">-->
-<!--      <thead class="thead-dark">-->
-<!--      <tr>-->
-<!--        <th>User ID</th>-->
-<!--        <th>E-mail</th>-->
-<!--        <th>First Name</th>-->
-<!--        <th>Last Name</th>-->
-<!--        <th>Phone</th>-->
-<!--        <th>Avr. rating</th>-->
-<!--        <th>Registered At</th>-->
-<!--&lt;!&ndash;        <th>Roles</th>&ndash;&gt;-->
-<!--        <th></th>-->
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      <tbody>-->
-<!--      <tr th:each="user: ${listUsers}">-->
-<!--        <td th:text="${user.id}">User ID</td>-->
-<!--        <td th:text="${user.email}">E-mail</td>-->
-<!--        <td th:text="${user.firstName}">First name</td>-->
-<!--        <td th:text="${user.lastName}">Last name</td>-->
-<!--        <td th:text="${user.phoneNumber}">Phone</td>-->
-<!--        <td th:text="${user.avrRating}">Avr. rating</td>-->
-<!--        <td th:text="${user.registeredAt}">Registered At</td>-->
-<!--&lt;!&ndash;        <td th:text="${user.roles}">Roles</td>&ndash;&gt;-->
-<!--        <td>-->
-<!--          <a th:href="@{'/users/edit/' + ${user.id}}">Edit</a>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
-<!--  </div>-->
+
+
+
+
+</div>
+
+<div id="footer">
+  <p>Copyrights: Forest Team Active users: Available rides: </p>
 </div>
 
 </body>
