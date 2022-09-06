@@ -1,69 +1,87 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<link rel="icon" type="image/x-icon" href="roady_logo.jpg">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My info</title>
+    <title>Roady</title>
+    <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
+
+    <link rel="stylesheet" href="../static/styles/style1.css" >
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+
 </head>
 <body>
-  <h1>This is my profile info</h1>
-  <html>
+<div id="header"><h1>Welcome to the Roady!</h1></div>
 
-<!--  <h2>Currently logged in user</h2>-->
+<div id="pageContent">
 
-<!--    <div >[[${#request.userPrincipal.principal.fullName}]]</div>-->
-<!--<li>-->
-<!--    <div class="nav-link" sec:authentication="name"> </div>-->
-<!--    <div class="nav-link" sec:authentication=principal.> </div>-->
-
-
-<div>
-    <form th:action="@{/users/save}" method="post"
-          style="max-width: 600px; margin: 0 auto;"
-          th:object="${user}">
-        <input type="number" th:field="*{id}"/>
-        <input type="email" th:field="*{username}"/>
-        <div class="m-3">
-            <br>
-                <label class="col-form-label col-4">Password</label>
-                <div class="col-8">
-                    <input type="password" class="form-control" th:field="*{password}" required minlength="4" maxlength="10"/>
-            </div>
-            <br>
-                <label class="col-form-label col-4">First Name</label>
-                <div class="col-8">
-                    <input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="20"/>
-            </div>
-            <br>
-                <label class="col-form-label col-4" >Last Name</label>
-                <div class="col-8">
-                    <input type="text" class="form-control" th:field="*{lastName}" required minlength="2" maxlength="20"/>
-            </div>
-                <label class="col-form-label col-4" >Phone</label>
-                <div class="col-8">
-                    <input type="text" class="form-control" th:field="*{phoneNumber}" required minlength="2" maxlength="20"/>
-            </div>
-            <br>
-            <!--        <div class="form-group row">-->
-            <!--          <label class="col-form-label col-4" >Assigned Roles</label>-->
-            <!--          <div class="col-8">-->
-            <!--            <th:block th:each="role : ${listRoles}">-->
-            <!--              <input type="checkbox" th:field="*{roles}"-->
-            <!--                     th:value="${role.id}"-->
-            <!--                     th:text="${role.name}" class="m-2"/>-->
-            <!--            </th:block>-->
-            <!--          </div>-->
-            <!--        </div>-->
-            <br>
-            <div>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
-
+    <div id="firstNav">
+        <div class="logo">
+            <img title="logo" src="../static/images/logo.png" alt="Roady logo">
         </div>
-    </form>
+    </div>
+
+    <div id="Content">
+
+        <h1>This is my profile info</h1>
+
+        <div>
+            <form th:action="@{/users/save}" method="post"
+                  style="max-width: 500px; margin: 0 auto;"
+                  th:object="${user}">
+                <div>Id:  <span th:field="${id}"></span> </div>
+
+                <div >
+                    <div>
+                        <label>Username</label>
+                        <input type="email" th:field="*{username}"/>
+                    </div>
+                    <br>
+                    <div >
+                        <label >Password</label>
+                        <input type="password"  th:field="*{password}" required minlength="4" maxlength="10"/>
+                    </div>
+                    <br>
+                    <div >
+                        <label >First Name</label>
+                        <input type="text" th:field="*{firstName}" required minlength="2" maxlength="20"/>
+                    </div>
+                    <br>
+                    <div >
+                        <label  >Last Name</label>
+                        <input type="text" th:field="*{lastName}" required minlength="2" maxlength="20"/>
+                    </div>
+                    <br>
+                    <div >
+                        <label>Phone</label>
+                        <input type="text"  th:field="*{phoneNumber}" required minlength="2" maxlength="20"/>
+                    </div>
+                    <br>
+                    <div>
+                        <button type="submit" >Update</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+
+
+    </div>
+
+    <div id="secondNav">
+        <div class="logo">
+            <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+        </div>
+    </div>
+
+
+
+
 </div>
 
-  </html>
+<div id="footer">
+    <p>Copyrights: Forest Team Active users: Available rides: </p>
+</div>
+
 </body>
 </html>

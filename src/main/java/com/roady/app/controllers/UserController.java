@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -17,6 +19,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
 
 // C R U D operations
     @PostMapping("/users/save")
@@ -45,11 +48,21 @@ public class UserController {
         return "user_form";
     }
 
+    @GetMapping("/user_profile")
+    public String showUserProfilePage(Model model){
+
+        return "user_profile";
+    }
+
 
 // O T H E R  operations
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         model.addAttribute("user", new User());
+
+        ArrayList<User> users =  userService.getAllUsers();
+
+        model.addAttribute("users", users);
         return "signup_form";
     }
 
@@ -58,4 +71,14 @@ public class UserController {
         model.addAttribute("user", user);
         return "my_info";
     }
+
+//    @GetMapping("/index")
+//    public String showIndexPage(Model model){
+//        ArrayList<User> users =  userService.getAllUsers();
+//
+//        model.addAttribute("users", users);
+//        return "index";
+//    }
+
+
 }
