@@ -13,14 +13,12 @@ import java.util.List;
 @Table(name = "rideRequest")
 public class Ride {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rideRequestId;
-
-    @OneToMany (fetch = FetchType.LAZY)
+    @OneToOne (cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "passengerId")
-    private List<User> passengers;
+    private User passenger;
     @Column(nullable = false, length = 64)
     private String departurePoint;
     @Column(nullable = false, length = 64)
@@ -34,8 +32,6 @@ public class Ride {
     @Column
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
-    @Column(nullable = false)
-    private int availableSeats;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "DriverId")
     private Car car;

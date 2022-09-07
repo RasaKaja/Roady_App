@@ -26,7 +26,7 @@ class CarRepositoryTest {
 
     @Test
     public void testAddCar(){
-        User user = userRepository.getReferenceById(2l);
+        User user = userRepository.getReferenceById(1l);
 
         Car car = new Car();
         car.setPlateNumber("AAA123");

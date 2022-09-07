@@ -27,8 +27,8 @@ public class UserRepositoryTests {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode("12345");
         user.setPassword(encodedPassword);
-        user.setEmail("zydre@email.com");
-        user.setFirstName("Zydre");
+        user.setEmail("ana@email.com");
+        user.setFirstName("Ana");
         user.setLastName("Test");
         user.setPhoneNumber("125-377-000");
 
