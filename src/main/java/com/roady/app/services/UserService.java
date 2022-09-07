@@ -45,5 +45,13 @@ public class UserService {
         return (ArrayList<User>) userRepository.findAll();
     }
 
+//    public User verifyUser(User userLoginRequest) throws Exception{
+//
+//        User foundUser = this.userRepository.findByEmailAndPassword(userLoginRequest.getEmail(), userLoginRequest.getPassword());
+//        if(foundUser==null) {throw new Exception("Username or password is not correct");}
+//
+//        return foundUser;
+//    }
+
 
 }

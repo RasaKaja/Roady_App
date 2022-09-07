@@ -72,12 +72,28 @@ public class UserController {
         return "my_info";
     }
 
-//    @GetMapping("/index")
-//    public String showIndexPage(Model model){
-//        ArrayList<User> users =  userService.getAllUsers();
+    @GetMapping("/signup_form")
+    public String showIndexPage(Model model){
+        ArrayList<User> users =  userService.getAllUsers();
+
+        model.addAttribute("users", users);
+        return "register";
+    }
+
+//    @GetMapping("/login")
+//    public String activeUserInfo(){
 //
-//        model.addAttribute("users", users);
-//        return "index";
+//        return "login";
+//    }
+
+//    @PostMapping("/login")
+//    public String successfulLogin(User user){
+//        try{
+//            User loggedInUser = userService.verifyUser(user);
+//            return "redirect:my_info";
+//        }catch (Exception e){
+//            return "login";
+//        }
 //    }
 
 
