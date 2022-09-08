@@ -29,17 +29,12 @@
         <form>
             <div>
                 <p >Existing user?</p>
-<!--                <button id="loginButton" style="width: 150px" onclick="location.href='/login'" type="button">Login</button>-->
                 <h3 class="likeButton"><a th:href="@{/register}">Register</a></h3>
 <!--                <h3 class="likeButton"><a href="/signup_form">Register</a></h3>-->
                 <br>
                 <br>
                 <p>New user?</p>
                 <h3 class="likeButton"><a th:href="@{/login}">Login</a> </h3>
-<!--                <button id="registerButton" onclick="location.href='/register'" type="button">Register</button>-->
-
-<!--                <h1>Users: </h1>-->
-<!--                <div> Total users <span th:text="${users.size()}"></span> </div>-->
 
             </div>
         </form>
@@ -56,12 +51,10 @@
     </div>
 
 
-
-
 </div>
 
 <div id="footer">
-    <p>Copyrights: Forest Team Active users: Available rides: </p>
+    <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>
 </div>
 
 </body>

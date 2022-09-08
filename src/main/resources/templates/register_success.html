@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="../static/styles/styles1.css" >
   <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+  <meta http-equiv = "refresh" content = "4; url = 'login'" />
 
 </head>
 <body>
@@ -26,7 +27,7 @@
     <!--        <h3><a th:href="@{/login}">Login</a> </h3>-->
     <div>
       <h3 style="-webkit-text-fill-color: #053745">You have signed up successfully!</h3>
-      <h4 style="-webkit-text-fill-color: #154468"><a th:href="@{/login}">Click here to login</a></h4>
+      <h4 style="-webkit-text-fill-color: #154468"><a th:href="@{/login}">If login page does not open Click here to login</a></h4>
     </div>
 
 
@@ -47,7 +48,7 @@
 </div>
 
 <div id="footer">
-  <p>Copyrights: Forest Team Active users: Available rides: </p>
+  <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>
 </div>
 
 </body>

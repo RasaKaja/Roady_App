@@ -1,12 +1,16 @@
 package com.roady.app.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
@@ -32,4 +36,10 @@ public class User {
 
     @JoinColumn(name = "carId", nullable = true)
     private Car car;
+
+//public User(String email, String password){
+//    this.email=email;
+//    this.password=password;
+//}
+
 }

@@ -25,32 +25,21 @@
 
     <form method="post" action="/login">
       <div>
-        <table>
-          <tr>
-            <td class="labelField"> <label class="login" >Enter your username</label></td>
-          </tr>
-          <tr>
-            <td > <input name="username" type="text"></td>
-          </tr>
-        </table>
+
+            <label class="login" >Enter your username</label>
+            <input name="email" type="email">
+      </div>
+      <div>
+
+              <label class="login">Enter your password</label>
+              <input name="password" type="password"><br>
 
       </div>
       <div>
-        <table>
-          <tr>
-            <td class="labelField">
-              <label class="login">Enter your password</label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input name="password" type="password"><br>
-            </td>
-          </tr>
-        </table>
-
+        <button id="loginButton">Login</button>
       </div>
-      <button id="loginButton">Login</button>
+
+
     </form>
 
     <form>
@@ -73,7 +62,7 @@
 </div>
 
 <div id="footer">
-  <p>Copyrights: Forest Team Active users: Available rides: </p>
+  <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>
 </div>
 
 </body>

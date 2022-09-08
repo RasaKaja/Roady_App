@@ -5,7 +5,8 @@
   <title>Registration successful</title>
   <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
 
-  <link rel="stylesheet" href="../static/styles/styles1.css" >
+  <link rel="stylesheet" href="/static/styles/style1.css" >
+  <link rel="stylesheet" href="/static/styles/user_form.css" >
   <meta name="viewport" content="width=device-width; initial-scale=1.0" >
 
 </head>
@@ -23,72 +24,82 @@
   <div id="Content">
 
 
-    <div class="container text-center">
+    <div >
       <div>
         <h1>My Profile</h1>
       </div>
+      <br>
 
-      <div>
-        <form th:action="@{/users/save}" method="post"
-              style="max-width: 600px; margin: 0 auto;"
-              th:object="${user}">
-          <input type="hidden" th:field="*{id}"/>
-          <div class="m-3">
-            <div class="form-group row">
-              <label class="col-form-label col-4">E-mail</label>
-              <div class="col-8">
-                <input type="email" class="form-control" th:field="*{email}" required/>
-              </div>
-            </div>
-            <br>
-            <div class="form-group row">
-              <label class="col-form-label col-4">Password</label>
-              <div class="col-8">
-                <input type="password" class="form-control" th:field="*{password}" required minlength="4" maxlength="10"/>
-              </div>
-            </div>
-            <br>
-            <div class="form-group row">
-              <label class="col-form-label col-4">First Name</label>
-              <div class="col-8">
-                <input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="20"/>
-              </div>
-            </div>
-            <br>
-            <div class="form-group row">
-              <label class="col-form-label col-4" >Last Name</label>
-              <div class="col-8">
-                <input type="text" class="form-control" th:field="*{lastName}" required minlength="2" maxlength="20"/>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-form-label col-4" >Phone</label>
-              <div class="col-8">
-                <input type="text" class="form-control" th:field="*{phoneNumber}" required minlength="2" maxlength="20"/>
-              </div>
-            </div>
-            <br>
-            <!--        <div class="form-group row">-->
-            <!--          <label class="col-form-label col-4" >Assigned Roles</label>-->
-            <!--          <div class="col-8">-->
-            <!--            <th:block th:each="role : ${listRoles}">-->
-            <!--              <input type="checkbox" th:field="*{roles}"-->
-            <!--                     th:value="${role.id}"-->
-            <!--                     th:text="${role.name}" class="m-2"/>-->
-            <!--            </th:block>-->
-            <!--          </div>-->
-            <!--        </div>-->
-            <br>
-            <div>
-              <button type="submit" class="btn btn-primary">Update</button>
-            </div>
+      <table >
+        <tr>
+        <td>
+          <h4>Id: </h4>
+        </td>
+        <td>
+          <p th:text="${id}"></p>
+        </td>
+      </tr>
 
-          </div>
-        </form>
-      </div>
+        <tr>
+          <td>
+            <h4>Email: </h4>
+          </td>
+          <td>
+            <p th:text="${email}"></p>
+          </td>
+        </tr>
 
-    </div>
+        <tr>
+          <td>
+            <h4>First name: </h4>
+          </td>
+          <td>
+            <p th:text="${firstName}"></p>
+          </td>
+        </tr>
 
+        <tr>
+          <td>
+            <h4>Last name: </h4>
+          </td>
+          <td>
+            <p th:text="${lastName}"></p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <h4> User rating: </h4>
+          </td>
+          <td>
+            <p th:text="${avrRating}"></p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <h4>Phone number: </h4>
+          </td>
+          <td>
+            <p th:text="${phoneNumber}"></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4>Member since: </h4>
+          </td>
+          <td>
+            <p th:text="${registredAt}"></p>
+          </td>
+        </tr>
+
+      </table>
+
+<div>
+  <a class="likeButton" href="/my_info"> Update your information</a>
+</div>
+
+</div>
 
     <br><br>
   </div>
@@ -101,7 +112,7 @@
 </div>
 
 <div id="footer">
-  <p>Copyrights: Forest Team Active users: Available rides: </p>
+  <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>
 </div>
 
 </body>
