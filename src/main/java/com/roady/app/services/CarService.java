@@ -4,13 +4,14 @@ import com.roady.app.entities.Car;
 import com.roady.app.entities.User;
 import com.roady.app.repositories.CarRepository;
 import com.roady.app.repositories.UserRepository;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
-@Transactional
+@Data
 public class CarService {
     @Autowired
     private CarRepository carRepository;
