@@ -5,23 +5,12 @@
     <title>User profile</title>
     <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
 
-    <link rel="stylesheet" href="../static/styles/styles1.css" >
+    <link rel="stylesheet" href="/static/styles/style1.css" >
     <meta name="viewport" content="width=device-width; initial-scale=1.0" >
 
 </head>
 <body>
 <div id="header"><h1>Welcome to the Roady!</h1>
-
-  <!-- needs revision-->
-  <form th:action="@{/logout}" method="post">
-    <div style="margin-right: 5%">
-      <a class="likeButton" th:href="@{/my_info}" >My profile</a>
-      <a class="likeButton" type="submit" >Logout</a>
-    </div>
-
-
-    <!--      <input type="submit" value="Sign Out"/>-->
-  </form>
 
 </div>
 
@@ -47,9 +36,7 @@
 
 <!--      </div>-->
 
-      <p> Welcome !! add name
-
-      </p>
+      <p> Welcome <span th:text="${firstName}"></span></p>
 
 <!--      <div>-->
 <!--        <img src="/static/images/logo.png"  alt="Roady logo">-->
@@ -83,7 +70,7 @@
 </div>
 
 <div id="footer">
-  <p>Copyrights: Forest Team Active users: Available rides: </p>
+  <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>
 </div>
 
 </body>

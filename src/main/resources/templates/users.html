@@ -2,61 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>User list</title>
+  <title>Users</title>
   <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
 
-  <link rel="stylesheet" href="../static/styles/styles1.css" >
+  <link rel="stylesheet" href="../static/styles/style1.css" >
   <meta name="viewport" content="width=device-width; initial-scale=1.0" >
 
 </head>
-
 <body>
-<div class="container text-center">
-  <div>
-    <form th:action="@{/logout}" method="post">
-      <p>
-        Welcome <b>put loggedIn user name here</b>
-        <!--                    This line should show the role of the current User near the name, at the bottom-->
+<div id="header"><h1>Welcome to the Roady!</h1></div>
 
-      </p>
-      <input type="submit" value="Sign Out"/>
-    </form>
+<div id="pageContent">
+
+  <div id="firstNav">
+    <div class="logo">
+      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+    </div>
   </div>
-  <div>
-    <h1>List Of All Users</h1>
+
+  <div id="Content">
+
+    <div >
+      <div>
+<!--        <form th:action="@{/logout}" method="post">-->
+<!--          <p>-->
+<!--            Welcome <b>put loggedIn user name here</b>-->
+<!--            &lt;!&ndash;                    This line should show the role of the current User near the name, at the bottom&ndash;&gt;-->
+
+<!--          </p>-->
+<!--          <input type="submit" value="Sign Out"/>-->
+<!--        </form>-->
+      </div>
+      <div>
+        <h1>List Of All Users</h1>
+      </div>
+      <div>
+        <table >
+          <thead >
+          <tr>
+            <th>User ID</th>
+            <th>E-mail</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Avr. rating</th>
+            <th>Registered At</th>
+            <!--        <th>Roles</th>-->
+            <th></th>
+          </tr>
+          </thead>
+<!--          <tbody>-->
+<!--          <tr th:each="user: ${listUsers}">-->
+<!--            <td th:text="${user.id}">User ID</td>-->
+<!--            <td th:text="${user.email}">E-mail</td>-->
+<!--            <td th:text="${user.firstName}">First name</td>-->
+<!--            <td th:text="${user.lastName}">Last name</td>-->
+<!--            <td th:text="${user.phoneNumber}">Phone</td>-->
+<!--            <td th:text="${user.avrRating}">Avr. rating</td>-->
+<!--            <td th:text="${user.registeredAt}">Registered At</td>-->
+<!--            &lt;!&ndash;        <td th:text="${user.roles}">Roles</td>&ndash;&gt;-->
+<!--            <td>-->
+<!--              <a th:href="@{'/users/edit/' + ${user.id}}">Edit</a>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+        </table>
+      </div>
+    </div>
+
   </div>
-  <div>
-    <table class="table table-striped table-bordered">
-      <thead class="thead-dark">
-      <tr>
-        <th>User ID</th>
-        <th>E-mail</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Phone</th>
-        <th>Avr. rating</th>
-        <th>Registered At</th>
-<!--        <th>Roles</th>-->
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="user: ${listUsers}">
-        <td th:text="${user.id}">User ID</td>
-        <td th:text="${user.email}">E-mail</td>
-        <td th:text="${user.firstName}">First name</td>
-        <td th:text="${user.lastName}">Last name</td>
-        <td th:text="${user.phoneNumber}">Phone</td>
-        <td th:text="${user.avrRating}">Avr. rating</td>
-        <td th:text="${user.registeredAt}">Registered At</td>
-<!--        <td th:text="${user.roles}">Roles</td>-->
-        <td>
-          <a th:href="@{'/users/edit/' + ${user.id}}">Edit</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+
+  <div id="secondNav">
+    <div class="logo">
+      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+    </div>
   </div>
+
+
+
+
+</div>
+
+<div id="footer">
+  <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>
 </div>
 
 </body>

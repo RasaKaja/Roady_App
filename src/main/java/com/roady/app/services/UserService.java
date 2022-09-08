@@ -10,8 +10,10 @@ import java.util.List;
 
 @Service
 public class UserService {
+
+    UserRepository userRepository;
     @Autowired
-    private UserRepository userRepository;
+    public UserService(UserRepository userRepository) {this.userRepository=userRepository;}
 
 
 // C R U D operations
@@ -35,9 +37,10 @@ public class UserService {
         return (ArrayList<User>) userRepository.findAll();
     }
 
-    public User verifyUser(User userLoginRequest) throws Exception{
+    public User verifyUser(String email, String password) throws Exception{
 
-        User foundUser = this.userRepository.findByEmailAndPassword(userLoginRequest.getEmail(), userLoginRequest.getPassword());
+        User foundUser = this.userRepository.findByEmailAndPassword(email, password);
+        System.out.println("Atrast lietotajs: " + foundUser);
         if(foundUser==null) {throw new Exception("Username or password is not correct");}
 
         return foundUser;
