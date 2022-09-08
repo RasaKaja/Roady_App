@@ -1,10 +1,8 @@
 package com.roady.app.controllers;
 
-import com.roady.app.entities.CustomUserDetails;
 import com.roady.app.entities.User;
 import com.roady.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,8 +64,9 @@ public class UserController {
         return "signup_form";
     }
 
+    //should be changed
     @GetMapping("/my_info")
-    public String activeUserInfo(@AuthenticationPrincipal CustomUserDetails user, Model model){
+    public String activeUserInfo(@PathVariable User user, Model model){
         model.addAttribute("user", user);
         return "my_info";
     }
@@ -80,11 +79,11 @@ public class UserController {
         return "register";
     }
 
-//    @GetMapping("/login")
-//    public String activeUserInfo(){
-//
-//        return "login";
-//    }
+    @GetMapping("/login")
+    public String activeUserInfo(){
+
+        return "login";
+    }
 
 //    @PostMapping("/login")
 //    public String successfulLogin(User user){
