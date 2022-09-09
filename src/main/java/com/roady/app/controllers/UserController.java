@@ -1,9 +1,7 @@
 package com.roady.app.controllers;
 
-import com.roady.app.entities.ActiveUser;
 import com.roady.app.entities.User;
 import com.roady.app.repositories.UserRepository;
-import com.roady.app.services.ActiveUserService;
 import com.roady.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,7 @@ import java.util.List;
 public class UserController {
 
     UserRepository userRepository;
-    ActiveUser activeUser;
+
     int activeUsersNumber;
 
     User currentUser;
@@ -28,25 +26,33 @@ public class UserController {
 
 
 // C R U D operations
-    @PutMapping("/update_profile")
-    public String saveUser(User user){
+    @PostMapping("/update_profile")
+    public String saveUser( String email,  String password, String firstName, String lastName, String phone){
+        User user = userService.getUserById(currentUser.getId());
+        if(email!=null) user.setEmail(email);
+        if(password!=null) user.setPassword(password);
+        if(firstName!=null) user.setFirstName(firstName);
+        if(lastName!=null) user.setLastName(lastName);
+        if(phone!=null) user.setPhoneNumber(phone);
 
+        currentUser=user;
         userService.saveUser(user);
         return "redirect:/user_form";
     }
 
-//    @GetMapping("/my_info")
-//    public String activeUserInfo(@PathVariable Long id , Model model){
-//        id = this.currentUser.getId();
-//        User user = userService.getUserById(id);
-//
-//        model.addAttribute("email", user.getEmail() );
-//        model.addAttribute("firstName", user.getFirstName() );
-//        model.addAttribute("lastName", user.getLastName() );
-//        model.addAttribute("phoneNumber", user.getPhoneNumber() );
-//        model.addAttribute("countUsers", this.activeUsersNumber );
-//        return "my_info";
-//    }
+
+    @GetMapping("/my_info")
+    public String editUser(Model model){
+        User user = currentUser;
+
+        model.addAttribute("id", user.getId() );
+        model.addAttribute("email", user.getEmail() );
+        model.addAttribute("firstName", user.getFirstName() );
+        model.addAttribute("lastName", user.getLastName() );
+        model.addAttribute("phoneNumber", user.getPhoneNumber() );
+        model.addAttribute("user", currentUser);
+        return "my_info";
+    }
 
     //works
     @PostMapping("/process_register")
@@ -63,18 +69,7 @@ public class UserController {
     }
 
     //works
-    @GetMapping("/my_info")
-    public String editUser(Model model){
-        User user = currentUser;
 
-        System.out.println("My info user " + user);
-                model.addAttribute("email", user.getEmail() );
-        model.addAttribute("firstName", user.getFirstName() );
-        model.addAttribute("lastName", user.getLastName() );
-        model.addAttribute("phoneNumber", user.getPhoneNumber() );
-        model.addAttribute("user", currentUser);
-        return "user_form";
-    }
 
     @GetMapping("/user_profile")
     public String showUserProfilePage(Model model){
@@ -128,13 +123,8 @@ public class UserController {
     public String successfulLogin(User user){
 
         try{
-            System.out.println("Epasts" + user.getEmail());
-            System.out.println("Lietotajs" + user);
             User loggedInUser = userService.verifyUser(user.getEmail(), user.getPassword());
-            System.out.println("Ielogots lietotajs" + loggedInUser);
-//            activeUser.changeCurrentUser(loggedInUser);
             this.currentUser=loggedInUser;
-            System.out.println("Tekošais lietotajs" + this.currentUser);
             return "redirect:user_profile/";
         }catch (Exception e){
             return "login"+e.getMessage();
@@ -160,6 +150,12 @@ public class UserController {
     @GetMapping("/register_success")
     public String RegistrationWasSuccessful(){
         return "register_success";
+    }
+
+    @GetMapping("/logout")
+    public String handleLogout(){
+        currentUser=null;
+        return "login";
     }
 
 
