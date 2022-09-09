@@ -126,7 +126,7 @@ public class UserController {
         try{
             User loggedInUser = userService.verifyUser(user.getEmail(), user.getPassword());
             this.currentUser=loggedInUser;
-            return "redirect:user_profile/";
+            return "redirect:user_profile";
         }catch (Exception e){
             return "redirect:login?status=user_not_found";
         }

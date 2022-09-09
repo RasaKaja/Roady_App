@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Registration successful</title>
-  <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
+  <title>Driver profile</title>
+  <link rel="icon" type="image/x-icon" href="images/logo.png">
 
-  <link rel="stylesheet" href="/static/styles/style1.css" >
-  <link rel="stylesheet" href="/static/styles/user_form.css" >
+  <link rel="stylesheet" href="styles/style1.css" >
+  <link rel="stylesheet" href="styles/user_form.css" >
   <meta name="viewport" content="width=device-width; initial-scale=1.0" >
 
 </head>
@@ -17,14 +17,12 @@
 
   <div id="firstNav">
     <div class="logo">
-      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+      <img title="logo" src="images/logo.png" alt="Roady logo">
     </div>
   </div>
 
   <div id="Content">
-
-    <myMenyButtons>
-
+    <div class="myMenuButtons">
       <form action="/logout" method="get">
         <button type="submit">Logout</button>
       </form>
@@ -33,7 +31,6 @@
       </form>
       <form action="/user_profile" method="get">
         <button type="submit">Select an action</button>
-
       </form>
       <form action="/cars" method="get">
         <button type="submit">Your cars</button>
@@ -44,18 +41,19 @@
       <form action="/driver_today" method="get">
         <button type="submit">Find passengers</button>
       </form>
+    </div>
 
-    </myMenyButtons>
+    <div>
+      <!-- Searching for passenger -->
+    </div>
 
-</div>
-
-  <div>
-    <!-- Searching for passenger -->
   </div>
+
+
 
   <div id="secondNav">
     <div class="logo">
-      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+      <img title="logo" src="images/logo.png" alt="Roady logo">
     </div>
   </div>
 </div>
@@ -63,6 +61,7 @@
 <div id="footer">
   <p>Copyrights: Forest Team Active users: <span ></span> Available rides: </p>
 </div>
+
 
 </body>
 </html>
