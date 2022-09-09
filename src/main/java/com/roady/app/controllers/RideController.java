@@ -18,7 +18,6 @@ public class RideController {
     @Autowired
     private RideService rideService;
 
-
     @PostMapping("ride_requests/save")
     public String createRideRequest(Ride ride){
         rideService.saveRideRequest(ride);

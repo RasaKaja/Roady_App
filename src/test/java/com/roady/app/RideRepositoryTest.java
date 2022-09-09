@@ -1,10 +1,8 @@
 package com.roady.app;
 
-import com.roady.app.entities.PaymentType;
-import com.roady.app.entities.Ride;
-import com.roady.app.entities.User;
-import com.roady.app.entities.Car;
+import com.roady.app.entities.*;
 import com.roady.app.repositories.CarRepository;
+import com.roady.app.repositories.DriverReviewRepository;
 import com.roady.app.repositories.RideRepository;
 import com.roady.app.repositories.UserRepository;
 import org.assertj.core.api.AssertionsForClassTypes;
@@ -38,19 +36,22 @@ public class RideRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
 
+    @Autowired
+    private DriverReviewRepository driverReviewRepository;
+
     @Test
     public void testAddRideRequest() {
-        User passenger = userRepository.getReferenceById(2l);
-        Car car = carRepository.getReferenceById(1l);
+        User passenger = userRepository.getReferenceById(4l);
+        Car car = carRepository.getReferenceById(4l);
 
         //given
         Ride ride = new Ride();
         ride.setPassenger(passenger);
-        ride.setDeparturePoint("Vilnius");
-        ride.setDestinationPoint("Klaipeda");
+        ride.setDeparturePoint("Palanga");
+        ride.setDestinationPoint("Riga");
         ride.setDepartureDate(Date.valueOf("2022-09-20"));
         ride.setDepartureTime(Time.valueOf("10:00:00"));
-        ride.setRidePrice(15D);
+        ride.setRidePrice(5D);
         ride.setPaymentType(PaymentType.CASH);
         ride.setCar(car);
         ride.setIsFinished(true);
@@ -58,9 +59,6 @@ public class RideRepositoryTest {
         //when
         Ride savedRide = rideRepository.save(ride);
         Ride existsRide = entityManager.find(Ride.class, savedRide.getRideRequestId());
-
-//        carRepository.save(car);
-//        userRepository.save(user);
 
         //then
         assertThat(existsRide.getRideRequestId().equals(ride.getRideRequestId()));
@@ -77,4 +75,22 @@ public class RideRepositoryTest {
         assertThat(rideRequest).isNotNull();
     }
 
+    @Test
+    public void addReviewToDriver(){
+        Long requestId = 4l;
+        Long driverId = rideRepository.getReferenceById(requestId).getCar().getUser().getId();
+//        String driverName = rideRepository.getReferenceById(4l).getCar().getUser().getFirstName();
+
+        DriverReview driverReview = new DriverReview();
+        driverReview.setRideId(requestId);
+        driverReview.setUserId(driverId);
+        driverReview.setReview(4.5);
+
+        DriverReview savedReview = driverReviewRepository.save(driverReview);
+        DriverReview existsRide = entityManager.find(DriverReview.class, savedReview.getRideId());
+
+        //then
+        assertThat(existsRide.getRideId().equals(savedReview.getRideId()));
+
+    }
 }

@@ -35,9 +35,9 @@ public class CustomUserDetails implements UserDetails {
         return user.getPhoneNumber();
     }
 
-    public Double getAvrRating() {
-        return user.getAvrRating();
-    }
+//    public Double getAvrRating() {
+//        return user.getAvrRating();
+//    }
 
     public Long getId() {
         return user.getId();

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -37,6 +38,15 @@ public class UserService {
 
     public void deleteUser(Long id){
         userRepository.deleteById(id);
+    }
+
+// O T H E R operations
+    public boolean checkIfIsUser(Long id){
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            return true;
+        }
+        return false;
     }
 
 }

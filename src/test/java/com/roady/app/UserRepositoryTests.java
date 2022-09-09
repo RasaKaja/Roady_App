@@ -25,11 +25,11 @@ public class UserRepositoryTests {
     public void testCreateUser(){
         User user = new User();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode("12345");
+        String encodedPassword = passwordEncoder.encode("1234");
         user.setPassword(encodedPassword);
         user.setEmail("ana@email.com");
         user.setFirstName("Ana");
-        user.setLastName("Test");
+        user.setLastName("AnaLast");
         user.setPhoneNumber("125-377-000");
 
         User savedUser = userRepository.save(user);
