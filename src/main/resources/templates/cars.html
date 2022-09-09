@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User profile</title>
+  <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
+
+  <link rel="stylesheet" href="/static/styles/style1.css" >
+  <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+
+</head>
+<body>
+<div id="header"><h1>Welcome to the Roady!</h1>
+
+</div>
+
+<div id="pageContent">
+
+
+
+  <div id="firstNav">
+    <div class="logo">
+      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+    </div>
+  </div>
+
+  <div id="Content">
+
+    <div class="myMenyButtons">
+
+      <form action="/logout" method="get">
+        <button type="submit">Logout</button>
+      </form>
+      <form action="/user_form" method="get">
+        <button type="submit">My profile info</button>
+      </form>
+      <form action="/user_profile" method="get">
+        <button type="submit">Select an action</button>
+
+      </form>
+      <form action="/cars" method="get">
+        <button type="submit">Your cars</button>
+      </form>
+      <form action="/transport_offer" method="get">
+        <button type="submit">Post available transport</button>
+      </form>
+      <form action="/driver_today" method="get">
+        <button type="submit">Find passengers</button>
+      </form>
+
+    </div>
+
+</div>
+
+
+  <div id="secondNav">
+    <div class="logo">
+      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+    </div>
+  </div>
+
+
+
+
+</div>
+
+<div id="footer">
+  <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>
+</div>
+
+</body>
+</html>

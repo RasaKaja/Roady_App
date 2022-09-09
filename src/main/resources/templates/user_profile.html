@@ -26,7 +26,7 @@
 
   <div id="Content">
 
-      <myMenyButtons>
+      <div class="myMenyButtons">
 
           <form action="/logout" method="get">
               <button type="submit">Logout</button>
@@ -38,7 +38,12 @@
               <button type="submit">Select an action</button>
           </form>
 
-      </myMenyButtons>
+      </div>
+
+<!--      <form method="get" action="/is_loggedIn">-->
+
+<!--      </form>-->
+
 
     <div >
 
@@ -48,7 +53,7 @@
         <h3>What is your plan for today?</h3>
       </div>
       <div>
-        <a class="likeButton"  >Looking for a ride</a>
+        <a class="likeButton"   href="driver_today">Looking for a ride</a>
         <a class="likeButton"  >Offering a ride</a>
       </div>
 

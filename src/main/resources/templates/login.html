@@ -35,6 +35,13 @@
               <input name="password" type="password"><br>
 
       </div>
+
+      <div>
+        <p th:if="${status == 'user_not_found'}" style="color: red; background: #facccc">
+          <span>User not found. Check your username or password</span>
+        </p>
+
+      </div>
       <div>
         <button id="loginButton">Login</button>
       </div>
@@ -62,7 +69,7 @@
 </div>
 
 <div id="footer">
-  <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>
+  <p>Copyrights: Forest Team Active users: <span th:text="${users}"></span> Available rides: </p>
 </div>
 
 </body>
