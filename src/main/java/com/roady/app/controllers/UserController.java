@@ -3,6 +3,7 @@ package com.roady.app.controllers;
 import com.roady.app.entities.User;
 import com.roady.app.repositories.UserRepository;
 import com.roady.app.services.UserService;
+import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,30 +28,29 @@ public class UserController {
 
 // C R U D operations
     @PostMapping("/update_profile")
-    public String saveUser( String email,  String password, String firstName, String lastName, String phone){
-        User user = userService.getUserById(currentUser.getId());
-        if(email!=null) user.setEmail(email);
-        if(password!=null) user.setPassword(password);
-        if(firstName!=null) user.setFirstName(firstName);
-        if(lastName!=null) user.setLastName(lastName);
-        if(phone!=null) user.setPhoneNumber(phone);
+    public String saveUser(String email, String firstName, String lastName, String phone){
+        User user = currentUser;
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPhoneNumber(phone);
+            currentUser=user;
+            userService.saveUser(user);
+            return "redirect:/user_form";
 
-        currentUser=user;
-        userService.saveUser(user);
-        return "redirect:/user_form";
     }
-
 
     @GetMapping("/my_info")
     public String editUser(Model model){
         User user = currentUser;
 
-        model.addAttribute("id", user.getId() );
+        model.addAttribute("id", currentUser.getId() );
         model.addAttribute("email", user.getEmail() );
         model.addAttribute("firstName", user.getFirstName() );
         model.addAttribute("lastName", user.getLastName() );
         model.addAttribute("phoneNumber", user.getPhoneNumber() );
         model.addAttribute("user", currentUser);
+
         return "my_info";
     }
 
@@ -88,10 +88,8 @@ public class UserController {
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         model.addAttribute("user", new User());
+        model.addAttribute("countUsers", this.activeUsersNumber );
 
-        ArrayList<User> users =  userService.getAllUsers();
-        this.activeUsersNumber = users.size();
-        model.addAttribute("users", users);
         return "signup_form";
     }
 
@@ -108,14 +106,17 @@ public class UserController {
 
     @GetMapping("/login")
     public String activeUserInfo(
-//            @RequestParam(name = "status", required = false) String status,
-//            @RequestParam(name = "message", required = false) String message,
+            @RequestParam(name="status", required = false) String status,
             Model model
     ){
 
-//        model.addAttribute("status", status);
-//        model.addAttribute("message", message);
+        model.addAttribute("status", status);
         model.addAttribute("countUsers", this.activeUsersNumber );
+
+        ArrayList<User> users =  userService.getAllUsers();
+        this.activeUsersNumber = users.size();
+        model.addAttribute("users", activeUsersNumber);
+
         return "login";
     }
 
@@ -127,7 +128,7 @@ public class UserController {
             this.currentUser=loggedInUser;
             return "redirect:user_profile/";
         }catch (Exception e){
-            return "login"+e.getMessage();
+            return "redirect:login?status=user_not_found";
         }
     }
 
@@ -157,6 +158,39 @@ public class UserController {
         currentUser=null;
         return "login";
     }
+
+    @GetMapping("/password_change")
+    public String handlePasswordChangeRequest(
+            @RequestParam(name="status", required = false) String status,
+            Model model
+    ){
+        model.addAttribute("status", status);
+        return "password_change";
+    }
+
+    @PostMapping("/change_password")
+    public String handlePasswordChangeRequest(String password, String newPassword){
+        User user = userService.getUserById(currentUser.getId());
+        if(password.equals(currentUser.getPassword())){
+            user.setPassword(newPassword);
+            currentUser=user;
+            userService.saveUser(user);
+            return "user_form";
+        }else{
+            return"redirect:password_change?status=incorrect_password";
+        }
+
+    }
+
+//    @GetMapping("/is_loggedIn")
+//    public String loggedIn(){
+//        if(this.currentUser==null){
+//            return "redirect:login";
+//        }
+//        return "";
+//    }
+
+
 
 
 }

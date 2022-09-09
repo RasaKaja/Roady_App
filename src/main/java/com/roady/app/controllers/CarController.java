@@ -22,5 +22,20 @@ public class CarController {
 //        return "allCars";
 //    }
 
+    @GetMapping("/cars")
+    public String showYourCarsPage(){
+        return "cars";
+    }
+
+    @GetMapping("/driver_today")
+    public String userIsDriver(){
+        return "driver_today";
+    }
+
+    @GetMapping("/transport_offer")
+    public String showTransportOfferingPage(){
+        return "transport_offer";
+    }
+
 
 }
