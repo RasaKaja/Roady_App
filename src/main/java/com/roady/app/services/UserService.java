@@ -40,7 +40,6 @@ public class UserService {
     public User verifyUser(String email, String password) throws Exception{
 
         User foundUser = this.userRepository.findByEmailAndPassword(email, password);
-        System.out.println("Atrast lietotajs: " + foundUser);
         if(foundUser==null) {throw new Exception("Username or password is not correct");}
 
         return foundUser;

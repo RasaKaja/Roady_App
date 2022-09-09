@@ -16,6 +16,8 @@
 
 <div id="pageContent">
 
+
+
   <div id="firstNav">
     <div class="logo">
       <img title="logo" src="../static/images/logo.png" alt="Roady logo">
@@ -23,34 +25,31 @@
   </div>
 
   <div id="Content">
+
+      <myMenyButtons>
+
+          <form action="/logout" method="get">
+              <button type="submit">Logout</button>
+          </form>
+          <form action="/user_form" method="get">
+              <button type="submit">My profile info</button>
+          </form>
+          <form action="/user_profile" method="get">
+              <button type="submit">Select an action</button>
+          </form>
+
+      </myMenyButtons>
+
     <div >
-<!--      <div >-->
-<!--        <form th:action="@{/logout}" method="post">-->
-
-<!--          <a class="likeButton" th:href="@{/my_info}" >My profile</a>-->
-
-<!--          <a class="likeButton"  >Logout</a>-->
-
-<!--          &lt;!&ndash;      <input type="submit" value="Sign Out"/>&ndash;&gt;-->
-<!--        </form>-->
-
-<!--      </div>-->
 
       <p> Welcome <span th:text="${firstName}"></span></p>
 
-<!--      <div>-->
-<!--        <img src="/static/images/logo.png"  alt="Roady logo">-->
-<!--      </div>-->
       <div>
         <h3>What is your plan for today?</h3>
       </div>
       <div>
-
         <a class="likeButton"  >Looking for a ride</a>
         <a class="likeButton"  >Offering a ride</a>
-
-<!--        <button type="button" class="btn btn-success">Looking for a ride</button>-->
-<!--        <button type="button" class="btn btn-danger">Offering a ride</button>-->
       </div>
 
     </div>

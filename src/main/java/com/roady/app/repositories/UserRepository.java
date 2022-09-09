@@ -21,6 +21,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
 
+
+
 }
 
 //JpaRepository is "bigger" than CRUD repository, has more methods inside
