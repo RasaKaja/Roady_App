@@ -42,16 +42,20 @@ public class UserController {
 
     @GetMapping("/my_info")
     public String editUser(Model model){
+        if(this.currentUser==null){
+            return "login";
+        }else{
+
         User user = currentUser;
 
-        model.addAttribute("id", currentUser.getId() );
+
         model.addAttribute("email", user.getEmail() );
         model.addAttribute("firstName", user.getFirstName() );
         model.addAttribute("lastName", user.getLastName() );
         model.addAttribute("phoneNumber", user.getPhoneNumber() );
         model.addAttribute("user", currentUser);
 
-        return "my_info";
+        return "my_info";}
     }
 
     //works
@@ -63,9 +67,12 @@ public class UserController {
 
     @GetMapping("/users")
     public String viewUsersList(Model model){
+        if(this.currentUser==null){
+            return "login";
+        }else{
         List<User> listUsers = userService.listAll();
         model.addAttribute("listUsers", listUsers);
-        return "users";
+        return "users";}
     }
 
     //works
@@ -73,12 +80,15 @@ public class UserController {
 
     @GetMapping("/user_profile")
     public String showUserProfilePage(Model model){
+        if(this.currentUser==null){
+            return "login";
+        }else{
 
         model.addAttribute("firstName", currentUser.getFirstName() );
         model.addAttribute("lastName", currentUser.getLastName() );
 
 
-        return "user_profile";
+        return "user_profile";}
     }
 
 
@@ -87,10 +97,16 @@ public class UserController {
     //works
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
-        model.addAttribute("user", new User());
-        model.addAttribute("countUsers", this.activeUsersNumber );
 
-        return "signup_form";
+        if(this.currentUser==null){
+            return "login";
+        }else{
+            model.addAttribute("user", new User());
+            model.addAttribute("countUsers", this.activeUsersNumber );
+
+            return "signup_form";
+        }
+
     }
 
     //works
@@ -98,6 +114,7 @@ public class UserController {
 
     @GetMapping("/signup_form")
     public String showIndexPage(Model model){
+
         ArrayList<User> users =  userService.getAllUsers();
         this.activeUsersNumber = users.size();
         model.addAttribute("users", users);
@@ -135,9 +152,9 @@ public class UserController {
     //works
     @GetMapping("/user_form")
     public String showUserFormPage(Model model){
-
-
-        model.addAttribute("id", currentUser.getId() );
+        if(this.currentUser==null){
+            return "login";
+        }else{
         model.addAttribute("email", currentUser.getEmail() );
         model.addAttribute("firstName", currentUser.getFirstName() );
         model.addAttribute("lastName", currentUser.getLastName() );
@@ -145,12 +162,15 @@ public class UserController {
         model.addAttribute("avrRating", currentUser.getAvrRating() );
         model.addAttribute("registredAt", currentUser.getRegisteredAt() );
         model.addAttribute("countUsers", this.activeUsersNumber );
-        return"user_form";
+        return"user_form";}
     }
 
     @GetMapping("/register_success")
     public String RegistrationWasSuccessful(){
-        return "register_success";
+        if(this.currentUser==null){
+            return "login";
+        }else{
+        return "register_success";}
     }
 
     @GetMapping("/logout")
@@ -164,8 +184,11 @@ public class UserController {
             @RequestParam(name="status", required = false) String status,
             Model model
     ){
+        if(this.currentUser==null){
+            return "login";
+        }else{
         model.addAttribute("status", status);
-        return "password_change";
+        return "password_change";}
     }
 
     @PostMapping("/change_password")
@@ -175,22 +198,12 @@ public class UserController {
             user.setPassword(newPassword);
             currentUser=user;
             userService.saveUser(user);
-            return "user_form";
-        }else{
+            return "redirect:user_form";
+        }
+        else{
             return"redirect:password_change?status=incorrect_password";
         }
 
     }
-
-//    @GetMapping("/is_loggedIn")
-//    public String loggedIn(){
-//        if(this.currentUser==null){
-//            return "redirect:login";
-//        }
-//        return "";
-//    }
-
-
-
 
 }

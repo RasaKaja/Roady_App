@@ -25,40 +25,32 @@
 
     <form method="post" action="/login">
       <div>
-
-            <label class="login" >Enter your username</label>
+            <label class="login" >Enter your username</label><br>
             <input name="email" type="email">
       </div>
       <div>
-
-              <label class="login">Enter your password</label>
+              <label class="login">Enter your password</label><br>
               <input name="password" type="password"><br>
-
       </div>
 
       <div>
         <p th:if="${status == 'user_not_found'}" style="color: red; background: #facccc">
           <span>User not found. Check your username or password</span>
         </p>
-
       </div>
       <div>
         <button id="loginButton">Login</button>
       </div>
-
-
     </form>
 
     <form>
       <div>
         <p>Don't have an account?</p>
-        <button id="registerButton" onclick="location.href='/register'" type="button">Register</button>
+        <a class="likeButton" href="/register"> Register</a>
       </div>
     </form>
     <br>
     <br>
-
-
   </div>
 
   <div id="secondNav">
