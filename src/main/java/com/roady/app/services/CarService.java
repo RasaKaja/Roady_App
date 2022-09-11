@@ -1,5 +1,6 @@
 package com.roady.app.services;
 
+import com.roady.app.controllers.UserController;
 import com.roady.app.entities.Car;
 import com.roady.app.entities.User;
 import com.roady.app.repositories.CarRepository;
@@ -8,6 +9,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,11 +21,14 @@ public class CarService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserController userController;
+
 // C R U D  operations
     public void saveNewCar(Car car){
-        User user = userRepository.getReferenceById(1l);
+//        User user = userRepository.getReferenceById(1l);
         carRepository.save(car);
-        userRepository.save(user);
+
     }
 
     public List<Car> allCarsList(){
@@ -37,5 +42,8 @@ public class CarService {
     public void deleteCar(Long id){
         carRepository.deleteById(id);
     }
+
+    public ArrayList<Car> getByUser(User user){
+        return carRepository.findAllByUser(user);}
 
 }

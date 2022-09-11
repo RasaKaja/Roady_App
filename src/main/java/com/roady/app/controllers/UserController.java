@@ -29,6 +29,9 @@ public class UserController {
 // C R U D operations
     @PostMapping("/update_profile")
     public String saveUser(String email, String firstName, String lastName, String phone){
+        if(this.currentUser==null){
+            return "login";
+        }else{
         User user = currentUser;
         user.setEmail(email);
         user.setFirstName(firstName);
@@ -36,7 +39,7 @@ public class UserController {
         user.setPhoneNumber(phone);
             currentUser=user;
             userService.saveUser(user);
-            return "redirect:/user_form";
+            return "redirect:/user_form";}
 
     }
 
@@ -97,20 +100,10 @@ public class UserController {
     //works
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
-
-        if(this.currentUser==null){
-            return "login";
-        }else{
             model.addAttribute("user", new User());
             model.addAttribute("countUsers", this.activeUsersNumber );
-
             return "signup_form";
-        }
-
     }
-
-    //works
-
 
     @GetMapping("/signup_form")
     public String showIndexPage(Model model){
@@ -162,15 +155,13 @@ public class UserController {
         model.addAttribute("avrRating", currentUser.getAvrRating() );
         model.addAttribute("registredAt", currentUser.getRegisteredAt() );
         model.addAttribute("countUsers", this.activeUsersNumber );
-        return"user_form";}
+        return"user_form";
+        }
     }
 
     @GetMapping("/register_success")
     public String RegistrationWasSuccessful(){
-        if(this.currentUser==null){
-            return "login";
-        }else{
-        return "register_success";}
+        return "register_success";
     }
 
     @GetMapping("/logout")
