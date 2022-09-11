@@ -50,7 +50,57 @@
 
     </div>
 
-</div>
+
+<!--    <div>-->
+
+
+<!--      <div th:each="car:${cars}" class="list">-->
+<!--              <table>-->
+<!--                <tr>-->
+<!--                  <td>-->
+<!--                    <h4>Car type: </h4>-->
+<!--                  </td>-->
+<!--                  <td>-->
+<!--                    <p th:text="@{car.getCarType()}"></p>-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>-->
+<!--                    <h4>Plate number: </h4>-->
+<!--                  </td>-->
+<!--                  <td>-->
+<!--                    <p th:text="@{car.getPlateNumber()}"></p>-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--              </table>-->
+<!--      </div>-->
+
+
+<!--    </div>-->
+
+
+    <div>
+      <h3>Add a car</h3>
+      <form action="/cars" method="post"
+           style="max-width: 500px; margin: 0 auto">
+        <div>
+            <label>Enter car type </label>
+            <input type="text" id="car_type" name="carType" />
+        </div>
+        <div>
+          <label>Enter plate number </label>
+          <input type="text" id="plate_number" name="plateNumber"  />
+        </div>
+        <div>
+          <button id="signupButton" type="submit" >Add a car</button>
+        </div>
+      </form>
+
+
+
+    </div>
+
+  </div>
 
 
   <div id="secondNav">
