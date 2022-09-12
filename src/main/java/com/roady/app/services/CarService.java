@@ -34,7 +34,7 @@ public class CarService {
     }
 
     public Car getCarById(Long id){
-        return carRepository.findById(id).get();
+        return carRepository.findCarById(id);
     }
 
     public void deleteCar(Long id){
@@ -44,8 +44,8 @@ public class CarService {
     public ArrayList<Car> getByUser(User user){
         return carRepository.findAllByUserId(user.getId());}
 
-    public void setUsersCar( Long id) {
-        User user = userRepository.findUserByEmail(userController.currentUser.getEmail());
-        user.setCar(carRepository.findCarById(id));
-    }
+//    public void setUsersCar( Long id) {
+//        User user = userRepository.findUserByEmail(userController.currentUser.getEmail());
+//        user.setCar(carRepository.findCarById(id));
+//    }
 }

@@ -37,16 +37,38 @@ public class CarController {
             @RequestParam(name = "status", required = false) String status,
             Model model
     ){
-//        System.out.println(userController.currentUser);
-//        Car car = userController.currentUser.getCar();
-//        System.out.println(car);
+        Long car_id = userController.currentUser.getCar().getId();
+        String car_type =carService.getCarById(car_id).getCarType();
+        String plate_Number =carService.getCarById(car_id).getPlateNumber();
+        Integer available_seats =carService.getCarById(car_id).getAvailableSeats();
+
         model.addAttribute("status", status);
-//        model.addAttribute("carType", car.getCarType());
-//        model.addAttribute("plateNumber", car.getPlateNumber());
-//        model.addAttribute("availableSeats", car.getAvailableSeats());
+        model.addAttribute("carType", car_type);
+        model.addAttribute("plateNumber", plate_Number);
+        model.addAttribute("availableSeats", available_seats);
 
         return "cars";
     }
+
+    @GetMapping("/updateAvailableSeatsNumber")
+    public String updateSeatNumbers(
+            @RequestParam(name = "status", required = false) String status,
+            Model model
+    ){
+        Long car_id = userController.currentUser.getCar().getId();
+        String car_type =carService.getCarById(car_id).getCarType();
+        String plate_Number =carService.getCarById(car_id).getPlateNumber();
+        Integer available_seats =carService.getCarById(car_id).getAvailableSeats();
+
+        model.addAttribute("status", status);
+        model.addAttribute("carType", car_type);
+        model.addAttribute("plateNumber", plate_Number);
+        model.addAttribute("availableSeats", available_seats);
+
+        return "redirect:cars?status=seats_updated";
+    }
+
+
 
     @PostMapping("/cars")
     public String addCar(String carType, String plateNumber, Integer availableSeats){
@@ -62,9 +84,6 @@ public class CarController {
             user.setCar(car);
             userController.currentUser=user;
             userService.saveUser(user);
-            System.out.println("Masina pirms try: " + car);
-            System.out.println(userController.currentUser);
-            System.out.println("user: " + user);
 
 //            carService.saveNewCar(car);
             return "redirect:cars?status=success";
