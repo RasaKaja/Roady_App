@@ -1,17 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="icon" type="image/x-icon" href="roady_logo.jpg">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Registration Succeeded</title>
-  <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <title>Registration successful</title>
+  <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
+
+  <link rel="stylesheet" href="../static/styles/styles1.css" >
+  <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+
 </head>
 <body>
-<div class="container text-center">
-  <div>
-    <h3>You have signed up successfully!</h3>
-    <h4><a th:href="@{/login}">Click here to login</a></h4>
+<div id="header"><h1>Welcome to the Roady!</h1></div>
+
+<div id="pageContent">
+
+  <div id="firstNav">
+    <div class="logo">
+      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+    </div>
+  </div>
+
+  <div id="Content">
+    <div>
+      <h3 style="-webkit-text-fill-color: #053745">You have signed up successfully!</h3>
+      <h4 style="-webkit-text-fill-color: #154468; text-decoration: underline"><a th:href="@{/login}">Click here to login</a></h4>
+    </div>
+    <br><br>
+  </div>
+
+  <div id="secondNav">
+    <div class="logo">
+      <img title="logo" src="../static/images/logo.png" alt="Roady logo">
+    </div>
   </div>
 </div>
+
+<div id="footer">
+  <p>Copyrights: Forest Team Active users: Available rides: </p>
+</div>
+
 </body>
 </html>
