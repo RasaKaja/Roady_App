@@ -9,5 +9,7 @@ import java.util.ArrayList;
 
 public interface CarRepository extends JpaRepository<Car, Long> {
 
-    ArrayList<Car> findAllByUser(User user);
+    ArrayList<Car> findAllByUserId(Long id);
+
+    Car findCarById(Long Id);
 }

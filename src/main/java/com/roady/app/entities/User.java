@@ -33,13 +33,8 @@ public class User {
     private Timestamp registeredAt;
     // this will by default create Foreign key column in User class, and default name will be "car_id"
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
-    @JoinColumn(name = "carId", nullable = true)
+    @JoinColumn(name = "carId")
     private Car car;
 
-//public User(String email, String password){
-//    this.email=email;
-//    this.password=password;
-//}
 
 }

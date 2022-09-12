@@ -26,9 +26,7 @@ public class CarService {
 
 // C R U D  operations
     public void saveNewCar(Car car){
-//        User user = userRepository.getReferenceById(1l);
         carRepository.save(car);
-
     }
 
     public List<Car> allCarsList(){
@@ -44,6 +42,10 @@ public class CarService {
     }
 
     public ArrayList<Car> getByUser(User user){
-        return carRepository.findAllByUser(user);}
+        return carRepository.findAllByUserId(user.getId());}
 
+    public void setUsersCar( Long id) {
+        User user = userRepository.findUserByEmail(userController.currentUser.getEmail());
+        user.setCar(carRepository.findCarById(id));
+    }
 }

@@ -20,9 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
 
-
-
-
 }
 
 //JpaRepository is "bigger" than CRUD repository, has more methods inside
