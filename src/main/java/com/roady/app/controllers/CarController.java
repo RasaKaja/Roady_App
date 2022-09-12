@@ -1,6 +1,7 @@
 package com.roady.app.controllers;
 
 import com.roady.app.entities.Car;
+import com.roady.app.entities.Ride;
 import com.roady.app.entities.User;
 import com.roady.app.services.CarService;
 import com.roady.app.services.UserService;
@@ -89,6 +90,15 @@ public class CarController {
 
     }
 
+    @PostMapping("/remove_car")
+    public String removeCar(){
+        Car car = userController.currentUser.getCar();
+        userController.currentUser.setCar(null);
+        userService.saveUser(userController.currentUser);
+//        carService.removeCar(car);
+        return "/cars";
+    }
+
 
 
     @PostMapping("/cars")
@@ -120,7 +130,11 @@ public class CarController {
     }
 
     @GetMapping("/transport_offer")
-    public String showTransportOfferingPage(){
+    public String showTransportOfferingPage(
+            @RequestParam(name = "status", required = false) String status,
+            Model model
+    ){
+        model.addAttribute("status", status);
         return "transport_offer";
     }
 

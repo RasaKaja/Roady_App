@@ -81,10 +81,14 @@
                 </tr>
               </table>
       </div>
+      <a class="likeButton" href="updateAvailableSeatsNumber">Update Seat numbers</a>
+      <form action="/remove_car" method="post" >
+        <button type="submit">Remove car</button>
+      </form>
+
     </div>
 
-    <a class="likeButton" href="updateAvailableSeatsNumber">Update Seat numbers</a>
-<!--    <a class="likeButton" href="removeCar">Remove Car</a>-->
+
 
     <div th:if="${car==null}">
       <h3>Add a car</h3>
