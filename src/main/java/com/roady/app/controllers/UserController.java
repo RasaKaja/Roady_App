@@ -19,7 +19,7 @@ public class UserController {
 
     int activeUsersNumber;
 
-    User currentUser;
+    public User currentUser;
 //    currentUser = new User(1L, "jelena@jelena.lv", "1111", "Jelena", "Mikelsone", "97458394", 2.5, null, null );
 
     @Autowired
