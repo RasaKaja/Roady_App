@@ -77,9 +77,11 @@ public class CarController {
     @PostMapping("/update_seats")
     public String updateSeats(Integer availableSeats){
         try{
+            Car car = carService.getCarById(userController.currentUser.getCar().getId());
             System.out.println("Seats from input" + availableSeats);
-            userController.currentUser.getCar().setAvailableSeats(availableSeats);
-            System.out.println("seat from user: " + userController.currentUser.getCar().getAvailableSeats());
+            car.setAvailableSeats(availableSeats);
+            carService.saveNewCar(car);
+
             return "redirect:cars?status=seats_updated";
         }catch(Exception e){
             return "redirect:cars?status=seats_update_failed";
