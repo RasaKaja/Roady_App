@@ -86,7 +86,7 @@
     <a class="likeButton" href="updateAvailableSeatsNumber">Update Seat numbers</a>
 <!--    <a class="likeButton" href="removeCar">Remove Car</a>-->
 
-    <div th:if="${carType==null}">
+    <div th:if="${car==null}">
       <h3>Add a car</h3>
       <form action="/cars" method="post"
            style="max-width: 500px; margin: 0 auto">

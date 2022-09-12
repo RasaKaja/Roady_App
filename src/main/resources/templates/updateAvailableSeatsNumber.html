@@ -76,7 +76,11 @@
               <h4>Available seats: </h4>
             </td>
             <td>
-              <p th:text="${availableSeats}"></p>
+              <form action="/update_seats" method="post">
+                <input type="number" name="availableSeats" th:value="${availableSeats}">
+                <input type="submit">
+              </form>
+
             </td>
           </tr>
         </table>
