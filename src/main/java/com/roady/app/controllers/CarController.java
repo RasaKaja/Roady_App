@@ -37,15 +37,21 @@ public class CarController {
             @RequestParam(name = "status", required = false) String status,
             Model model
     ){
-        Long car_id = userController.currentUser.getCar().getId();
-        String car_type =carService.getCarById(car_id).getCarType();
-        String plate_Number =carService.getCarById(car_id).getPlateNumber();
-        Integer available_seats =carService.getCarById(car_id).getAvailableSeats();
+        try{
+            Long car_id = userController.currentUser.getCar().getId();
+            String car_type =carService.getCarById(car_id).getCarType();
+            String plate_Number =carService.getCarById(car_id).getPlateNumber();
+            Integer available_seats =carService.getCarById(car_id).getAvailableSeats();
 
-        model.addAttribute("status", status);
-        model.addAttribute("carType", car_type);
-        model.addAttribute("plateNumber", plate_Number);
-        model.addAttribute("availableSeats", available_seats);
+            model.addAttribute("status", status);
+            model.addAttribute("carType", car_type);
+            model.addAttribute("plateNumber", plate_Number);
+            model.addAttribute("availableSeats", available_seats);
+            model.addAttribute("car", 1);
+        }catch (Exception e){
+            model.addAttribute("car", null);
+        }
+
 
         return "cars";
     }
@@ -65,7 +71,20 @@ public class CarController {
         model.addAttribute("plateNumber", plate_Number);
         model.addAttribute("availableSeats", available_seats);
 
-        return "redirect:cars?status=seats_updated";
+        return "updateAvailableSeatsNumber";
+    }
+
+    @PostMapping("/update_seats")
+    public String updateSeats(Integer availableSeats){
+        try{
+            System.out.println("Seats from input" + availableSeats);
+            userController.currentUser.getCar().setAvailableSeats(availableSeats);
+            System.out.println("seat from user: " + userController.currentUser.getCar().getAvailableSeats());
+            return "redirect:cars?status=seats_updated";
+        }catch(Exception e){
+            return "redirect:cars?status=seats_update_failed";
+        }
+
     }
 
 
