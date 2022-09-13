@@ -21,8 +21,12 @@ public class RideController {
 
     @PostMapping("ride_requests/save")
     public String createRideRequest(Ride ride){
-        rideService.saveRideRequest(ride);
-        return "ride_requests";
+        try {
+            rideService.saveRideRequest(ride);
+            return "redirect:ride_requests?status=ride_requests_successful";
+        }catch (Exception exception){
+            return "redirect:ride_requests?status=ride_requests_failed&message=" + exception.getMessage();
+        }
     }
 
     @GetMapping("/ride_requests")
@@ -35,9 +39,14 @@ public class RideController {
 
     @GetMapping("/ride_requests/edit")
     public String editRideRequest(@PathVariable("rideRequestId") Long rideRequestId, Model model){
-        Ride ride = rideService.getRideRequestById(rideRequestId);
-        model.addAttribute("rideRequest", ride);
-        return "ride_request";
+        try {
+            Ride ride = rideService.getRideRequestById(rideRequestId);
+            model.addAttribute("rideRequest", ride);
+            return "ride_requests";
+        }catch (Exception exception){
+            return "redirect:ride_requests?status=user_not_found?message=" + exception.getMessage();
+        }
+
     }
 
 

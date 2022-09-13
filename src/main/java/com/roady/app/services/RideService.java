@@ -23,19 +23,19 @@ public class RideService {
 
     //CRUD operations
     public void saveRideRequest(Ride rideRequest){
-        User user = userRepository.getReferenceById(1l);
-        Car car = carRepository.getReferenceById(1l);
-        rideRepository.save(rideRequest);
-        carRepository.save(car);
-        userRepository.save(user);
+            User user = userRepository.getReferenceById(1l);
+            Car car = carRepository.getReferenceById(1l);
+            rideRepository.save(rideRequest);
+            carRepository.save(car);
+            userRepository.save(user);
     }
 
     public List<Ride> allRideRequestsList(){
         return rideRepository.findAll();
     }
 
-    public Ride getRideRequestById(Long rideRequestId) {
-        return rideRepository.findById(rideRequestId).get();
+    public Ride getRideRequestById(Long rideRequestId) throws Exception{
+        return this.rideRepository.findById(rideRequestId).orElseThrow();
     }
 
 

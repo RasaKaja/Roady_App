@@ -29,7 +29,7 @@ class CarRepositoryTest {
         User user = userRepository.getReferenceById(1l);
 
         Car car = new Car();
-        car.setPlateNumber("AAA123");
+        car.setPlateNumber("ABC123");
         car.setAvailableSeats(2);
         car.setCarType("AUDI");
         car.setUser(user);
@@ -39,7 +39,6 @@ class CarRepositoryTest {
 
         user.setCar(existsCar);
         userRepository.save(user);
-        System.out.println("Add new car: " + existsCar.getCarType());
 
         assertThat(existsCar.getPlateNumber().equals(car.getPlateNumber()));
     }

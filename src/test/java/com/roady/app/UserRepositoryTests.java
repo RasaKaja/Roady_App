@@ -1,6 +1,8 @@
 package com.roady.app;
 
 import com.roady.app.entities.User;
+import com.roady.app.repositories.DriverReviewRepository;
+import com.roady.app.repositories.PassengerReviewRepository;
 import com.roady.app.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,12 @@ public class UserRepositoryTests {
     private UserRepository userRepository;
     @Autowired
     private TestEntityManager entityManager;
+
+    @Autowired
+    private DriverReviewRepository driverReviewRepository;
+
+    @Autowired
+    private PassengerReviewRepository passengerReviewRepository;
 
     @Test
     public void testCreateUser(){
@@ -59,5 +67,4 @@ public class UserRepositoryTests {
 
         assertThat(saverUser.getLastName().equals(user));
     }
-
 }
