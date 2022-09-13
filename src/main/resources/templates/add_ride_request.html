@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User profile</title>
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+
+    <link rel="stylesheet" href="styles/style1.css" >
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+
+</head>
+<body>
+<div id="header"><h1>Welcome to the Roady!</h1>
+
+</div>
+
+<div id="pageContent">
+
+
+
+    <div id="firstNav">
+        <div class="logo">
+            <img title="logo" src="images/logo.png" alt="Roady logo">
+        </div>
+    </div>
+
+    <div id="Content">
+
+        <div class="myMenuButtons">
+            <form action="/logout" method="get">
+                <button type="submit">Logout</button>
+            </form>
+            <form action="/user_form" method="get">
+                <button type="submit">My profile info</button>
+            </form>
+            <form action="/user_profile" method="get">
+                <button type="submit">Select an action</button>
+            </form>
+
+            <form action="/add_ride_request" method="get">
+                <button type="submit">Add ride request</button>
+            </form>
+            <form action="/my_active_ride_requests" method="get">
+                <button type="submit">My ride requests</button>
+            </form>
+            <form action="/passenger_today" method="get">
+                <button type="submit">Find transport</button>
+            </form>
+        </div>
+
+
+        <div  >
+
+            <div>
+                <a href="my_active_ride_requests" style="text-decoration: underline"><h4>Your ride requests (<span th:text="${userRidesCount}"></span>)</h4></a>
+
+
+            </div>
+
+
+            <form action="/passenger_ride_requests_save" method="post"
+                  style="max-width: 500px; margin: 0 auto">
+                <div >
+                    <div >
+                        <label >Departure: </label>
+                        <input type="text"  name="departurePoint" required/>
+                    </div>
+                    <br>
+                    <div >
+                        <label >Destination: </label>
+                        <input type="text" name="destinationPoint" required minlength="2" maxlength="20"/>
+                    </div> <br>
+
+                    <div>
+                        <label >Departure date: </label>
+                        <input type="date"  name="departureDate" />
+                    </div><br>
+
+                    <div >
+                        <label >Departure time</label>
+                        <input type="time"  name="departureTime" />
+                    </div><br>
+                    <div >
+                        <label >Ride price</label>
+                        <input type="text"  name="ridePrice" />
+                    </div><br>
+                    <div >
+                        <label >Payment Type</label>
+                        <input type="text" name="paymentType" />
+                    </div><br>
+                    <div>
+                        <button type="submit" >Post ride request</button>
+                    </div>
+                </div>
+            </form>
+            <br><br>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <div id="secondNav">
+        <div class="logo">
+            <img title="logo" src="images/logo.png" alt="Roady logo">
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<div id="footer">
+    <p>Copyrights: Forest Team Active users: <span ></span> Available rides: </p>
+</div>
+
+</body>
+</html>

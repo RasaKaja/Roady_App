@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.roady.app.repositories.RideRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 
@@ -27,10 +28,9 @@ public class RideService {
 
     //CRUD operations
     public void saveRideRequest(Ride rideRequest){
-
-        System.out.println("tika šeit");
+        System.out.println("saglaba");
         rideRepository.save(rideRequest);
-
+        System.out.println("saglabaja");
     }
 
     public List<Ride> allRideRequestsList(){
@@ -47,5 +47,11 @@ public class RideService {
         rideRepository.deleteById(rideRequestId);
     }
 
+    public ArrayList<Ride> getAllUsersRides(Long id){
+        return rideRepository.findAllByCar_Id(id);
+    }
 
+    public ArrayList<Ride> getAllPassengerRides(Long id){
+        return rideRepository.findAllByPassengerId(id);
+    }
 }

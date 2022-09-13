@@ -24,7 +24,7 @@ public class Ride {
     @Column(nullable = false, length = 64)
     private String destinationPoint;
     @Column(nullable = false)
-    private String departureDate;
+    private Date departureDate;
     @Column(nullable = false)
     private String departureTime;
     @Column(length = 20)

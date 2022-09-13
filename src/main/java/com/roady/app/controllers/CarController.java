@@ -4,6 +4,7 @@ import com.roady.app.entities.Car;
 import com.roady.app.entities.Ride;
 import com.roady.app.entities.User;
 import com.roady.app.services.CarService;
+import com.roady.app.services.RideService;
 import com.roady.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,10 @@ public class CarController {
 
     @Autowired
     private UserController userController;
+
+    @Autowired
+    private RideService rideService;
+
 //    @GetMapping
 //    public String viewAllCarsList(Model model){
 //        List<Car> carList = carService.allCarsList();
@@ -134,8 +139,15 @@ public class CarController {
             @RequestParam(name = "status", required = false) String status,
             Model model
     ){
-        model.addAttribute("status", status);
-        return "transport_offer";
+        try{
+            ArrayList<Ride> userRides = rideService.getAllUsersRides(userController.currentUser.getCar().getId());
+            Integer userRidesCount = userRides.size();
+            model.addAttribute("status", status);
+            model.addAttribute("userRidesCount", userRidesCount);
+            return "transport_offer";
+        }catch (Exception e){
+            return "redirect:cars?status=no_car";
+        }
     }
 
 

@@ -88,10 +88,18 @@
 
     </div>
 
-
+    <div>
+      <p th:if="${status == 'no_car'}" style="color: red; background: #facccc">
+        <span>Add a car information. Then you can add a transportation offer</span>
+      </p>
+      </div>
 
     <div th:if="${car==null}">
-      <h3>Add a car</h3>
+      <div>
+        <p style="color: red; background: #facccc">
+          Add a car information. Then you can add a transportation offer
+        </p>
+      </div>
       <form action="/cars" method="post"
            style="max-width: 500px; margin: 0 auto">
         <div>
