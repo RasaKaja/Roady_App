@@ -35,6 +35,8 @@ private CarService carService;
 @Autowired
 private UserService userService;
 
+Long rideIdToEdit;
+
 
     @PostMapping("ride_requests_save")
     public String createRideRequest(
@@ -83,27 +85,14 @@ private UserService userService;
         return "my_active_transport_offers";
     }
 
-//    @PostMapping("/find_passenger")
-//    public String findPassengerByDestAndDep(){
-//        return "";
-//    }
-
-//    @PostMapping("/send_info_to_ride_update")
-//    public String editRide(Ride ride){
-//        try{
-//            return "redirect:edit_ride";
-//        }catch (Exception e){
-//            return "redirect:my_active_transport_offers?status=error";
-//        }
-//
-//    }
-//
     @GetMapping("/edit_ride")
-    public String displayEditRidePage(Ride ride){
-//        try{
-//            ride.getRideRequestId();
-//            return "redirect:my_active_transport_offers?status=updated";
-//        }catch (Exception e){
+    public String displayEditRidePage(Model model){
+        Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
+        model.addAttribute("departurePoint", ride.getDeparturePoint());
+        model.addAttribute("destinationPoint", ride.getDestinationPoint());
+        model.addAttribute("departureDate", ride.getDepartureDate());
+        model.addAttribute("departureTime", ride.getDepartureTime());
+        model.addAttribute("ridePrice", ride.getRidePrice());
         return "edit_ride";
     }
 
@@ -164,8 +153,90 @@ private UserService userService;
     }
 
     @GetMapping("/edit_ride_request")
-    public String showRideEditRequestPage(){
+    public String showRideEditRequestPage(Model model){
+        System.out.println(this.rideIdToEdit);
+        Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
+        System.out.println("Ride id: " + ride.getRideRequestId());
+        model.addAttribute("departurePoint", ride.getDeparturePoint());
+        model.addAttribute("destinationPoint", ride.getDestinationPoint());
+        model.addAttribute("departureDate", ride.getDepartureDate());
+        model.addAttribute("departureTime", ride.getDepartureTime());
+        model.addAttribute("ridePrice", ride.getRidePrice());
         return "edit_ride_request";
+    }
+
+    @PostMapping("/send_info_for_ride_editing")
+    public String editRideRequest(Long rideId, String toDo){
+        this.rideIdToEdit = rideId;
+        return "redirect:edit_ride_request?status=rideId_sent";
+    }
+
+    @PostMapping("/send_info_for_transport_offer_editing")
+    public String editRideOfferRequest(Long rideId){
+        this.rideIdToEdit = rideId;
+        return "redirect:edit_ride?status=rideId_sent";
+    }
+
+    @PostMapping("/save_ride_updates")
+    public String UpdateRideInformation(
+                String destinationPoint,
+                String departurePoint,
+                Date departureDate,
+                String departureTime,
+                String ridePrice,
+                String paymentType
+    ){
+            if (userController.currentUser==null){
+                return "redirect:login";
+            }else{
+                Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
+                ride.setDeparturePoint(departurePoint);
+                ride.setDepartureDate(departureDate);
+                ride.setDestinationPoint(destinationPoint);
+                ride.setDepartureTime(departureTime);
+                ride.setRidePrice(ridePrice);
+                ride.setPaymentType(paymentType);
+
+                User user = userService.getUserById(userController.currentUser.getId());
+                ride.setPassenger(user);
+                rideService.saveRideRequest(ride);
+                return "redirect:my_active_ride_requests?status=request_updated";
+            }
+    }
+
+    @PostMapping("/save_transport_updates")
+    public String UpdateTransportOfferInformation(
+            String destinationPoint,
+            String departurePoint,
+            Date departureDate,
+            String departureTime,
+            String ridePrice,
+            String paymentType
+    ){
+        if (userController.currentUser==null){
+            return "redirect:login";
+        }else{
+            Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
+            ride.setDeparturePoint(departurePoint);
+            ride.setDepartureDate(departureDate);
+            ride.setDestinationPoint(destinationPoint);
+            ride.setDepartureTime(departureTime);
+            ride.setRidePrice(ridePrice);
+            ride.setPaymentType(paymentType);
+
+            User user = userService.getUserById(userController.currentUser.getId());
+            Long carId = user.getCar().getId();
+            ride.setCar(carService.getCarById(carId));
+            rideService.saveRideRequest(ride);
+            return "redirect:my_active_transport_offers?status=request_updated";
+        }
+    }
+
+    @PostMapping("/remove_ride_request")
+    public String removeRideRequest(Long rideId){
+
+        rideService.deleteRideRequest(rideService.getRideRequestById(this.rideIdToEdit).getRideRequestId());
+        return "redirect:my_active_ride_requests?status=removed";
     }
 
 

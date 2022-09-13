@@ -44,7 +44,9 @@ public class RideService {
 
     //method still not created at rideRepository
     public void deleteRideRequest(Long rideRequestId){
-        rideRepository.deleteById(rideRequestId);
+        System.out.println("tika servisa");
+        rideRepository.deleteRideByRideRequestId(rideRequestId);
+        System.out.println("izdzesa servisā");
     }
 
     public ArrayList<Ride> getAllUsersRides(Long id){
@@ -54,4 +56,8 @@ public class RideService {
     public ArrayList<Ride> getAllPassengerRides(Long id){
         return rideRepository.findAllByPassengerId(id);
     }
+
+
+
+
 }

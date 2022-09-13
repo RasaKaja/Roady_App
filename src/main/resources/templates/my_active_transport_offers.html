@@ -69,24 +69,19 @@
             </thead>
 
             <tbody>
-                  <tr th:each="ride: ${userRides}">
+            <tr th:each="ride: ${userRides}">
+                <form action="send_info_for_transport_offer_editing" method="post">
                     <td th:text="${ride.departurePoint}"></td>
                     <td th:text="${ride.destinationPoint}"></td>
                     <td th:text="${ride.departureDate}"></td>
                     <td th:text="${ride.departureTime}"></td>
                     <td th:text="${ride.ridePrice}"></td>
                     <td th:text="${ride.paymentType}"></td>
-                    <td th:text="${ride.car.getAvailableSeats()}"></td>
-<!--                    <td th:text="${ride.passenger.getId()}">Roles</td>-->
-                      <td>
-<!--                          <form action="send_info_to_ride_update" method="post">-->
-<!--                              <button type="submit">Edit ride</button>-->
-<!--                          </form>-->
-                          <a href="edit_ride" >Edit</a>
-                      </td>
-
-
-                  </tr>
+                    <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+                    <td><button type="submit"> Edit</button></td>
+                </form>
+            </tr>
+            </tr>
             </tbody>
 
         </table>

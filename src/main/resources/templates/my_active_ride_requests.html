@@ -57,26 +57,24 @@
         <th>Departure Time</th>
         <th>Price</th>
         <th>Payment</th>
-<!--        <th>Car </th>-->
-<!--        &lt;!&ndash;                <th>Passenger</th>&ndash;&gt;-->
-<!--      </tr>-->
-<!--      </thead>-->
+      </tr>
+      </thead>
 
-<!--      <tbody>-->
-      <tr th:each="ride: ${userRideRequests}">
-        <td th:text="${ride.departurePoint}"></td>
-        <td th:text="${ride.destinationPoint}"></td>
-        <td th:text="${ride.departureDate}"></td>
-        <td th:text="${ride.departureTime}"></td>
-        <td th:text="${ride.ridePrice}"></td>
-        <td th:text="${ride.paymentType}"></td>
-<!--        <td th:text="${ride.car.getAvailableSeats()}"></td>-->
-        <!--                    <td th:text="${ride.passenger.getId()}">Roles</td>-->
-        <td>
-          <a href="edit_ride_request" >Edit</a>
-        </td>
+      <tbody>
+        <tr th:each="ride: ${userRideRequests}">
 
+          <form action="send_info_for_ride_editing" method="post">
+            <td th:text="${ride.departurePoint}"></td>
+            <td th:text="${ride.destinationPoint}"></td>
+            <td th:text="${ride.departureDate}"></td>
+            <td th:text="${ride.departureTime}"></td>
+            <td th:text="${ride.ridePrice}"></td>
+            <td th:text="${ride.paymentType}"></td>
+            <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+            <td><button type="submit" name="toDo" value="edit"> Edit/Delete</button></td>
+          </form>
 
+        </tr>
       </tr>
       </tbody>
 
