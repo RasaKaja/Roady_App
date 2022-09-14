@@ -26,17 +26,17 @@ public class UserController {
     private UserService userService;
 
 
-    // C R U D operations
+// C R U D operations
     @PostMapping("/update_profile")
     public String saveUser(String email, String firstName, String lastName, String phone){
         if(this.currentUser==null){
             return "login";
         }else{
-            User user = currentUser;
-            user.setEmail(email);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPhoneNumber(phone);
+        User user = currentUser;
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPhoneNumber(phone);
             currentUser=user;
             userService.saveUser(user);
             return "redirect:/user_form";}
@@ -49,16 +49,16 @@ public class UserController {
             return "login";
         }else{
 
-            User user = currentUser;
+        User user = currentUser;
 
 
-            model.addAttribute("email", user.getEmail() );
-            model.addAttribute("firstName", user.getFirstName() );
-            model.addAttribute("lastName", user.getLastName() );
-            model.addAttribute("phoneNumber", user.getPhoneNumber() );
-            model.addAttribute("user", currentUser);
+        model.addAttribute("email", user.getEmail() );
+        model.addAttribute("firstName", user.getFirstName() );
+        model.addAttribute("lastName", user.getLastName() );
+        model.addAttribute("phoneNumber", user.getPhoneNumber() );
+        model.addAttribute("user", currentUser);
 
-            return "my_info";}
+        return "my_info";}
     }
 
     //works
@@ -73,9 +73,9 @@ public class UserController {
         if(this.currentUser==null){
             return "login";
         }else{
-            List<User> listUsers = userService.listAll();
-            model.addAttribute("listUsers", listUsers);
-            return "users";}
+        List<User> listUsers = userService.listAll();
+        model.addAttribute("listUsers", listUsers);
+        return "users";}
     }
 
     //works
@@ -87,11 +87,11 @@ public class UserController {
             return "login";
         }else{
 
-            model.addAttribute("firstName", currentUser.getFirstName() );
-            model.addAttribute("lastName", currentUser.getLastName() );
+        model.addAttribute("firstName", currentUser.getFirstName() );
+        model.addAttribute("lastName", currentUser.getLastName() );
 
 
-            return "user_profile";}
+        return "user_profile";}
     }
 
 
@@ -100,9 +100,9 @@ public class UserController {
     //works
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
-        model.addAttribute("user", new User());
-        model.addAttribute("countUsers", this.activeUsersNumber );
-        return "signup_form";
+            model.addAttribute("user", new User());
+            model.addAttribute("countUsers", this.activeUsersNumber );
+            return "signup_form";
     }
 
     @GetMapping("/signup_form")
@@ -148,14 +148,14 @@ public class UserController {
         if(this.currentUser==null){
             return "login";
         }else{
-            model.addAttribute("email", currentUser.getEmail() );
-            model.addAttribute("firstName", currentUser.getFirstName() );
-            model.addAttribute("lastName", currentUser.getLastName() );
-            model.addAttribute("phoneNumber", currentUser.getPhoneNumber() );
-            model.addAttribute("avrRating", currentUser.getAvrRating() );
-            model.addAttribute("registredAt", currentUser.getRegisteredAt() );
-            model.addAttribute("countUsers", this.activeUsersNumber );
-            return"user_form";
+        model.addAttribute("email", currentUser.getEmail() );
+        model.addAttribute("firstName", currentUser.getFirstName() );
+        model.addAttribute("lastName", currentUser.getLastName() );
+        model.addAttribute("phoneNumber", currentUser.getPhoneNumber() );
+        model.addAttribute("avrRating", currentUser.getAvrRating() );
+        model.addAttribute("registredAt", currentUser.getRegisteredAt() );
+        model.addAttribute("countUsers", this.activeUsersNumber );
+        return"user_form";
         }
     }
 
@@ -178,8 +178,8 @@ public class UserController {
         if(this.currentUser==null){
             return "login";
         }else{
-            model.addAttribute("status", status);
-            return "password_change";}
+        model.addAttribute("status", status);
+        return "password_change";}
     }
 
     @PostMapping("/change_password")
