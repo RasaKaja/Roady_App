@@ -35,7 +35,8 @@ public class Ride {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "DriverId")
     private Car car;
-    @ColumnDefault("true")
-    private Boolean isFinished;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private RideStatus rideStatus;
 
 }

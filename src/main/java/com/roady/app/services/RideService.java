@@ -39,6 +39,7 @@ public class RideService {
     }
 
 
+
     //method still not created at rideRepository
     public void deleteRideRequest(Long rideRequestId){
         rideRepository.deleteById(rideRequestId);
