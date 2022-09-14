@@ -16,7 +16,7 @@ public class UserService {
     public UserService(UserRepository userRepository) {this.userRepository=userRepository;}
 
 
-// C R U D operations
+    // C R U D operations
     public void saveUser(User user){
         userRepository.save(user);
     }
