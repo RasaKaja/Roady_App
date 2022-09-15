@@ -20,7 +20,7 @@ public class UserController {
     int activeUsersNumber;
 
     public User currentUser;
-//    currentUser = new User(1L, "jelena@jelena.lv", "1111", "Jelena", "Mikelsone", "97458394", 2.5, null, null );
+
 
     @Autowired
     private UserService userService;
@@ -48,16 +48,12 @@ public class UserController {
         if(this.currentUser==null){
             return "login";
         }else{
-
         User user = currentUser;
-
-
         model.addAttribute("email", user.getEmail() );
         model.addAttribute("firstName", user.getFirstName() );
         model.addAttribute("lastName", user.getLastName() );
         model.addAttribute("phoneNumber", user.getPhoneNumber() );
         model.addAttribute("user", currentUser);
-
         return "my_info";}
     }
 
@@ -86,11 +82,8 @@ public class UserController {
         if(this.currentUser==null){
             return "login";
         }else{
-
         model.addAttribute("firstName", currentUser.getFirstName() );
         model.addAttribute("lastName", currentUser.getLastName() );
-
-
         return "user_profile";}
     }
 
@@ -107,7 +100,6 @@ public class UserController {
 
     @GetMapping("/signup_form")
     public String showIndexPage(Model model){
-
         ArrayList<User> users =  userService.getAllUsers();
         this.activeUsersNumber = users.size();
         model.addAttribute("users", users);
@@ -119,20 +111,16 @@ public class UserController {
             @RequestParam(name="status", required = false) String status,
             Model model
     ){
-
         model.addAttribute("status", status);
         model.addAttribute("countUsers", this.activeUsersNumber );
-
         ArrayList<User> users =  userService.getAllUsers();
         this.activeUsersNumber = users.size();
         model.addAttribute("users", activeUsersNumber);
-
         return "login";
     }
 
     @PostMapping("/login")
     public String successfulLogin(User user){
-
         try{
             User loggedInUser = userService.verifyUser(user.getEmail(), user.getPassword());
             this.currentUser=loggedInUser;
@@ -194,7 +182,5 @@ public class UserController {
         else{
             return"redirect:password_change?status=incorrect_password";
         }
-
     }
-
 }

@@ -93,6 +93,7 @@ Long rideIdToEdit;
         model.addAttribute("departureDate", ride.getDepartureDate());
         model.addAttribute("departureTime", ride.getDepartureTime());
         model.addAttribute("ridePrice", ride.getRidePrice());
+        model.addAttribute("paymentType", ride.getPaymentType());
         return "edit_ride";
     }
 
@@ -131,9 +132,7 @@ Long rideIdToEdit;
             ride.setPaymentType(paymentType);
 
             User user = userService.getUserById(userController.currentUser.getId());
-            System.out.println("user");
             ride.setPassenger(user);
-            System.out.println("ride");
             rideService.saveRideRequest(ride);
             return "redirect:add_ride_request?status=request_added";
         }}
@@ -143,20 +142,14 @@ Long rideIdToEdit;
         if(userController.currentUser==null){
             return"redirect:login";
         }
-
         ArrayList<Ride> userRideRequests = rideService.getAllPassengerRides(userController.currentUser.getId());
-
-
         model.addAttribute("userRideRequests", userRideRequests);
-
         return "my_active_ride_requests";
     }
 
     @GetMapping("/edit_ride_request")
     public String showRideEditRequestPage(Model model){
-        System.out.println(this.rideIdToEdit);
         Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
-        System.out.println("Ride id: " + ride.getRideRequestId());
         model.addAttribute("departurePoint", ride.getDeparturePoint());
         model.addAttribute("destinationPoint", ride.getDestinationPoint());
         model.addAttribute("departureDate", ride.getDepartureDate());
@@ -234,40 +227,11 @@ Long rideIdToEdit;
 
     @PostMapping("/remove_ride_request")
     public String removeRideRequest(Long rideId){
-
+        System.out.println("it is here");
         rideService.deleteRideRequest(rideService.getRideRequestById(this.rideIdToEdit).getRideRequestId());
+        System.out.println("here");
         return "redirect:my_active_ride_requests?status=removed";
     }
 
-
-//    @GetMapping("/ride_requests")
-//    public String viewRidesList(Model model){
-//        List<Ride> listRides = rideService.allRideRequestsList();
-//        model.addAttribute("rideRequestList", listRides);
-//        return "ride_requests";
-//    }
-
-
-//    @GetMapping("/ride_requests/edit")
-//    public String editRideRequest(@PathVariable("rideRequestId") Long rideRequestId, Model model){
-//        Ride ride = rideService.getRideRequestById(rideRequestId);
-//        model.addAttribute("rideRequest", ride);
-//        return "ride_request";
-//    }
-
-
-//    @GetMapping("/transport_offer")
-//    public String showTransportOfferPage(){
-//        return "transport_offer";
-//    }
-
-    //Required to think if needed, intend of creating it to finish RideRequest
-
-//    @GetMapping("/ride_requests/update")
-//    public String updateRideRequest(@PathVariable("rideRequestId") Long rideRequestId, Model model){
-//        Ride ride = rideService.getRideRequestById(rideRequestId);
-//        model.addAttribute("rideRequest", ride);
-//        return "ride_request";
-//    }
 
 }

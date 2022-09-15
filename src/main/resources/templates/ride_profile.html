@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Driver profile</title>
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+
+    <link rel="stylesheet" href="styles/style1.css" >
+    <link rel="stylesheet" href="styles/user_form.css" >
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+
+</head>
+<body>
+<div id="header"><h1>Welcome to the Roady!</h1></div>
+
+<div id="pageContent">
+
+    <div id="firstNav">
+        <div class="logo">
+            <img title="logo" src="images/logo.png" alt="Roady logo">
+        </div>
+    </div>
+
+    <div id="Content">
+        <div class="myMenuButtons">
+            <form action="/logout" method="get">
+                <button type="submit">Logout</button>
+            </form>
+            <form action="/user_form" method="get">
+                <button type="submit">My profile info</button>
+            </form>
+            <form action="/user_profile" method="get">
+                <button type="submit">Select an action</button>
+            </form>
+            <form action="/cars" method="get">
+                <button type="submit">Your cars</button>
+            </form>
+            <form action="/transport_offer" method="get">
+                <button type="submit">Post available transport</button>
+            </form>
+            <form action="/my_active_transport_offers" method="get">
+                <button type="submit">My transport offers</button>
+            </form>
+            <form action="/driver_today" method="get">
+                <button type="submit">Find passengers</button>
+            </form>
+        </div>
+
+        <div>
+            <div>
+                                    <h2>Route information</h2>
+            <table>
+                    <tr>
+                        <td><h6>Departure: </h6></td>
+                        <td><p th:text="${ride.getDeparturePoint()}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><h6>Destination: </h6></td>
+                        <td><p th:text="${ride.getDestinationPoint()}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><h6>Departure Date: </h6></td>
+                        <td><p th:text="${ride.getDepartureDate()}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><h6>Departure Time: </h6></td>
+                        <td><p th:text="${ride.getDepartureTime()}" ></p></td>
+                    </tr>
+                    <tr>
+                        <td><h6>Price: </h6> </td>
+                        <td><p th:text="${ride.getRidePrice()}"></p></td>
+                    </tr>
+                    <tr>
+                        <td>Payment type: </td>
+                        <td><p th:text="${ride.getPaymentType()}"></p></td>
+                    </tr>
+            </table>
+            </div>
+
+                <div >
+                    <h2>Passenger information</h2>
+                <table>
+                    <tr>
+                        <td><h6>First Name: </h6></td>
+                        <td><p th:text="${ride.getPassenger().getFirstName()}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><h6>Last Name: </h6></td>
+                        <td><p th:text="${ride.getPassenger().getLastName()}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><h6>Phone: </h6></td>
+                        <td><p th:text="${ride.getPassenger().getPhoneNumber()}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><h6>Member since: </h6></td>
+                        <td><p th:text="${ride.getPassenger().getRegisteredAt()}"></p></td>
+                    </tr>
+                </table>
+                </div>
+
+
+<!--                <div th:if="car!=null">-->
+<!--                    <h2 >Car information</h2>-->
+<!--                 <table>-->
+<!--                     <tr>-->
+<!--                        <td><h6>Car type: </h6></td>-->
+<!--                        <td><p th:text="${ride.getCar().getCarType()}"></p></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><h6>Plate Number: </h6></td>-->
+<!--                        <td><p th:text="${ride.getCar().getPlateNumber()}" ></p></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><h6>Available seats: </h6></td>-->
+<!--                        <td><p th:text="${ride.getCar().getAvailableSeats()}"></p></td>-->
+<!--                    </tr>-->
+<!--                 </table>-->
+
+<!--                    <h2>Driver information</h2>-->
+<!--                <table>-->
+<!--                    <tr>-->
+<!--                        <td><h6>First Name: </h6></td>-->
+<!--                        <td><p th:text="${ride.getCar().getUser().getFirstName()}"></p></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><h6>Last Name: </h6></td>-->
+<!--                        <td><p th:text="${ride.getCar().getUser().getLastName()}"></p></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><h6>Phone: </h6></td>-->
+<!--                        <td><p th:text="${ride.getCar().getUser().getPhoneNumber()}"></p></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><h6>Member since: </h6></td>-->
+<!--                        <td><p th:text="${ride.getCar().getUser().getRegisteredAt()}"></p></td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+<!--                </div>-->
+
+        </div>
+    </div>
+
+
+    </div>
+
+
+
+
+    <div id="secondNav">
+        <div class="logo">
+            <img title="logo" src="images/logo.png" alt="Roady logo">
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <p>Copyrights: Forest Team Active users: <span ></span> Available rides: </p>
+</div>
+
+
+</body>
+</html>

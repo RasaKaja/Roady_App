@@ -31,12 +31,10 @@ public class CarController {
     @Autowired
     private RideService rideService;
 
-//    @GetMapping
-//    public String viewAllCarsList(Model model){
-//        List<Car> carList = carService.allCarsList();
-//        model.addAttribute("carList", carList);
-//        return "allCars";
-//    }
+    @Autowired
+    private RideSearchingController rideSearchingController;
+
+
 
     @GetMapping("/cars")
     public String showYourCarsPage(
@@ -84,7 +82,6 @@ public class CarController {
     public String updateSeats(Integer availableSeats){
         try{
             Car car = carService.getCarById(userController.currentUser.getCar().getId());
-            System.out.println("Seats from input" + availableSeats);
             car.setAvailableSeats(availableSeats);
             carService.saveNewCar(car);
 
@@ -130,7 +127,19 @@ public class CarController {
     }
 
     @GetMapping("/driver_today")
-    public String userIsDriver(){
+    public String userIsDriver(
+            @RequestParam(name = "status", required = false) String status,
+            Model model){
+        if (rideSearchingController.departure!=null){
+            String destination = rideSearchingController.destination;
+            String departure = rideSearchingController.departure;
+            rideSearchingController.departure = rideSearchingController.destination = null;
+            ArrayList<Ride> searchedRides= rideService.getAllBySearch(destination, departure);
+            model.addAttribute("searchedRides", searchedRides);
+            model.addAttribute("test", searchedRides.size());
+            model.addAttribute("status", status);
+            return "redirect:driver_today?status=search_displayed";
+        }
         return "driver_today";
     }
 

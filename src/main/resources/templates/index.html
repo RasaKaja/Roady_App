@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Roady</title>
+    <title>Login</title>
     <link rel="icon" type="image/x-icon" href="images/logo.png">
 
     <link rel="stylesheet" href="styles/style1.css" >
@@ -21,27 +21,36 @@
     </div>
 
     <div id="Content">
-<!--                <h1>new links</h1>-->
+        <h1>Please log-in</h1>
 
-<!--                <h3 class="likeButton"><a th:href="@{/register}">Register</a></h3>-->
-<!--                <h3 class="likeButton"><a th:href="@{/login}">Login</a> </h3>-->
-
-        <form>
+        <form method="post" action="/login">
             <div>
-                <p >Existing user?</p>
-                <h3 class="likeButton"><a th:href="@{/register}">Register</a></h3>
-<!--                <h3 class="likeButton"><a href="/signup_form">Register</a></h3>-->
-                <br>
-                <br>
-                <p>New user?</p>
-                <h3 class="likeButton"><a th:href="@{/login}">Login</a> </h3>
+                <label class="login" >Enter your username</label><br>
+                <input name="email" type="email">
+            </div>
+            <div>
+                <label class="login">Enter your password</label><br>
+                <input name="password" type="password"><br>
+            </div>
 
+            <div>
+                <p th:if="${status == 'user_not_found'}" style="color: red; background: #facccc">
+                    <span>Please add a car information first. </span><a href="cars.html">Press here to add a car</a>
+                </p>
+            </div>
+            <div>
+                <button id="loginButton">Login</button>
             </div>
         </form>
 
-        <br><br>
-
-
+        <form>
+            <div>
+                <p>Don't have an account?</p>
+                <a class="likeButton" th:href="@{/register}"> Register</a>
+            </div>
+        </form>
+        <br>
+        <br>
     </div>
 
     <div id="secondNav">
@@ -49,12 +58,10 @@
             <img title="logo" src="images/logo.png" alt="Roady logo">
         </div>
     </div>
-
 </div>
 
-
 <div id="footer">
-    <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>
+    <p>Copyrights: Forest Team Active users: <span th:text="${users}"></span> Available rides: </p>
 </div>
 
 </body>

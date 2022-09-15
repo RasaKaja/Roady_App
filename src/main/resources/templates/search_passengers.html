@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Driver profile</title>
+  <link rel="icon" type="image/x-icon" href="images/logo.png">
+
+  <link rel="stylesheet" href="styles/style1.css" >
+  <link rel="stylesheet" href="styles/user_form.css" >
+  <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+
+</head>
+<body>
+<div id="header"><h1>Welcome to the Roady!</h1></div>
+
+<div id="pageContent">
+
+  <div id="firstNav">
+    <div class="logo">
+      <img title="logo" src="images/logo.png" alt="Roady logo">
+    </div>
+  </div>
+
+  <div id="Content">
+    <div class="myMenuButtons">
+      <form action="/logout" method="get">
+        <button type="submit">Logout</button>
+      </form>
+      <form action="/user_form" method="get">
+        <button type="submit">My profile info</button>
+      </form>
+      <form action="/user_profile" method="get">
+        <button type="submit">Select an action</button>
+      </form>
+      <form action="/cars" method="get">
+        <button type="submit">Your cars</button>
+      </form>
+      <form action="/transport_offer" method="get">
+        <button type="submit">Post available transport</button>
+      </form>
+      <form action="/my_active_transport_offers" method="get">
+        <button type="submit">My transport offers</button>
+      </form>
+      <form action="/driver_today" method="get">
+        <button type="submit">Find passengers</button>
+      </form>
+    </div>
+
+
+    <div >
+      <div>
+
+        <table>
+          <thead >
+          <tr>
+            <th>Departure</th>
+            <th>Destination</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Price</th>
+            <th>Payment</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr th:each="ride: ${searchedRides}">
+            <form action="book_ride_request" method="post">
+              <td th:text="${ride.departurePoint}"></td>
+              <td th:text="${ride.destinationPoint}"></td>
+              <td th:text="${ride.departureDate}"></td>
+              <td th:text="${ride.departureTime}"></td>
+              <td th:text="${ride.ridePrice}"></td>
+              <td th:text="${ride.paymentType}"></td>
+              <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+              <td><button type="submit"> Offer your transport</button></td>
+            </form>
+          </tr>
+
+          </tbody>
+
+        </table>
+
+
+      </div>
+
+
+
+</div>
+  </div>
+
+
+
+
+  <div id="secondNav">
+    <div class="logo">
+      <img title="logo" src="images/logo.png" alt="Roady logo">
+    </div>
+  </div>
+</div>
+
+<div id="footer">
+  <p>Copyrights: Forest Team Active users: <span ></span> Available rides: </p>
+</div>
+
+
+</body>
+</html>

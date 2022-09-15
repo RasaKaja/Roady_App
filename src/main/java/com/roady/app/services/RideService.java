@@ -28,16 +28,10 @@ public class RideService {
 
     //CRUD operations
     public void saveRideRequest(Ride rideRequest){
-        System.out.println("saglaba");
         rideRepository.save(rideRequest);
-        System.out.println("saglabaja");
     }
 
-    public List<Ride> allRideRequestsList(){
-        return rideRepository.findAll();
-    }
-
-    public Ride getRideRequestById(Long rideRequestId) {
+      public Ride getRideRequestById(Long rideRequestId) {
         return rideRepository.findById(rideRequestId).get();
     }
 
@@ -57,6 +51,16 @@ public class RideService {
         return rideRepository.findAllByPassengerId(id);
     }
 
+    public ArrayList<Ride> getAllBySearch(String departurePoint ,String destinationPoint){
+          return rideRepository.findAllByDeparturePointAndDestinationPointAndCarIsNull(destinationPoint, departurePoint);
+    }
+
+    public ArrayList<Ride> getAllDriversBySearch(String departurePoint ,String destinationPoint){return rideRepository.findAllByDeparturePointAndDestinationPointAndPassengerIsNull(destinationPoint, departurePoint);}
+
+
+    public Ride lookUpRideById(Long id){
+        return rideRepository.findByRideRequestId(id);
+    }
 
 
 
