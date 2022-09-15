@@ -71,7 +71,7 @@ public class RideRepositoryTest {
 
     @Test
     public void testUpdateRideRequestStatus(){
-        Ride rideRequest = rideRepository.getReferenceById(1l);
+        Ride rideRequest = rideRepository.getReferenceById(4l);
         rideRequest.setRideStatus(RideStatus.COMPLETED);
 
         Ride updatedRide = rideRepository.save(rideRequest);

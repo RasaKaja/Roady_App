@@ -20,10 +20,6 @@ public class RideController {
 
     @Autowired
     private RideService rideService;
-
-    @Autowired
-    private RideController rideController;
-
     public Ride currentRideRequest;
 
 
@@ -54,7 +50,7 @@ public class RideController {
             @RequestParam(name = "status", required = false) String status,
             Model model
     ){
-        Long rideRequestId = rideController.currentRideRequest.getRideRequestId();
+        Long rideRequestId = currentRideRequest.getRideRequestId();
         String departurePoint = rideService.getRideRequestById(rideRequestId).getDeparturePoint();
         String destinationPoint = rideService.getRideRequestById(rideRequestId).getDestinationPoint();
         String departureDate = String.valueOf(rideService.getRideRequestById(rideRequestId).getDepartureDate());
@@ -71,14 +67,14 @@ public class RideController {
         model.addAttribute("availableSeats", paymentType);
         model.addAttribute("availableSeats", rideStatus);
 
-        return "update_ride_status";
+        return "ride_request";
     }
 
 
     @PostMapping("/update_ride_request_status")
     public String updateRequestStatus(RideStatus rideStatus) {
         try {
-            Ride rideRequest = rideService.getRideRequestById(rideController.currentRideRequest.getRideRequestId());
+            Ride rideRequest = rideService.getRideRequestById(currentRideRequest.getRideRequestId());
             rideRequest.setRideStatus(rideStatus);
             rideService.saveRideRequest(rideRequest);
 
