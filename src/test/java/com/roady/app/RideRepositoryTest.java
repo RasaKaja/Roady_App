@@ -1,9 +1,6 @@
 package com.roady.app;
 
-import com.roady.app.entities.PaymentType;
-import com.roady.app.entities.Ride;
-import com.roady.app.entities.User;
-import com.roady.app.entities.Car;
+import com.roady.app.entities.*;
 import com.roady.app.repositories.CarRepository;
 import com.roady.app.repositories.RideRepository;
 import com.roady.app.repositories.UserRepository;
@@ -53,22 +50,17 @@ public class RideRepositoryTest {
         ride.setRidePrice(15D);
         ride.setPaymentType(PaymentType.CASH);
         ride.setCar(car);
-        ride.setIsFinished(true);
+        ride.setRideStatus(RideStatus.AVAILABLE);
 
         //when
         Ride savedRide = rideRepository.save(ride);
         Ride existsRide = entityManager.find(Ride.class, savedRide.getRideRequestId());
-
-//        carRepository.save(car);
-//        userRepository.save(user);
 
         //then
         assertThat(existsRide.getRideRequestId().equals(ride.getRideRequestId()));
 
     }
 
-
-    //WORKS
     @Test
     public void testFindRideRequestById(){
         Long rideRequestId = 2l;
@@ -77,4 +69,13 @@ public class RideRepositoryTest {
         assertThat(rideRequest).isNotNull();
     }
 
+    @Test
+    public void testUpdateRideRequestStatus(){
+        Ride rideRequest = rideRepository.getReferenceById(4l);
+        rideRequest.setRideStatus(RideStatus.COMPLETED);
+
+        Ride updatedRide = rideRepository.save(rideRequest);
+
+        assertThat(updatedRide.getRideStatus().equals(rideRequest));
+    }
 }
