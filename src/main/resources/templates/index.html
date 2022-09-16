@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Roady</title>
-    <link rel="icon" type="image/x-icon" href="images/logo.png">
-    <link rel="stylesheet" href="styles/style1.css" >
-    <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+	<meta charset="UTF-8">
+	<title>Roady home</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg">
+	<link href="/styles/index-style.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
 </head>
 
 <body>
-<div id="header"><h1>Welcome to the Roady!</h1></div>
 
-<div id="pageContent">
+<header class="main-header">
+	<h1>Welcome to the Roady</h1>
+</header>
 
-    <div id="firstNav">
-        <div class="logo">
-            <img title="logo" src="images/logo.png" alt="Roady logo">
-        </div>
-    </div>
-
-    <div id="Content">
-<!--                <h1>new links</h1>-->
-
-<!--                <h3 class="likeButton"><a th:href="@{/register}">Register</a></h3>-->
-<!--                <h3 class="likeButton"><a th:href="@{/login}">Login</a> </h3>-->
-
-        <form>
-            <div>
-                <p >Existing user?</p>
-                <h3 class="likeButton"><a th:href="@{/register}">Register</a></h3>
-<!--                <h3 class="likeButton"><a href="/signup_form">Register</a></h3>-->
-                <br>
-                <br>
-                <p>New user?</p>
-                <h3 class="likeButton"><a th:href="@{/login}">Login</a> </h3>
-
-            </div>
-        </form>
-        <br><br>
-    </div>
-
-    <div id="secondNav">
-        <div class="logo">
-            <img title="logo" src="images/logo.png" alt="Roady logo">
-        </div>
-    </div>
+<div class="main-part">
+	
+	<img src="images/logo.jpg" alt="Roady logo" class="image">
+	
+	<div class="login-form">
+		<h2>Please log-in</h2>
+		
+		<form method="post" action="/login">
+			<div>
+				<input class="input" name="email" type="email" placeholder="Enter your email">
+			</div>
+			<div>
+				<input class="input" name="password" type="password" placeholder="Enter your password">
+			</div>
+			
+			<div>
+				<p th:if="${status == 'user_not_found'}" class="user-not-found">
+					User not found. Check your username or password
+				</p>
+			</div>
+			<div>
+				<button class="login-button">Login</button>
+			</div>
+		</form>
+	</div>
+	
+	<form class="invite-register" action="/register">
+		<h2>Don't have an account?</h2>
+		<button th:href="@{/register}" class="register-button" type="submit"> Register</button>
+	</form>
 
 </div>
 
-<div id="footer">
-    <p>Active users: <span th:text="${countUsers}"></span> Available rides: </p>
-    <p>Forest Team &copy; 2022</p>
-</div>
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
+
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
 
 </body>
 </html>
