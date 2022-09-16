@@ -23,9 +23,14 @@
 
   <div id="Content">
 
+    <form action="return_to_previous_page" method="post">
+      <input type="hidden" name="link" th:value="${status}">
+      <button type="submit">Back</button>
+    </form>
+
     <div>
       <div>
-        <h2>Route information</h2>
+        <h2>Ride information</h2>
         <table>
           <tr>
             <td><h6>Departure: </h6></td>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 @Controller
@@ -112,16 +113,24 @@ public class RideSearchingController {
     }
 
     @PostMapping("/send_info_for_ride_overview")
-    public String getInfoForRideRequestDisplaying(Long rideId){
+    public String getInfoForRideRequestDisplaying(Long rideId, String link){
         this.bookedRideId=rideId;
-        return "redirect:finished_ride_profile";
+        return "redirect:finished_ride_profile?status="+link;
     }
 
     @GetMapping("/finished_ride_profile")
-    public String showFinishedRideProfile(Model model){
+    public String showFinishedRideProfile(
+            @RequestParam(name="status", required = false) String status,
+            Model model){
         Ride ride = rideService.getRideRequestById(this.bookedRideId);
         model.addAttribute("ride", ride);
+        model.addAttribute("status", status);
         return "finished_ride_profile";
+    }
+
+    @PostMapping("/return_to_previous_page")
+    public String returnToPreviousPage(String link){
+        return "redirect:"+link;
     }
 
 

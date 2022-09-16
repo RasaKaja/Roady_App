@@ -27,25 +27,26 @@
   <div id="Content">
 
     <div class="myMenuButtons">
-      <form action="/logout" method="get">
+      <form action="/logout" method="get" style ='float: left; padding: 5px;'>
         <button type="submit">Logout</button>
       </form>
-      <form action="/user_form" method="get">
+      <form action="/user_form" method="get" style ='float: left; padding: 5px;'>
         <button type="submit">My profile info</button>
       </form>
-      <form action="/user_profile" method="get">
+      <form action="/user_profile" method="get" style ='float: left; padding: 5px;'>
         <button type="submit">Select an action</button>
       </form>
 
-      <form action="/add_ride_request" method="get">
+      <form action="/add_ride_request" method="get" style ='float: left; padding: 5px;'>
         <button type="submit">Add ride request</button>
       </form>
-      <form action="/my_active_ride_requests" method="get">
+      <form action="/my_active_ride_requests" method="get" style ='float: left; padding: 5px;'>
         <button type="submit">My ride requests</button>
       </form>
-      <form action="/passenger_today" method="get">
+      <form action="/passenger_today" method="get" style ='float: left; padding: 5px;'>
         <button type="submit">Find transport</button>
       </form>
+      <br><br><br>
     </div>
 
     <div>
@@ -111,6 +112,7 @@
             <td th:text="${ride.paymentType}"></td>
             <td th:text="${ride.getCar().getUser().getFirstName()}"></td>
             <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+            <input type="hidden" name="link" value="my_active_ride_requests"/>
             <td><button type="submit" > See ride information</button></td>
           </form>
 

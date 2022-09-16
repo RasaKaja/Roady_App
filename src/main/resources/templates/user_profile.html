@@ -26,28 +26,24 @@
 
   <div id="Content">
 
-      <div class="myMenyButtons">
+      <div class="myMenuButtons">
 
-          <form action="/logout" method="get">
+          <form action="/logout" method="get" style ='float: left; padding: 5px;'>
               <button type="submit">Logout</button>
           </form>
-          <form action="/user_form" method="get">
+          <form action="/user_form" method="get" style ='float: left; padding: 5px;'>
               <button type="submit">My profile info</button>
           </form>
-          <form action="/user_profile" method="get">
+          <form action="/user_profile" method="get" style ='float: left; padding: 5px;'>
               <button type="submit">Select an action</button>
           </form>
-
+          <br><br><br>
       </div>
-
-<!--      <form method="get" action="/is_loggedIn">-->
-
-<!--      </form>-->
 
 
     <div >
 
-      <p> Welcome <span th:text="${firstName}"></span></p>
+      <p> Welcome <span th:text="${firstName}"></span>! </p>
 
       <div>
         <h3>What is your plan for today?</h3>
