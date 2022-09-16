@@ -1,122 +1,92 @@
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Registration</title>
-  <link rel="icon" type="image/x-icon" href="images/logo.png">
-
-  <link rel="stylesheet" href="styles/style1.css" >
-  <meta name="viewport" content="width=device-width; initial-scale=1.0" >
-
+	<meta charset="UTF-8">
+	<title>Registration</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg">
+	<link href="/styles/index-style.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
 </head>
+
 <body>
-<div id="header"><h1>Welcome to the Roady!</h1></div>
 
-<div id="pageContent">
+<header class="main-header">
+	<h1>Welcome to the Roady</h1>
+</header>
 
-  <div id="firstNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
+<div class="main-part">
+	
+	<img src="images/logo.jpg" alt="Roady logo" class="image">
+	
+	<div class="login-form">
+		<h2>Please Sign Up</h2>
+		
+		<form th:action="@{/process_register}" method="post"
+		      th:object="${user}">
 
-  <div id="Content">
+				<div>
+					<input type="email" class="input" th:field="*{email}" placeholder="Enter your email" required/>
+				</div>
+				
+				<script>var check = function () {
+					if (document.getElementById('password').value ==
+							 document.getElementById('confirm_password').value) {
+						document.getElementById('message').style.color = 'green';
+						document.getElementById('message').innerHTML = 'Passwords are matching';
+					} else {
+						document.getElementById('message').style.color = 'red';
+						document.getElementById('message').innerHTML = 'Passwords not matching';
+					}
+				}</script>
+				
+				<div>
+					<input name="password" class="input" type="password" placeholder="Enter your password"
+					       onkeyup='check();'/>
+				</div>
+				
+				<div>
+					<input type="password" class="input" name="confirm_password" placeholder="Confirm password"
+					       onkeyup='check();'/> <br>
+					<span id='message'></span>
+				</div>
+				
+				<div>
+					<input type="text" class="input" placeholder="Enter first name" required minlength="2" maxlength="20"
+					       th:field="*{firstName}"/>
+				</div>
+				
+				<div>
+					<input type="text" class="input" placeholder="Enter last name" required minlength="2" maxlength="20"
+					       th:field="*{lastName}"/>
+				</div>
+				
+				<div>
+					<input type="text" class="input" placeholder="Enter phone number" required minlength="5" maxlength="20"
+					       th:field="*{phoneNumber}"/>
+				</div>
+				
+				<div>
+					<button class="login-button" type="submit">Sign Up</button>
+				</div>
 
-    <div >
-      <div>
-        <h1 style="-webkit-text-fill-color: #24052d; text-align: center">User Registration - Sign Up</h1>
-      </div>
+		</form>
+	</div>
+	
+	<form class="invite-register" action="/login">
+		<h2>Already have an account?</h2>
+		<button th:href="@{/login}" class="register-button" type="submit">Sign in</button>
+	</form>
 
-      <div >
-        <form th:action="@{/process_register}" method="post"
-              style="max-width: 500px; margin: 0 auto"
-              th:object="${user}" >
-
-          <div >
-            <div >
-              <label >E-mail</label>
-              <input type="email"  th:field="*{email}" required/>
-            </div>
-            <br>
-
-            <script>var check = function() {
-            if (document.getElementById('password').value ==
-            document.getElementById('confirm_password').value) {
-            document.getElementById('message').style.color = 'green';
-            document.getElementById('message').innerHTML = 'Passwords are matching';
-            } else {
-            document.getElementById('message').style.color = 'red';
-            document.getElementById('message').innerHTML = 'Passwords not matching';
-            }
-            }</script>
-
-            <div>
-              <div>
-                <label>Password <br>
-                  <input name="password" id="password" type="password" onkeyup='check();' /><br>
-                </label>
-                <br>
-              </div>
-            </div><br>
-
-            <div>
-              <div>
-                <label>Confirm password <br>
-                  <input type="password" name="confirm_password" id="confirm_password"  onkeyup='check();' /> <br>
-                  </label>
-                  <span id='message'></span>
-                  <br>
-
-              </div>
-            </div><br>
-
-            <div >
-              <label >First Name</label>
-              <input type="text"  th:field="*{firstName}" required minlength="2" maxlength="20"/>
-            </div> <br>
-
-            <div>
-              <label >Last Name</label>
-              <input type="text"  th:field="*{lastName}" required minlength="2" maxlength="20"/>
-            </div><br>
-
-            <div >
-              <label >Phone Number</label>
-              <input type="text"  th:field="*{phoneNumber}" required minlength="5" maxlength="20"/>
-            </div><br>
-            <div>
-              <button id="signupButton" type="submit" >Sign Up</button>
-            </div>
-
-          </div>
-
-          <div >
-            <p style="text-align: center">Already have an account? <a href="/login" style="text-decoration: underline">Sign in</a></p>
-          </div>
-
-        </form>
-      </div>
-
-    </div>
-
-
-    <br><br>
-  </div>
-
-  <div id="secondNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
 </div>
 
-<div id="footer">
-  <p>Active users: <span th:text="${countUsers}"></span> Available rides: </p>
-  <p>Forest Team &copy; 2022</p>
-</div>
+<aside>
+	<p>Active users: <span th:text="${countUsers}"></span></p>
+	<p> Available rides: </p>
+</aside>
+
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
 
 </body>
 </html>
-
