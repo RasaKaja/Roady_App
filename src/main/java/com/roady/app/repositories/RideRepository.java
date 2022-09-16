@@ -1,5 +1,6 @@
 package com.roady.app.repositories;
 
+import com.roady.app.entities.Car;
 import com.roady.app.entities.Ride;
 import com.roady.app.entities.User;
 import org.springframework.data.domain.Sort;
@@ -22,5 +23,12 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
     ArrayList<Ride> findAllByDeparturePointAndDestinationPointAndPassengerIsNull(String destinationPoint, String departurePoint);
 
     Ride findByRideRequestId(Long id);
+
+    ArrayList<Ride> findAllByPassengerIdAndAndCarIsNull(Long id);
+    ArrayList<Ride> findAllByPassengerIdAndAndCarIsNotNull(Long id);
+
+    ArrayList<Ride> findAllByCarAndPassengerIsNotNull(Car car);
+
+    ArrayList<Ride> findAllByCarAndPassengerIsNull(Car car);
 
 }

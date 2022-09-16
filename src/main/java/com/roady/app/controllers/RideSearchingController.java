@@ -94,15 +94,35 @@ public class RideSearchingController {
     }
 
     @PostMapping("/confirm_booking_as_passenger")
-    public String passengerConfirmBooking(Long rideId){
+    public String passengerConfirmsBooking(Long rideId){
         Ride ride = rideService.lookUpRideById(rideId);
-        System.out.println(ride.getRideRequestId());
         ride.setPassenger(userService.getUserById(userController.currentUser.getId()));
         ride.setIsFinished(true);
         rideService.saveRideRequest(ride);
         return "redirect:my_active_ride_requests";
     }
 
+    @PostMapping("/confirm_booking_as_driver")
+    public String driverConfirmsBooking(Long rideId){
+        Ride ride = rideService.lookUpRideById(rideId);
+        ride.setCar(carService.getCarById(userController.currentUser.getId()));
+        ride.setIsFinished(true);
+        rideService.saveRideRequest(ride);
+        return "redirect:my_active_transport_offers";
+    }
+
+    @PostMapping("/send_info_for_ride_overview")
+    public String getInfoForRideRequestDisplaying(Long rideId){
+        this.bookedRideId=rideId;
+        return "redirect:finished_ride_profile";
+    }
+
+    @GetMapping("/finished_ride_profile")
+    public String showFinishedRideProfile(Model model){
+        Ride ride = rideService.getRideRequestById(this.bookedRideId);
+        model.addAttribute("ride", ride);
+        return "finished_ride_profile";
+    }
 
 
     }

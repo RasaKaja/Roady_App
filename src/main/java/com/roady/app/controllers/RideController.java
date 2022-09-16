@@ -77,10 +77,13 @@ Long rideIdToEdit;
             return "redirect:cars?status=no_car";
         }
 
-        ArrayList<Ride> userRides = rideService.getAllUsersRides(userController.currentUser.getCar().getId());
+
+        ArrayList<Ride> driverPendingRides =rideService.getAllPendingDriverRides(userController.currentUser.getCar());
+        ArrayList<Ride> driverFinishedRides =rideService.getAllFinishedDriverRides(userController.currentUser.getCar());
         Long car_Id = userController.currentUser.getCar().getId();
         String platenumber = carService.getCarById(car_Id).getPlateNumber();
-        model.addAttribute("userRides", userRides);
+        model.addAttribute("driverPendingRides", driverPendingRides);
+        model.addAttribute("driverFinishedRides", driverFinishedRides);
         model.addAttribute("plateNumber", platenumber);
         return "my_active_transport_offers";
     }
@@ -142,8 +145,10 @@ Long rideIdToEdit;
         if(userController.currentUser==null){
             return"redirect:login";
         }
-        ArrayList<Ride> userRideRequests = rideService.getAllPassengerRides(userController.currentUser.getId());
-        model.addAttribute("userRideRequests", userRideRequests);
+        ArrayList<Ride> userPendingRideRequests = rideService.getAllPendingPassengerRides(userController.currentUser.getId());
+        ArrayList<Ride> userFinishedRideRequests = rideService.getAllFinishedPassengerRides(userController.currentUser.getId());
+        model.addAttribute("userPendingRideRequests", userPendingRideRequests);
+        model.addAttribute("userFinishedRideRequests", userFinishedRideRequests);
         return "my_active_ride_requests";
     }
 

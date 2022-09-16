@@ -63,5 +63,19 @@ public class RideService {
     }
 
 
+    public ArrayList<Ride> getAllPendingPassengerRides(Long id) {
+        return rideRepository.findAllByPassengerIdAndAndCarIsNull(id);
+    }
 
+    public ArrayList<Ride> getAllFinishedPassengerRides(Long id) {
+        return rideRepository.findAllByPassengerIdAndAndCarIsNotNull(id);
+    }
+
+    public ArrayList<Ride> getAllPendingDriverRides(Car car) {
+        return rideRepository.findAllByCarAndPassengerIsNull(car);
+    }
+
+    public ArrayList<Ride> getAllFinishedDriverRides(Car car) {
+        return rideRepository.findAllByCarAndPassengerIsNotNull(car);
+    }
 }

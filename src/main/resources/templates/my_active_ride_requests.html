@@ -48,6 +48,8 @@
       </form>
     </div>
 
+    <div>
+      <h3>My pending ride requests</h3>
     <table>
       <thead >
       <tr>
@@ -61,7 +63,7 @@
       </thead>
 
       <tbody>
-        <tr th:each="ride: ${userRideRequests}">
+        <tr th:each="ride: ${userPendingRideRequests}">
 
           <form action="send_info_for_ride_editing" method="post">
             <td th:text="${ride.departurePoint}"></td>
@@ -71,7 +73,7 @@
             <td th:text="${ride.ridePrice}"></td>
             <td th:text="${ride.paymentType}"></td>
             <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
-            <td><button type="submit" name="toDo" value="edit"> Edit/Delete</button></td>
+            <td><button type="submit" name="toDo" value="edit"> Edit</button></td>
           </form>
 
         </tr>
@@ -79,11 +81,44 @@
       </tbody>
 
     </table>
+    </div>
 
-
+    <br>
     <div>
+    <h3>My finished ride requests</h3>
+      <table>
+        <thead >
+        <tr>
+          <th>Departure</th>
+          <th>Destination</th>
+          <th>Departure Date</th>
+          <th>Departure Time</th>
+          <th>Price</th>
+          <th>Payment</th>
+          <th>Driver</th>
+        </tr>
+        </thead>
 
+        <tbody>
+        <tr th:each="ride: ${userFinishedRideRequests}">
 
+          <form action="send_info_for_ride_overview" method="post">
+            <td th:text="${ride.departurePoint}"></td>
+            <td th:text="${ride.destinationPoint}"></td>
+            <td th:text="${ride.departureDate}"></td>
+            <td th:text="${ride.departureTime}"></td>
+            <td th:text="${ride.ridePrice}"></td>
+            <td th:text="${ride.paymentType}"></td>
+            <td th:text="${ride.getCar().getUser().getFirstName()}"></td>
+            <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+            <td><button type="submit" > See ride information</button></td>
+          </form>
+
+        </tr>
+        </tr>
+        </tbody>
+
+      </table>
 
 
     </div>

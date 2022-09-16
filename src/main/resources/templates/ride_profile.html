@@ -47,9 +47,11 @@
         </div>
 
         <div>
+            <h2>Route information</h2>
+            <form action="confirm_booking_as_driver" method="post">
+
             <div>
-                                    <h2>Route information</h2>
-            <table>
+                    <table>
                     <tr>
                         <td><h6>Departure: </h6></td>
                         <td><p th:text="${ride.getDeparturePoint()}"></p></td>
@@ -96,52 +98,12 @@
                         <td><h6>Member since: </h6></td>
                         <td><p th:text="${ride.getPassenger().getRegisteredAt()}"></p></td>
                     </tr>
+                    <input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}" >
+                    <button type="submit"> Confirm</button>
                 </table>
                 </div>
-
-
-<!--                <div th:if="car!=null">-->
-<!--                    <h2 >Car information</h2>-->
-<!--                 <table>-->
-<!--                     <tr>-->
-<!--                        <td><h6>Car type: </h6></td>-->
-<!--                        <td><p th:text="${ride.getCar().getCarType()}"></p></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td><h6>Plate Number: </h6></td>-->
-<!--                        <td><p th:text="${ride.getCar().getPlateNumber()}" ></p></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td><h6>Available seats: </h6></td>-->
-<!--                        <td><p th:text="${ride.getCar().getAvailableSeats()}"></p></td>-->
-<!--                    </tr>-->
-<!--                 </table>-->
-
-<!--                    <h2>Driver information</h2>-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <td><h6>First Name: </h6></td>-->
-<!--                        <td><p th:text="${ride.getCar().getUser().getFirstName()}"></p></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td><h6>Last Name: </h6></td>-->
-<!--                        <td><p th:text="${ride.getCar().getUser().getLastName()}"></p></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td><h6>Phone: </h6></td>-->
-<!--                        <td><p th:text="${ride.getCar().getUser().getPhoneNumber()}"></p></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td><h6>Member since: </h6></td>-->
-<!--                        <td><p th:text="${ride.getCar().getUser().getRegisteredAt()}"></p></td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--                </div>-->
-
+            </form>
         </div>
-    </div>
-
-
     </div>
 
 

@@ -55,6 +55,7 @@
         </div>
 
         <div>
+            <h3>My pending transport offers</h3>
 
         <table>
             <thead >
@@ -71,7 +72,7 @@
             </thead>
 
             <tbody>
-            <tr th:each="ride: ${userRides}">
+            <tr th:each="ride: ${driverFinishedRides}">
                 <form action="send_info_for_transport_offer_editing" method="post">
                     <td th:text="${ride.departurePoint}"></td>
                     <td th:text="${ride.destinationPoint}"></td>
@@ -91,6 +92,46 @@
 
 
          </div>
+
+        <div>
+            <h3>My finished transport offers</h3>
+
+            <table>
+                <thead >
+                <tr>
+                    <th>Departure</th>
+                    <th>Destination</th>
+                    <th>Departure Date</th>
+                    <th>Departure Time</th>
+                    <th>Price</th>
+                    <th>Payment</th>
+                    <th>Seats in Car <span th:text="${plateNumber}"></span></th>
+                    <th>Passenger</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="ride: ${driverFinishedRides}">
+                    <form action="send_info_for_ride_overview" method="post">
+                        <td th:text="${ride.departurePoint}"></td>
+                        <td th:text="${ride.destinationPoint}"></td>
+                        <td th:text="${ride.departureDate}"></td>
+                        <td th:text="${ride.departureTime}"></td>
+                        <td th:text="${ride.ridePrice}"></td>
+                        <td th:text="${ride.paymentType}"></td>
+                        <td th:text="${ride.car.getAvailableSeats()}"></td>
+                        <td th:text="${ride.getPassenger().getFirstName()}" ></td>
+                        <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+                        <td><button type="submit"> See ride information</button></td>
+                    </form>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+
+        </div>
 
 
 
