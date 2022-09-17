@@ -1,7 +1,10 @@
 package com.roady.app.controllers;
 
+import com.roady.app.entities.DriverReview;
+import com.roady.app.entities.PassengerReview;
 import com.roady.app.entities.Ride;
 import com.roady.app.services.CarService;
+import com.roady.app.services.ReviewService;
 import com.roady.app.services.RideService;
 import com.roady.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,9 @@ public class RideSearchingController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+            private ReviewService reviewService;
 
     String departure;
     String destination;
@@ -123,14 +129,55 @@ public class RideSearchingController {
             @RequestParam(name="status", required = false) String status,
             Model model){
         Ride ride = rideService.getRideRequestById(this.bookedRideId);
+        int isDriverRated;
+        if(ride.getDriverReview()==null){
+            isDriverRated = 0;
+        }else{
+            isDriverRated =1;
+        }
+        int isPassengerRated;
+        if(ride.getPassengerReview()==null){
+            isPassengerRated= 0;
+        }else{
+            isPassengerRated =1;
+        }
         model.addAttribute("ride", ride);
         model.addAttribute("status", status);
+        model.addAttribute("isPassengerRated", isPassengerRated);
+        model.addAttribute("isDriverRated", isDriverRated);
         return "finished_ride_profile";
     }
 
     @PostMapping("/return_to_previous_page")
     public String returnToPreviousPage(String link){
         return "redirect:"+link;
+    }
+
+
+    @PostMapping("driver_rates_passenger")
+    public String driverRatesPassenger(Double rating, Long rideId){
+        DriverReview driverReview = new DriverReview();
+        driverReview.setReview(rating);
+        driverReview.setRide(rideService.lookUpRideById(rideId));
+        driverReview.setUserId(rideService.getRideRequestById(rideId).getCar().getUser().getId());
+        reviewService.saveDriversReviewToPassenger(driverReview);
+        Ride ride = rideService.lookUpRideById(rideId);
+        ride.setDriverReview(driverReview);
+        rideService.saveRideRequest(ride);
+        return "redirect:my_active_transport_offers?status=rated";
+    }
+
+    @PostMapping("passenger_rates_driver")
+    public String passengerRatesDriver(Double rating, Long rideId){
+        PassengerReview passengerReview = new PassengerReview();
+        passengerReview.setReview(rating);
+        passengerReview.setRide(rideService.lookUpRideById(rideId));
+        passengerReview.setUserId(rideService.getRideRequestById(rideId).getPassenger().getId());
+        reviewService.savePassengerReviewToDriver(passengerReview);
+        Ride ride = rideService.lookUpRideById(rideId);
+        ride.setPassengerReview(passengerReview);
+        rideService.saveRideRequest(ride);
+        return "redirect:my_active_ride_requests?status=rated";
     }
 
 

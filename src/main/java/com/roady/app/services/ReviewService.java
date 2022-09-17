@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class ReviewService implements Review {
+public class ReviewService  {
 
     @Autowired
     private UserRepository userRepository;
@@ -23,11 +23,11 @@ public class ReviewService implements Review {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PassengerReview passengerReview;
-
-    @Autowired
-    private DriverReview driverReview;
+//    @Autowired
+//    private PassengerReview passengerReview;
+//
+//    @Autowired
+//    private DriverReview driverReview;
 
     @Autowired
     private PassengerReviewRepository passengerReviewRepository;
@@ -38,10 +38,26 @@ public class ReviewService implements Review {
     @Autowired
     private UserReviews userReviews;
 
-    public Iterable<User> getReviewInfo() {
-        Iterable<User> users = userRepository.findAll();
-        return users;
+    public double findDriverRating(Ride ride){
+        DriverReview driverReview = driverReviewRepository.findByRide(ride);
+        Double rating = driverReview.getReview();
+        return rating;
     }
+
+    public DriverReview getByRide(Ride ride){
+        return driverReviewRepository.findByRide(ride);
+    }
+
+    public void saveDriversReviewToPassenger(DriverReview driverReview){
+        driverReviewRepository.save(driverReview);
+    }
+
+    public void savePassengerReviewToDriver(PassengerReview passengerReview) {passengerReviewRepository.save(passengerReview);}
+
+//    public Iterable<User> getReviewInfo() {
+//        Iterable<User> users = userRepository.findAll();
+//        return users;
+//    }
 
 //    public boolean assessReview(double review, Long userId, String reviewType, Long rideId) {
 //        if (!userService.checkIfIsUser(userId)) {
@@ -109,13 +125,13 @@ public class ReviewService implements Review {
 //        }
 //    }
 
-    @Override
-    public Double avgRating(Long userId) {
-        if (userId == driverReview.getUserId()) {
-            driverReviewRepository.avgRating(userId);
-        }else {
-            passengerReviewRepository.avgRating(userId);
-        }
-        return avgRating(userId);
-    }
+//    @Override
+//    public Double avgRating(Long userId) {
+//        if (userId == driverReview.getUserId()) {
+//            driverReviewRepository.avgRating(userId);
+//        }else {
+//            passengerReviewRepository.avgRating(userId);
+//        }
+//        return avgRating(userId);
+//    }
 }

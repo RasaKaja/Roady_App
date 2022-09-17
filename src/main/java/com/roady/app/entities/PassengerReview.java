@@ -1,15 +1,17 @@
 package com.roady.app.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "passenger_review")
-public class PassengerReview implements Review {
+public class PassengerReview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,46 +19,48 @@ public class PassengerReview implements Review {
     @Column(name = "passenger_id")
     private Long userId;
 
-    @Column(name = "ride_id")
-    private Long rideId;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "RideId")
+    private Ride ride;
+
     @Column(name = "review")
     private double review;
 
-    @Override
-    public double getReview() {
-        return review;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id=id;
-    }
-
-    @Override
-    public Long getUserId() {
-        return userId;
-    }
-
-    @Override
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    @Override
-    public void setReview(double review) {
-        this.review = review;
-    }
-
-    public Long getRideId() {
-        return rideId;
-    }
-
-    public void setRideId(Long rideId) {
-        this.rideId = rideId;
-    }
+//    @Override
+//    public double getReview() {
+//        return review;
+//    }
+//
+//    @Override
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    @Override
+//    public void setId(Long id) {
+//        this.id=id;
+//    }
+//
+//    @Override
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    @Override
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
+//
+//    @Override
+//    public void setReview(double review) {
+//        this.review = review;
+//    }
+//
+//    public Long getRideId() {
+//        return rideId;
+//    }
+//
+//    public void setRideId(Long rideId) {
+//        this.rideId = rideId;
+//    }
 }

@@ -4,6 +4,7 @@ import com.roady.app.entities.Car;
 import com.roady.app.entities.Ride;
 import com.roady.app.entities.User;
 import com.roady.app.services.CarService;
+import com.roady.app.services.ReviewService;
 import com.roady.app.services.RideService;
 import com.roady.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ private CarService carService;
 
 @Autowired
 private UserService userService;
+
+@Autowired
+        private ReviewService reviewService;
 
 Long rideIdToEdit;
 
@@ -82,6 +86,8 @@ Long rideIdToEdit;
         ArrayList<Ride> driverFinishedRides =rideService.getAllFinishedDriverRides(userController.currentUser.getCar());
         Long car_Id = userController.currentUser.getCar().getId();
         String platenumber = carService.getCarById(car_Id).getPlateNumber();
+        System.out.println("Finished" + driverFinishedRides.size());
+        System.out.println(driverPendingRides.size());
         model.addAttribute("driverPendingRides", driverPendingRides);
         model.addAttribute("driverFinishedRides", driverFinishedRides);
         model.addAttribute("plateNumber", platenumber);
@@ -91,6 +97,7 @@ Long rideIdToEdit;
     @GetMapping("/edit_ride")
     public String displayEditRidePage(Model model){
         Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
+        model.addAttribute("ride", ride);
         model.addAttribute("departurePoint", ride.getDeparturePoint());
         model.addAttribute("destinationPoint", ride.getDestinationPoint());
         model.addAttribute("departureDate", ride.getDepartureDate());
@@ -155,6 +162,7 @@ Long rideIdToEdit;
     @GetMapping("/edit_ride_request")
     public String showRideEditRequestPage(Model model){
         Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
+        model.addAttribute("ride", ride);
         model.addAttribute("departurePoint", ride.getDeparturePoint());
         model.addAttribute("destinationPoint", ride.getDestinationPoint());
         model.addAttribute("departureDate", ride.getDepartureDate());
@@ -232,10 +240,46 @@ Long rideIdToEdit;
 
     @PostMapping("/remove_ride_request")
     public String removeRideRequest(Long rideId){
-        System.out.println("it is here");
-        rideService.deleteRideRequest(rideService.getRideRequestById(this.rideIdToEdit).getRideRequestId());
-        System.out.println("here");
+        Ride ride = rideService.lookUpRideById(rideId);
+        ride.setPassenger(null);
+        rideService.saveRideRequest(ride);
         return "redirect:my_active_ride_requests?status=removed";
+    }
+
+    @PostMapping("/remove_transport_offer")
+    public String removeTransportOffer(Long rideId){
+        Ride ride = rideService.lookUpRideById(rideId);
+        ride.setCar(null);
+        rideService.saveRideRequest(ride);
+        return "redirect:my_active_transport_offers?status=removed";
+    }
+
+
+
+    @GetMapping("/user_form")
+    public String showUserFormPage(Model model){
+        if(userController.currentUser==null){
+            return "login";
+        }else{
+
+            Double passengerAverageRating = rideService.getPassengerRating(userController.currentUser.getId());
+            Double driverAverageRating = 0.0;
+            if(userController.currentUser.getCar()==null){
+                driverAverageRating = 0.0;
+            }else{
+                driverAverageRating = rideService.getDriverRating(userController.currentUser.getCar().getId());
+            }
+
+            model.addAttribute("email", userController.currentUser.getEmail() );
+            model.addAttribute("firstName", userController.currentUser.getFirstName() );
+            model.addAttribute("lastName", userController.currentUser.getLastName() );
+            model.addAttribute("phoneNumber", userController.currentUser.getPhoneNumber() );
+            model.addAttribute("avrPassengerRating", passengerAverageRating );
+            model.addAttribute("avrDriverRating", driverAverageRating );
+            model.addAttribute("registredAt", userController.currentUser.getRegisteredAt() );
+            model.addAttribute("countUsers", userController.activeUsersNumber );
+            return"user_form";
+        }
     }
 
 

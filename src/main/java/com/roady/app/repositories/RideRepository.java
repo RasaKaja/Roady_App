@@ -19,8 +19,8 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
 
     void deleteRideByRideRequestId(Long id);
 
-    ArrayList<Ride> findAllByDeparturePointAndDestinationPointAndCarIsNull(String destinationPoint, String departurePoint);
-    ArrayList<Ride> findAllByDeparturePointAndDestinationPointAndPassengerIsNull(String destinationPoint, String departurePoint);
+    ArrayList<Ride> findAllByDeparturePointAndDestinationPointAndCarIsNullAndPassengerIsNotNull(String destinationPoint, String departurePoint);
+    ArrayList<Ride> findAllByDeparturePointAndDestinationPointAndPassengerIsNullAndCarIsNotNull(String destinationPoint, String departurePoint);
 
     Ride findByRideRequestId(Long id);
 
@@ -30,5 +30,10 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
     ArrayList<Ride> findAllByCarAndPassengerIsNotNull(Car car);
 
     ArrayList<Ride> findAllByCarAndPassengerIsNull(Car car);
+
+
+    ArrayList<Ride> findAllByPassengerIdAndDriverReviewIsNotNull(Long Id);
+    ArrayList<Ride> findAllByCar_IdAndPassengerReviewIsNotNull(Long id);
+
 
 }

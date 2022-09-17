@@ -54,41 +54,42 @@
         <div>
             <h3>My pending transport offers</h3>
 
-        <table>
-            <thead >
-            <tr>
-                <th>Departure</th>
-                <th>Destination</th>
-                <th>Departure Date</th>
-                <th>Departure Time</th>
-                <th>Price</th>
-                <th>Payment</th>
-                <th>Seats in Car <span th:text="${plateNumber}"></span></th>
-<!--                <th>Passenger</th>-->
-            </tr>
-            </thead>
+            <table>
+                <thead >
+                <tr>
+                    <th>Departure</th>
+                    <th>Destination</th>
+                    <th>Departure Date</th>
+                    <th>Departure Time</th>
+                    <th>Price</th>
+                    <th>Payment</th>
+                    <th>Seats in Car <span th:text="${plateNumber}"></span></th>
+                    <!--                <th>Passenger</th>-->
+                </tr>
+                </thead>
 
-            <tbody>
-            <tr th:each="ride: ${driverFinishedRides}">
-                <form action="send_info_for_transport_offer_editing" method="post">
-                    <td th:text="${ride.departurePoint}"></td>
-                    <td th:text="${ride.destinationPoint}"></td>
-                    <td th:text="${ride.departureDate}"></td>
-                    <td th:text="${ride.departureTime}"></td>
-                    <td th:text="${ride.ridePrice}"></td>
-                    <td th:text="${ride.paymentType}"></td>
-                    <td th:text="${ride.car.getAvailableSeats()}"></td>
-                    <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
-                    <td><button type="submit"> Edit</button></td>
-                </form>
-            </tr>
-
-            </tbody>
-
-        </table>
+                <tbody>
+                <tr th:each="ride: ${driverPendingRides}">
+                    <form action="send_info_for_transport_offer_editing" method="post">
+                        <td th:text="${ride.departurePoint}"></td>
+                        <td th:text="${ride.destinationPoint}"></td>
+                        <td th:text="${ride.departureDate}"></td>
+                        <td th:text="${ride.departureTime}"></td>
+                        <td th:text="${ride.ridePrice}"></td>
+                        <td th:text="${ride.paymentType}"></td>
+                        <td th:text="${ride.car.getAvailableSeats()}"></td>
+                        <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+                        <td><button type="submit"> Edit/Delete</button></td>
+                    </form>
+                </tr>
 
 
-         </div>
+                </tbody>
+
+            </table>
+
+
+        </div>
 
         <div>
             <h3>My finished transport offers</h3>
@@ -104,6 +105,8 @@
                     <th>Payment</th>
                     <th>Seats in Car <span th:text="${plateNumber}"></span></th>
                     <th>Passenger</th>
+                    <th>Your rating</th>
+                    <th>Received rating</th>
                 </tr>
                 </thead>
 
@@ -118,12 +121,30 @@
                         <td th:text="${ride.paymentType}"></td>
                         <td th:text="${ride.car.getAvailableSeats()}"></td>
                         <td th:text="${ride.getPassenger().getFirstName()}" ></td>
+                        <td >
+                        <div th:if="${ride.getDriverReview()}!=null">
+                            <p th:text="${ride.getDriverReview().getReview()}"></p>
+                        </div>
+                            <div th:if="${ride.getDriverReview()}==null">
+                                <p>Please rate!</p>
+                            </div>
+
+                        </td>
+                        <td >
+                            <div th:if="${ride.getPassengerReview()}!=null">
+                                <p th:text="${ride.getPassengerReview().getReview()}"></p>
+                            </div>
+                            <div th:if="${ride.getPassengerReview()}==null">
+                                <p>No rating yet!</p>
+                            </div>
+
+                        </td>
                         <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
                         <input type="hidden" name="link" value="my_active_transport_offers"/>
-                        <td><button type="submit"> See ride information</button></td>
+                        <td><button type="submit">Ride overview/Rating</button></td>
                     </form>
                 </tr>
-
+                </tr>
                 </tbody>
 
             </table>
@@ -135,14 +156,14 @@
 
 
 
-</div>
-
-
-<div id="secondNav">
-    <div class="logo">
-        <img title="logo" src="images/logo.png" alt="Roady logo">
     </div>
-</div>
+
+
+    <div id="secondNav">
+        <div class="logo">
+            <img title="logo" src="images/logo.png" alt="Roady logo">
+        </div>
+    </div>
 
 
 

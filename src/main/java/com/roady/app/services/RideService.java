@@ -52,10 +52,11 @@ public class RideService {
     }
 
     public ArrayList<Ride> getAllBySearch(String departurePoint ,String destinationPoint){
-          return rideRepository.findAllByDeparturePointAndDestinationPointAndCarIsNull(destinationPoint, departurePoint);
+          return rideRepository.findAllByDeparturePointAndDestinationPointAndCarIsNullAndPassengerIsNotNull(destinationPoint, departurePoint);
     }
 
-    public ArrayList<Ride> getAllDriversBySearch(String departurePoint ,String destinationPoint){return rideRepository.findAllByDeparturePointAndDestinationPointAndPassengerIsNull(destinationPoint, departurePoint);}
+    public ArrayList<Ride> getAllDriversBySearch(String departurePoint ,String destinationPoint){
+        return rideRepository.findAllByDeparturePointAndDestinationPointAndPassengerIsNullAndCarIsNotNull(destinationPoint, departurePoint);}
 
 
     public Ride lookUpRideById(Long id){
@@ -78,4 +79,37 @@ public class RideService {
     public ArrayList<Ride> getAllFinishedDriverRides(Car car) {
         return rideRepository.findAllByCarAndPassengerIsNotNull(car);
     }
+
+    public Double getPassengerRating(Long id){
+
+        ArrayList<Ride> passengerRidesWithRating = rideRepository.findAllByPassengerIdAndDriverReviewIsNotNull(id);
+        if(passengerRidesWithRating==null){
+            return 0.0;
+        }else{
+        Double sum = 0.0;
+        for (Ride ride: passengerRidesWithRating){
+            sum=sum+ride.getDriverReview().getReview();
+        }
+        Double averagePassengerRating = sum/passengerRidesWithRating.size();
+        return averagePassengerRating;
+        }
+    }
+
+
+    public Double getDriverRating(Long id){
+
+        ArrayList<Ride> driversRidesWithRating = rideRepository.findAllByCar_IdAndPassengerReviewIsNotNull(id);
+        if(driversRidesWithRating==null){
+            return 0.0;
+        }else{
+            Double sum = 0.0;
+            for (Ride ride: driversRidesWithRating){
+                sum=sum+ride.getPassengerReview().getReview();
+            }
+            Double averagePassengerRating = sum/driversRidesWithRating.size();
+            return averagePassengerRating;
+        }
+    }
+
+
 }

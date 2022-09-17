@@ -87,7 +87,21 @@
           </div><br>
           <div >
             <label >Payment Type</label>
-            <input type="text" name="paymentType" />
+            <select id="paymentType" name="paymentType">
+              <option value="CASH">CASH</option>
+              <option value="REVOLUT">REVOLUT</option>
+              <option value="BANK_TRANSACTION">BANK_TRANSACTION</option>
+              <option value="FREE" >FREE</option>
+            </select>
+<!--            <input type="radio" name="paymentType" value="CASH" id="CASH" style ='float: left; padding: 5px;'/>-->
+<!--            <label style="float: left">CASH</label>-->
+<!--            <input type="radio" name="paymentType" value="REVOLUT" id="REVOLUT" style ='float: left; padding: 5px;' />-->
+<!--            <label>REVOLUT</label>-->
+<!--            <input type="radio" name="paymentType" value="BANK_TRANSACTION" id="BANK_TRANSACTION" style ='float: left; padding: 5px;' />-->
+<!--            <label>BANK_TRANSACTION</label>-->
+<!--            <input type="radio" name="paymentType" value="FREE" id="FREE" style ='float: left; padding: 5px;' />-->
+<!--            <label>FREE</label>-->
+
           </div><br>
           <div>
             <button type="submit" >Post transport offer</button>

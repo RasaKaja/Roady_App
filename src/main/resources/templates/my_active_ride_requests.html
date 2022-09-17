@@ -74,7 +74,7 @@
             <td th:text="${ride.ridePrice}"></td>
             <td th:text="${ride.paymentType}"></td>
             <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
-            <td><button type="submit" name="toDo" value="edit"> Edit</button></td>
+            <td><button type="submit" name="toDo" value="edit"> Edit/Delete</button></td>
           </form>
 
         </tr>
@@ -97,6 +97,9 @@
           <th>Price</th>
           <th>Payment</th>
           <th>Driver</th>
+          <th>Received rating</th>
+          <th>Your rating</th>
+
         </tr>
         </thead>
 
@@ -111,9 +114,27 @@
             <td th:text="${ride.ridePrice}"></td>
             <td th:text="${ride.paymentType}"></td>
             <td th:text="${ride.getCar().getUser().getFirstName()}"></td>
+            <td>
+            <div th:if="${ride.getDriverReview()}!=null">
+              <p th:text="${ride.getDriverReview().getReview()}"></p>
+            </div>
+            <div th:if="${ride.getDriverReview()}==null">
+              <p>No rating yet!</p>
+            </div>
+
+            </td>
+            <td >
+              <div th:if="${ride.getPassengerReview()}!=null">
+                <p th:text="${ride.getPassengerReview().getReview()}"></p>
+              </div>
+              <div th:if="${ride.getPassengerReview()}==null">
+                <p>Please rate!</p>
+              </div>
+
+            </td>
             <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
             <input type="hidden" name="link" value="my_active_ride_requests"/>
-            <td><button type="submit" > See ride information</button></td>
+            <td><button type="submit" >Ride overview/Rating</button></td>
           </form>
 
         </tr>

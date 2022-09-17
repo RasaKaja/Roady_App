@@ -28,6 +28,25 @@
       <button type="submit">Back</button>
     </form>
 
+    <div th:if="${status=='my_active_transport_offers' && isDriverRated==0}">
+        <form action="driver_rates_passenger" method="post">
+          <Label>Rate your passenger</Label>
+          <input type="number" name="rating" min="1" max="5" />
+          <input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>;
+          <button type="submit">Rate!</button>
+        </form>
+    </div>
+
+    <div th:if="${status=='my_active_ride_requests' && isPassengerRated==0}" >
+      <form action="passenger_rates_driver" method="post">
+        <Label>Rate your driver</Label>
+        <input type="number" name="rating" min="1" max="5" />
+        <input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>;
+        <button type="submit">Rate!</button>
+      </form>
+    </div>
+
+
     <div>
       <div>
         <h2>Ride information</h2>

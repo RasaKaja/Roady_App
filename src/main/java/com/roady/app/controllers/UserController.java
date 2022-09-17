@@ -2,6 +2,7 @@ package com.roady.app.controllers;
 
 import com.roady.app.entities.User;
 import com.roady.app.repositories.UserRepository;
+import com.roady.app.services.RideService;
 import com.roady.app.services.UserService;
 import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
 
 
 // C R U D operations
@@ -131,21 +133,7 @@ public class UserController {
     }
 
     //works
-    @GetMapping("/user_form")
-    public String showUserFormPage(Model model){
-        if(this.currentUser==null){
-            return "login";
-        }else{
-        model.addAttribute("email", currentUser.getEmail() );
-        model.addAttribute("firstName", currentUser.getFirstName() );
-        model.addAttribute("lastName", currentUser.getLastName() );
-        model.addAttribute("phoneNumber", currentUser.getPhoneNumber() );
-        model.addAttribute("avrRating", currentUser.getAvrRating() );
-        model.addAttribute("registredAt", currentUser.getRegisteredAt() );
-        model.addAttribute("countUsers", this.activeUsersNumber );
-        return"user_form";
-        }
-    }
+
 
     @GetMapping("/register_success")
     public String RegistrationWasSuccessful(){

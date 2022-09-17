@@ -38,4 +38,13 @@ public class Ride {
     @ColumnDefault("false")
     private Boolean isFinished;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "DriverReviewId")
+    private DriverReview driverReview;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "PassengerReviewId")
+    private PassengerReview passengerReview;
+
+
 }

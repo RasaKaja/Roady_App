@@ -87,7 +87,13 @@
                     </div><br>
                     <div >
                         <label >Payment Type</label>
-                        <input type="text" name="paymentType"  />
+<!--                        <input type="text" name="paymentType"  />-->
+                        <select id="paymentType" name="paymentType">
+                            <option value="CASH">CASH</option>
+                            <option value="REVOLUT">REVOLUT</option>
+                            <option value="BANK_TRANSACTION">BANK_TRANSACTION</option>
+                            <option value="FREE" >FREE</option>
+                        </select>
                     </div><br>
                     <div>
                         <button type="submit" >Post ride request</button>
