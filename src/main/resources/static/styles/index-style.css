@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    color: #0BFAFB;
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #07082E;
+    padding: 40px;
+    color: #0BFAFB;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.main-part {
+    width: 1200px;
+    margin: auto;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #07082E;
+    padding: 10px;
+}
+
+aside {
+    display: flex;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+    background-color: #07082E;
+    padding: 10px;
+}
+
+.copyrights {
+    font-size: 15px;
+}
+
+.main-part {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.input {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #757575;
+    width: 100%;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.image {
+    flex: 1;
+}
+
+.login-form {
+    flex: 1;
+    align-self: center;
+}
+
+.invite-register {
+    flex: 1;
+    align-self: center;
+}
+
+.user-not-found {
+    color: red;
+    background-color: #e5cccc;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+h2 {
+    color: #07082E;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.invite-register h2 {
+    color: #0676F5;
+}
+
+/* REGISTER BUTTON PROPERTIES */
+.register-button {
+    background-color: #0676F5;
+    color: #07082E;
+    border: #0676F5 solid;
+    text-transform: capitalize;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.register-button:hover {
+    background-color: #E84855;
+    color: #07082E;
+    border: #E84855 solid;
+}
+
+/* LOGIN BUTTON PROPERTIES */
+.login-button {
+    background-color: #07082E;
+    color: #0BFAFB;
+    border: #07082E solid;
+    text-transform: capitalize;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.login-button:hover {
+    background-color: #0676F5;
+    color: #07082E;
+    border: #0676F5 solid;
+}
+/* --------- */
