@@ -95,7 +95,9 @@ h2 {
     color: #0676F5;
 }
 
+/******************************/
 /* REGISTER BUTTON PROPERTIES */
+/******************************/
 .register-button {
     background-color: #0676F5;
     color: #07082E;
@@ -115,7 +117,9 @@ h2 {
     border: #E84855 solid;
 }
 
+/***************************/
 /* LOGIN BUTTON PROPERTIES */
+/***************************/
 .login-button {
     background-color: #07082E;
     color: #0BFAFB;
@@ -134,4 +138,35 @@ h2 {
     color: #07082E;
     border: #0676F5 solid;
 }
-/* --------- */
+
+/****************************/
+/* REGISTER SUCCESS SECTION */
+/****************************/
+
+.container {
+    display: grid;
+    height: 500px;
+    width: 1200px;
+    margin: 0 auto;
+    justify-items: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.success-message {
+    width: 600px;
+    background-color: #0676F5;
+    background-image: linear-gradient(to right bottom, #07082E, #0676f5);
+    border-radius: 5px;
+    height: 50%;
+    text-align: center;
+    color: #0BFAFB;
+    font-size: 30px;
+    padding-top: 10px;
+    font-weight: bolder;
+}
+
+.login-message {
+    color: #E84855;
+    text-align: start;
+}
