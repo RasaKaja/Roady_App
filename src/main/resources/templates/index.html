@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>Roady home</title>
@@ -34,9 +34,11 @@
 					User not found. Check your username or password
 				</p>
 			</div>
+			
 			<div>
 				<button class="login-button">Login</button>
 			</div>
+			
 		</form>
 	</div>
 	
@@ -48,7 +50,7 @@
 </div>
 
 <aside>
-	<p>Active users: <span th:text="${users}"></span>
+	<p>Active users: <span th:text="${users}"></span></p>
 	<p>Available rides: <span th:text="${countUsers}"></span></p>
 </aside>
 
