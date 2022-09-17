@@ -20,6 +20,14 @@ body {
     justify-content: space-between;
 }
 
+.second-main {
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(#07082E, #0676f5);
+    padding: 0 50px;
+    justify-content: center;
+}
+
 footer {
     display: flex;
     align-items: center;
@@ -49,10 +57,6 @@ aside {
     padding-bottom: 10px;
 }
 
-.navigation {
-
-}
-
 .page-content {
     width: 1200px;
     /* centers horizontally */
@@ -65,12 +69,21 @@ aside {
 /* NAVIGATION */
 /******************************/
 
+.my-name {
+    display: flex;
+    justify-content: center;
+    margin-left: 30px;
+    /*padding-top: 20px;*/
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+
 .navigation-list {
     list-style: none;
     display: flex;
     align-items: center;
     gap: 15px;
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
 }
 
 .nav-list-link:link,
@@ -89,10 +102,28 @@ aside {
     color: #E84855;
 }
 
+.nav-list-link-text:link,
+.av-list-link-text:visited {
+    display: inline-block;
+    text-decoration: none;
+    color: #0BFAFB;
+    font-size: 20px;
+    padding: 5px;
+    transition: all 0.3s;
+}
+
+.nav-list-link-text:hover,
+.nav-list-link-text:active
+{
+    display: inline-block;
+    color: #E84855;
+}
+
 .container {
     max-width: 800px;
     padding: 0 20px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .grid {
@@ -102,6 +133,10 @@ aside {
 
 .grid--2-cols {
     grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3-cols {
+    grid-template-columns: 2fr 2fr 1fr;
 }
 
 /******************************/
@@ -122,6 +157,11 @@ aside {
     justify-items: center;
     padding: 6px;
     border-radius: 100%;
+}
+
+
+.icon-swap-passenger {
+    margin-left: -20px;
 }
 
 .user-mode-title {
@@ -183,6 +223,10 @@ ul {
     padding-bottom: 10px;
 }
 
+/******************************/
+/* BUTTONS */
+/******************************/
+
 .role-btn {
     text-align: center;
     margin-top: 20px;
@@ -206,4 +250,41 @@ ul {
     background-image: linear-gradient(to right bottom, #E84855, #FDEDEE);
     align-content: center;
     margin-top: 25px;
+}
+
+
+.input {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #757575;
+    width: 100%;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.register-button {
+    background-color: #0676F5;
+    color: #07082E;
+    border: #0676F5 solid;
+    text-transform: capitalize;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.register-button:hover {
+    background-color: #E84855;
+    color: #07082E;
+    border: #E84855 solid;
+}
+
+.search {
+    height: 200px;
+}
+
+.search-title {
+    color: #07082E;
 }
