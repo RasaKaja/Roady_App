@@ -1,195 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Driver profile</title>
-  <link rel="icon" type="image/x-icon" href="images/logo.png">
-
-  <link rel="stylesheet" href="styles/style1.css" >
-  <link rel="stylesheet" href="styles/user_form.css" >
-  <meta name="viewport" content="width=device-width; initial-scale=1.0" >
+	<meta charset="UTF-8"/>
+	<title>Driver profile</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
+	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </head>
 <body>
-<div id="header"><h1>Welcome to the Roady!</h1></div>
+<header class="main-header">
+	
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
+		<h1>Roady</h1>
+	</div>
+	
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/passenger_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/user_form"/>
+				<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/logout"/>
+				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+		<span class="my-name" th:text="${firstName}"></span>
+	</nav>
 
-<div id="pageContent">
+</header>
 
-  <div id="firstNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
+<section class="second-main">
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link-text" href="/driver_today">Find passengers</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
+			</li>
+			<li><a class="nav-list-link-text" href="/cars">Car info</a>
+			</li>
+		</ul>
+	</nav>
+</section>
 
-  <div id="Content">
-    <div class="myMenuButtons">
-      <form action="/logout" method="get">
-        <button type="submit">Logout</button>
-      </form>
-      <form action="/user_form" method="get">
-        <button type="submit">My profile info</button>
-      </form>
-      <form action="/user_profile" method="get">
-        <button type="submit">Select an action</button>
-      </form>
-      <form action="/cars" method="get">
-        <button type="submit">Your cars</button>
-      </form>
-      <form action="/transport_offer" method="get">
-        <button type="submit">Post available transport</button>
-      </form>
-      <form action="/driver_today" method="get">
-        <button type="submit">Find passengers</button>
-      </form>
-    </div>
-
-    <div>
-
-      <br>
-
-      <form autocomplete="off" >
-        <div class="autocomplete" style="width:300px;">
-          <input class="autoFill" id="departurePoint" type="text" name="departurePoint" placeholder="Departure">
-          <input class="autoFill" id="destinationPoint" type="text" name="destinationPoint" placeholder="Destination">
-        </div>
-        <input type="submit">
-      </form>
-
-
-      <script>
-        function autocomplete(inp, arr) {
-          var currentFocus;
-          inp.addEventListener("input", function(e) {
-            var a, b, i, val = this.value;
-            closeAllLists();
-            if (!val) { return false;}
-            currentFocus = -1;
-            a = document.createElement("DIV");
-            a.setAttribute("id", this.id + "autocomplete-list");
-            a.setAttribute("class", "autocomplete-items");
-            this.parentNode.appendChild(a);
-            for (i = 0; i < arr.length; i++) {
-              if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                b = document.createElement("DIV");
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                b.innerHTML += arr[i].substr(val.length);
-                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                b.addEventListener("click", function(e) {
-                  inp.value = this.getElementsByTagName("input")[0].value;
-                  closeAllLists();
-                });
-                a.appendChild(b);
-              }
-            }
-          });
-          inp.addEventListener("keydown", function(e) {
-            var x = document.getElementById(this.id + "autocomplete-list");
-            if (x) x = x.getElementsByTagName("div");
-            if (e.keyCode == 40) {
-              currentFocus++;
-              addActive(x);
-            } else if (e.keyCode == 38) { //up
-              currentFocus--;
-              addActive(x);
-            } else if (e.keyCode == 13) {
-              e.preventDefault();
-              if (currentFocus > -1) {
-                if (x) x[currentFocus].click();
-              }
-            }
-          });
-          function addActive(x) {
-            if (!x) return false;
-            removeActive(x);
-            if (currentFocus >= x.length) currentFocus = 0;
-            if (currentFocus < 0) currentFocus = (x.length - 1);
-            x[currentFocus].classList.add("autocomplete-active");
-          }
-          function removeActive(x) {
-            for (var i = 0; i < x.length; i++) {
-              x[i].classList.remove("autocomplete-active");
-            }
-          }
-          function closeAllLists(elmnt) {
-            var x = document.getElementsByClassName("autocomplete-items");
-            for (var i = 0; i < x.length; i++) {
-              if (elmnt != x[i] && elmnt != inp) {
-                x[i].parentNode.removeChild(x[i]);
-              }
-            }
-          }
-          document.addEventListener("click", function (e) {
-            closeAllLists(e.target);
-          });
-        }
-
-        var cities = ["Ādaži", "Ainaži", "Aizkraukle", "Aizpute", "Aknīste", "Aloja", "Alūksne", "Ape", "Auce",
-          "Baldone", "Baloži (pilsēta)", "Balvi", "Bauska", "Brocēni", "Cēsis", "Cesvaine", "Dagda", "Daugavpils",
-          "Dobele", "Durbe", "Gostiņi", "Grīva (Daugavpils)", "Grobiņa", "Gulbene", "Iecava", "Ikšķile", "Ilūkste",
-          "Jaunjelgava", "Jēkabpils", "Jelgava", "Jūrmala", "Kalnciems", "Kandava", "Kārsava", "Koknese", "Krāslava",
-          "Krustpils", "Kuldīga", "Ķegums", "Ķekava", "Ķemeri", "Lejasciems", "Lielvārde", "Liepāja", "Līgatne",
-          "Limbaži", "Līvāni", "Lubāna", "Ludza", "Madona", "Mārupe", "Mazsalaca", "Ogre", "Olaine", "Pāvilosta",
-          "Piltene", "Pitalova", "Pļaviņas", "Preiļi", "Priekule", "Rēzekne", "Rīga", "Rīgas Jūrmala", "Rūjiena",
-          "Sabile", "Salacgrīva", "Salaspils", "Saldus", "Saulkrasti", "Seda", "Sigulda", "Skrunda", "Smiltene",
-          "Staicele", "Stende", "Straupe", "Strenči", "Subate", "Talsi", "Tukums", "Valdemārpils", "Valka", "Valmiera",
-          "Vangaži", "Varakļāni", "Vecsēlpils", "Ventspils", "Viesīte", "Viļaka", "Viļāni", "Zilupe", "Akmenė", "Alytus",
-          "Anykščiai", "Ariogala", "Baltoji", "Vokė", "Birštonas", "Biržai", "Daugai", "Druskininkai", "Dūkštas",
-          "Dusetos", "Eišiškės", "Elektrėnai", "Ežerėlis", "Gargždai", "Garliava", "Gelgaudiškis", "Grigiškės",
-          "Ignalina", "Jieznas", "Jonava", "Joniškėlis", "Joniškis", "Jurbarkas", "Kaišiadorys", "Kalvarija", "Kaunas",
-          "Kavarskas", "Kazlų", "Rūda", "Kėdainiai", "Kelmė", "Kybartai", "Klaipėda", "Kretinga", "Kudirkos",
-          "Naumiestis", "Kupiškis", "Kuršėnai", "Lazdijai", "Lentvaris", "Linkuva", "Marijampolė", "Mažeikiai",
-          "Molėtai", "Naujoji", "Akmenė", "Nemenčinė", "Neringa", "Obeliai", "Pabradė", "Pagėgiai", "Pakruojis",
-          "Palanga", "Pandėlys", "Panemunė", "Panevėžys", "Pasvalys", "Plungė", "Priekulė", "Prienai", "Radviliškis",
-          "Ramygala", "Raseiniai", "Rietavas", "Rokiškis", "Rūdiškės", "Salantai", "Seda", "Simnas", "Skaudvilė",
-          "Skuodas", "Smalininkai", "Subačius", "Šakiai", "Šalčininkai", "Šeduva", "Šiauliai", "Šilalė", "Šilutė",
-          "Širvintos", "Švenčionėliai", "Švenčionys", "Tauragė", "Telšiai", "Tytuvėnai", "Trakai", "Troškūnai",
-          "Ukmergė", "Utena", "Užventis", "Vabalninkas", "Varėna", "Varniai", "Veisiejai", "Venta", "Viekšniai",
-          "Vievis", "Vilkaviškis", "Vilkija", "Vilnius", "Virbalis", "Visaginas", "Zarasai", "Žagarė", "Žiežmariai"];
-        autocomplete(document.getElementById("departurePoint"), cities);
-        autocomplete(document.getElementById("destinationPoint"), cities);
-      </script>
-
-
-    </div>
-
-<!--    <div>-->
-
-
-<!--      <iframe-->
-<!--              width="450"-->
-<!--              height="250"-->
-<!--              frameborder="0" style="border:0"-->
-<!--              referrerpolicy="no-referrer-when-downgrade"-->
-<!--              src="https://www.google.com/maps/embed/v1/directions-->
-<!--  ?key=AIzaSyCiKLHHRR_2yQB96i2Gv3LRXfH3wbXgwiE-->
-<!--  &origin=Oslo+Norway-->
-<!--  &destination=Telemark+Norway-->
-<!--  &avoid=tolls|highways"-->
-<!--              allowfullscreen>-->
-<!--      </iframe>-->
-
-
-<!--    </div>-->
-
-
-  </div>
-
-
-
-
-
-  <div id="secondNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
+<div class="page-content">
+		
+		<form action="send_info_for_ride_search" method="post" class="container grid grid--3-cols search">
+			<h2 class="search-title">New search</h2>
+			<div>
+				<input class="input" id="departurePoint" type="text" name="departure" placeholder="Departure" required
+				       minlength="2">
+			</div>
+			<div>
+				<input class="input" id="destinationPoint" type="text" name="destination" placeholder="Destination" required
+				       minlength="2">
+			</div>
+			<div>
+				<button class="register-button" type="submit">Submit</button>
+			</div>
+		</form>
+	
 </div>
 
-<div id="footer">
-  <p>Active users: <span th:text="${countUsers}"></span> Available rides: </p>
-  <p>Forest Team &copy; 2022</p>
-</div>
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
 
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
 
 </body>
 </html>

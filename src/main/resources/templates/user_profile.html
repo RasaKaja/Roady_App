@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8"/>
 	<title>User profile</title>
-	<link rel="icon" type="image/x-icon" href="images/logo.jpg">
-	<link href="/styles/other-pages-style.css" rel="stylesheet">
-	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
+	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
@@ -14,19 +14,19 @@
 <header class="main-header">
 	
 	<div class="logo-and-name">
-		<img src="images/logo.jpg" alt="Roady logo" class="logo">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
 		<h1>Roady</h1>
 	</div>
 	
 	<nav class="navigation">
 		<ul class="navigation-list">
 			<li>
-				<a class="nav-list-link" href="/my_info">
+				<a class="nav-list-link" href="/user_form"/>
 					<ion-icon name="person" class="nav-icon"></ion-icon>
 				</a>
 			</li>
 			<li>
-				<a class="nav-list-link" href="/login">
+				<a class="nav-list-link" href="/logout"/>
 					<ion-icon name="Log-out" class="nav-icon"></ion-icon>
 				</a>
 			</li>
@@ -48,7 +48,6 @@
 		<div class="container grid grid--2-cols">
 			
 			<div class="role driver">
-				<!--				<a href="my_info.html"/>-->
 				<div class="logo-and-name">
 					<ion-icon name="car-sport" class="icon"></ion-icon>
 					<p class="user-mode-title">Driver</p>
@@ -77,9 +76,9 @@
 					<li class="user-mode-detail">TO where</li>
 					<li class="user-mode-detail">are you alone or with friend, maybe pet</li>
 				</ul>
-				<div class="role-btn">
+				<form class="role-btn" action="/passenger_today">
 					<button class="btn btn--passenger" href="#">Passenger</button>
-				</div>
+				</form>
 			</div>
 			
 			<h2>... or you can choose from the existing requests.</h2>
