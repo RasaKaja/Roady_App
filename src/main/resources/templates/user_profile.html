@@ -1,82 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>User profile</title>
-    <link rel="icon" type="image/x-icon" href="images/logo.png">
-
-    <link rel="stylesheet" href="styles/style1.css" >
-    <meta name="viewport" content="width=device-width; initial-scale=1.0" >
-
+	<meta charset="UTF-8">
+	<title>User profile</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg">
+	<link href="/styles/other-pages-style.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
+
 <body>
-<div id="header"><h1>Welcome to the Roady!</h1>
+<header class="main-header">
+	
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo">
+		<h1>Roady</h1>
+	</div>
+	
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/my_info">
+					<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/login">
+					<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+</header>
+
+<div class="page-content">
+	
+	<section class="section-role">
+		
+		<div class="container">
+			<h2 class="user-mode-question">
+				<span th:text="${firstName}"></span>, what is your plan for today?
+			</h2>
+		</div>
+		
+		<div class="container grid grid--2-cols">
+			
+			<div class="role driver">
+				<!--				<a href="my_info.html"/>-->
+				<div class="logo-and-name">
+					<ion-icon name="car-sport" class="icon"></ion-icon>
+					<p class="user-mode-title">Driver</p>
+				</div>
+				<ul class="user-mode-details">
+					<h3>You can suggest the ride by saying:</h3>
+					<li class="user-mode-detail">FROM where driving</li>
+					<li class="user-mode-detail">TO where driving</li>
+					<li class="user-mode-detail">how many passengers can you take</li>
+					<li class="user-mode-detail">what is the price</li>
+				</ul>
+				<form class="role-btn" action="/driver_today">
+					<button class="btn btn--driver">Driver</button>
+				</form>
+			</div>
+			
+			<div class="role passenger">
+				<div class="logo-and-name">
+					<ion-icon name="walk" class="icon"></ion-icon>
+					<p class="user-mode-title">Passenger</p>
+				</div>
+				
+				<ul class="user-mode-details">
+					<h3>You can say your wishes:</h3>
+					<li class="user-mode-detail">FROM where you want to go</li>
+					<li class="user-mode-detail">TO where</li>
+					<li class="user-mode-detail">are you alone or with friend, maybe pet</li>
+				</ul>
+				<div class="role-btn">
+					<button class="btn btn--passenger" href="#">Passenger</button>
+				</div>
+			</div>
+			
+			<h2>... or you can choose from the existing requests.</h2>
+		
+		</div>
+	
+	</section>
+
 
 </div>
 
-<div id="pageContent">
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
 
-
-
-  <div id="firstNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
-
-  <div id="Content">
-
-      <div class="myMenyButtons">
-
-          <form action="/logout" method="get">
-              <button type="submit">Logout</button>
-          </form>
-          <form action="/user_form" method="get">
-              <button type="submit">My profile info</button>
-          </form>
-          <form action="/user_profile" method="get">
-              <button type="submit">Select an action</button>
-          </form>
-
-      </div>
-
-<!--      <form method="get" action="/is_loggedIn">-->
-
-<!--      </form>-->
-
-
-    <div >
-
-      <p> Welcome <span th:text="${firstName}"></span></p>
-
-      <div>
-        <h3>What is your plan for today?</h3>
-      </div>
-      <div>
-        <a class="likeButton"   href="driver_today">Offering a ride</a>
-        <a class="likeButton"  >Looking for a ride</a>
-      </div>
-
-    </div>
-
-</div>
-
-
-  <div id="secondNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
-
-
-
-
-</div>
-
-<div id="footer">
-    <p>Active users: <span th:text="${countUsers}"></span> Available rides: </p>
-    <p>Forest Team &copy; 2022</p>
-</div>
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
 
 </body>
 </html>
