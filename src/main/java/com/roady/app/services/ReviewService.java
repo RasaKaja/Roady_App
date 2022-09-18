@@ -30,8 +30,7 @@ public class ReviewService  {
     @Autowired
     private DriverReviewRepository driverReviewRepository;
 
-    @Autowired
-    private UserReviews userReviews;
+
 
     public double findDriverRating(Ride ride){
         DriverReview driverReview = driverReviewRepository.findByRide(ride);
