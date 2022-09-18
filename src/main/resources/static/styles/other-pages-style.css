@@ -143,6 +143,10 @@ aside {
     grid-template-columns: 2fr 2fr 1fr;
 }
 
+.grid--1-cols {
+    grid-template-columns: 1fr;
+}
+
 /******************************/
 /* USER MODE SECTION */
 /******************************/
@@ -377,3 +381,23 @@ ul {
      padding-top: 20px;
  }
 
+.change-password {
+    height: 400px;
+    width: 400px;
+    align-content: center;
+    row-gap: 5px;
+    grid-template-rows: 1fr 3fr;
+    column-gap: 0;
+}
+
+.form-row {
+    margin-bottom: 10px;
+}
+
+/*.col--1 {*/
+/*    grid-column: 1 / 2;*/
+/*}*/
+
+/*.col--2 {*/
+/*    grid-column: 2 / 3;*/
+/*}*/
