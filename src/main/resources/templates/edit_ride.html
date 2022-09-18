@@ -52,72 +52,64 @@
     </div>
 
 
-    <div  >
 
-      <div>
-        <a href="my_active_transport_offers" style="text-decoration: underline"><h4>Your transport offers (<span th:text="${userRidesCount}"></span>)</h4></a>
-      </div>
+    <div>
 
-
-      <form action="/ride_requests_save" method="post"
-            style="max-width: 500px; margin: 0 auto">
+      <form action="/save_transport_updates" method="post">
         <div >
           <div >
             <label >Departure: </label>
-            <input type="text"  name="departurePoint" required/>
+            <input type="text"  name="departurePoint" th:value="${ride.getDeparturePoint()}" required/>
           </div>
           <br>
           <div >
             <label >Destination: </label>
-            <input type="text" name="destinationPoint" required minlength="2" maxlength="20"/>
+            <input type="text" name="destinationPoint" th:value="${ride.getDestinationPoint()}" required minlength="2" maxlength="20"/>
           </div> <br>
 
           <div>
             <label >Departure date: </label>
-            <input type="date"  name="departureDate" />
+            <input type="date"  name="departureDate" th:value="${ride.getDepartureDate()}"/>
           </div><br>
 
           <div >
             <label >Departure time</label>
-            <input type="time"  name="departureTime" />
+            <input type="time"  name="departureTime" th:value="${ride.getDepartureTime()}"/>
           </div><br>
           <div >
             <label >Ride price</label>
-            <input type="text"  name="ridePrice" />
+            <input type="text"  name="ridePrice" th:value="${ride.getRidePrice()}" />
           </div><br>
           <div >
             <label >Payment Type</label>
-            <select id="paymentType" name="paymentType">
+            <!--            <input type="text" name="paymentType"  th:value="${paymentType}" />-->
+            <select id="paymentType" name="paymentType" >
               <option value="CASH">CASH</option>
               <option value="REVOLUT">REVOLUT</option>
               <option value="BANK_TRANSACTION">BANK_TRANSACTION</option>
               <option value="FREE" >FREE</option>
             </select>
-            <!--            <input type="radio" name="paymentType" value="CASH" id="CASH" style ='float: left; padding: 5px;'/>-->
-            <!--            <label style="float: left">CASH</label>-->
-            <!--            <input type="radio" name="paymentType" value="REVOLUT" id="REVOLUT" style ='float: left; padding: 5px;' />-->
-            <!--            <label>REVOLUT</label>-->
-            <!--            <input type="radio" name="paymentType" value="BANK_TRANSACTION" id="BANK_TRANSACTION" style ='float: left; padding: 5px;' />-->
-            <!--            <label>BANK_TRANSACTION</label>-->
-            <!--            <input type="radio" name="paymentType" value="FREE" id="FREE" style ='float: left; padding: 5px;' />-->
-            <!--            <label>FREE</label>-->
-
           </div><br>
           <div>
-            <button type="submit" >Post transport offer</button>
+            <button type="submit" >Edit transport offer</button>
           </div>
+
         </div>
       </form>
-      <br><br>
 
+      <form action="remove_transport_offer" method="post">
+        <input type="hidden" name="rideId"  th:value="${ride.getRideRequestId()}">
+        <button type="submit">Delete transport offer</button>
+      </form>
 
 
     </div>
 
+    <!--        th:value="${paymentType}"-->
+
 
 
   </div>
-
 
 
   <div id="secondNav">
