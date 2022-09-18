@@ -5,6 +5,3 @@ auto-wires the bean by matching data-type.
 
 @Service
 It tells the Spring that class contains the business logic.
-
-
-

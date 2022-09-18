@@ -3,7 +3,6 @@ package com.roady.app.controllers;
 import com.roady.app.entities.User;
 import com.roady.app.repositories.UserRepository;
 import com.roady.app.services.UserService;
-import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +27,7 @@ public class UserController {
 
 // C R U D operations
     @PostMapping("/update_profile")
-    public String saveUser(String email, String firstName, String lastName, String phone){
+    public String saveUser(String email, String firstName, String lastName, String phone) throws Exception {
         if(this.currentUser==null){
             return "login";
         }else{
@@ -61,11 +60,14 @@ public class UserController {
         return "my_info";}
     }
 
-    //works
     @PostMapping("/process_register")
-    public String processRegistration(User user){
-        userService.saveUser(user);
-        return "register_success";
+    public String processRegistration(User user) throws Exception {
+        try {
+            userService.saveUser(user);
+            return "redirect:/register_success";
+        }catch (Exception exception) {
+            return "redirect:/index" + exception.getMessage();
+        }
     }
 
     @GetMapping("/users")
@@ -97,7 +99,6 @@ public class UserController {
 
 // O T H E R  operations
 
-    //works
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
             model.addAttribute("user", new User());
@@ -117,8 +118,7 @@ public class UserController {
     @GetMapping("/login")
     public String activeUserInfo(
             @RequestParam(name="status", required = false) String status,
-            Model model
-    ){
+            Model model){
 
         model.addAttribute("status", status);
         model.addAttribute("countUsers", this.activeUsersNumber );
@@ -183,7 +183,7 @@ public class UserController {
     }
 
     @PostMapping("/change_password")
-    public String handlePasswordChangeRequest(String password, String newPassword){
+    public String handlePasswordChangeRequest(String password, String newPassword) throws Exception {
         User user = userService.getUserById(currentUser.getId());
         if(password.equals(currentUser.getPassword())){
             user.setPassword(newPassword);
