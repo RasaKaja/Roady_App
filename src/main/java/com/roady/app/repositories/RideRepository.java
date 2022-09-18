@@ -35,5 +35,9 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
     ArrayList<Ride> findAllByPassengerIdAndDriverReviewIsNotNull(Long Id);
     ArrayList<Ride> findAllByCar_IdAndPassengerReviewIsNotNull(Long id);
 
+    ArrayList<Ride> findAll();
+
+    Integer countAll();
+
 
 }

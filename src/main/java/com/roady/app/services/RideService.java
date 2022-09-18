@@ -111,5 +111,9 @@ public class RideService {
         }
     }
 
+    public Integer countAllRides(){
+        return rideRepository.countAll();
+    }
+
 
 }

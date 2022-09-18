@@ -163,11 +163,11 @@ Long rideIdToEdit;
     public String showRideEditRequestPage(Model model){
         Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
         model.addAttribute("ride", ride);
-        model.addAttribute("departurePoint", ride.getDeparturePoint());
-        model.addAttribute("destinationPoint", ride.getDestinationPoint());
-        model.addAttribute("departureDate", ride.getDepartureDate());
-        model.addAttribute("departureTime", ride.getDepartureTime());
-        model.addAttribute("ridePrice", ride.getRidePrice());
+//        model.addAttribute("departurePoint", ride.getDeparturePoint());
+//        model.addAttribute("destinationPoint", ride.getDestinationPoint());
+//        model.addAttribute("departureDate", ride.getDepartureDate());
+//        model.addAttribute("departureTime", ride.getDepartureTime());
+//        model.addAttribute("ridePrice", ride.getRidePrice());
         return "edit_ride_request";
     }
 
