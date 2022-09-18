@@ -6,7 +6,9 @@ import com.roady.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,6 @@ public class UserController {
     int activeUsersNumber;
 
     public User currentUser;
-//    currentUser = new User(1L, "jelena@jelena.lv", "1111", "Jelena", "Mikelsone", "97458394", 2.5, null, null );
 
     @Autowired
     private UserService userService;
@@ -27,7 +28,7 @@ public class UserController {
 
 // C R U D operations
     @PostMapping("/update_profile")
-    public String saveUser(String email, String firstName, String lastName, String phone) throws Exception {
+    public String saveUser(String email, String firstName, String lastName, String phone){
         if(this.currentUser==null){
             return "login";
         }else{
@@ -47,16 +48,12 @@ public class UserController {
         if(this.currentUser==null){
             return "login";
         }else{
-
         User user = currentUser;
-
-
         model.addAttribute("email", user.getEmail() );
         model.addAttribute("firstName", user.getFirstName() );
         model.addAttribute("lastName", user.getLastName() );
         model.addAttribute("phoneNumber", user.getPhoneNumber() );
         model.addAttribute("user", currentUser);
-
         return "my_info";}
     }
 
@@ -65,22 +62,35 @@ public class UserController {
         try {
             userService.saveUser(user);
             return "redirect:/register_success";
-        }catch (Exception exception) {
+        } catch (Exception exception) {
             return "redirect:/index" + exception.getMessage();
         }
     }
+//    public String processRegistration(@Valid User user, BindingResult bindingResult, Model model) throws Exception {
+//        if(bindingResult.hasErrors()){
+//            model.addAttribute(, user);
+//            return "register_success";
+//        }
+//        try {
+//            userService.saveUser(user);
+//        }catch (UserAlreadyExistException exception) {
+//            bindingResult.rejectValue("email", "user.email", "An account already exists for this email.");
+//            model.addAttribute(, user);
+//            return "index";
+//        }
+//        return "redirect:/index";
+//    }
 
     @GetMapping("/users")
-    public String viewUsersList(Model model){
-        if(this.currentUser==null){
+    public String viewUsersList(Model model) {
+        if (this.currentUser == null) {
             return "login";
-        }else{
-        List<User> listUsers = userService.listAll();
-        model.addAttribute("listUsers", listUsers);
-        return "users";}
+        } else {
+            List<User> listUsers = userService.listAll();
+            model.addAttribute("listUsers", listUsers);
+            return "users";
+        }
     }
-
-    //works
 
 
     @GetMapping("/user_profile")
@@ -88,11 +98,8 @@ public class UserController {
         if(this.currentUser==null){
             return "login";
         }else{
-
         model.addAttribute("firstName", currentUser.getFirstName() );
         model.addAttribute("lastName", currentUser.getLastName() );
-
-
         return "user_profile";}
     }
 
@@ -108,7 +115,6 @@ public class UserController {
 
     @GetMapping("/signup_form")
     public String showIndexPage(Model model){
-
         ArrayList<User> users =  userService.getAllUsers();
         this.activeUsersNumber = users.size();
         model.addAttribute("users", users);
@@ -126,13 +132,11 @@ public class UserController {
         ArrayList<User> users =  userService.getAllUsers();
         this.activeUsersNumber = users.size();
         model.addAttribute("users", activeUsersNumber);
-
         return "login";
     }
 
     @PostMapping("/login")
     public String successfulLogin(User user){
-
         try{
             User loggedInUser = userService.verifyUser(user.getEmail(), user.getPassword());
             this.currentUser=loggedInUser;
@@ -142,7 +146,6 @@ public class UserController {
         }
     }
 
-    //works
     @GetMapping("/user_form")
     public String showUserFormPage(Model model){
         if(this.currentUser==null){
@@ -158,6 +161,14 @@ public class UserController {
         return"user_form";
         }
     }
+
+    //Need to check which one is correct
+//    @GetMapping("/register")
+//    public String showRegistrationForm(Model model){
+//        model.addAttribute("user", new User());
+//        model.addAttribute("countUsers", this.activeUsersNumber );
+//        return "signup_form";
+//    }
 
     @GetMapping("/register_success")
     public String RegistrationWasSuccessful(){
@@ -183,7 +194,7 @@ public class UserController {
     }
 
     @PostMapping("/change_password")
-    public String handlePasswordChangeRequest(String password, String newPassword) throws Exception {
+    public String handlePasswordChangeRequest(String password, String newPassword){
         User user = userService.getUserById(currentUser.getId());
         if(password.equals(currentUser.getPassword())){
             user.setPassword(newPassword);

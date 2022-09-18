@@ -44,6 +44,10 @@ public class CarService {
     public ArrayList<Car> getByUser(User user){
         return carRepository.findAllByUserId(user.getId());}
 
+    public void removeCar(Car car){
+        carRepository.delete(car);
+    }
+
 //    public void setUsersCar( Long id) {
 //        User user = userRepository.findUserByEmail(userController.currentUser.getEmail());
 //        user.setCar(carRepository.findCarById(id));

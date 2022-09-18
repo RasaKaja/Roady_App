@@ -11,22 +11,21 @@ import java.util.List;
 @Service
 public class UserService {
 
+
     UserRepository userRepository;
     @Autowired
     public UserService(UserRepository userRepository) {this.userRepository=userRepository;}
 
 
 // C R U D operations
-    public void saveUser(User user) throws Exception{
-        if(checkIfUserExist(user.getEmail())){
-            throw new Exception("User already exists for this email");
-        }
+
+    public void saveUser(User user){
         userRepository.save(user);
     }
 
-    public boolean checkIfUserExist(String email){
-        return userRepository.findByEmail(email) != null ? true :false;
-    }
+//    public boolean checkIfUserExist(String email){
+//        return userRepository.findByEmail(email) != null ? true :false;
+//    }
 
     public List<User> listAll(){
         return userRepository.findAll();
