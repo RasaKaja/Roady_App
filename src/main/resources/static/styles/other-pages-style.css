@@ -65,6 +65,13 @@ aside {
     /*align-items: center;*/
 }
 
+.form-1-col {
+    display: flex;
+    justify-content: center;
+    /*gap: 40px;*/
+    margin-bottom: 100px;
+}
+
 /******************************/
 /* NAVIGATION */
 /******************************/
@@ -401,3 +408,28 @@ ul {
 /*.col--2 {*/
 /*    grid-column: 2 / 3;*/
 /*}*/
+
+.msg-add-car-failed {
+    color: red;
+    background-color: #facccc;
+}
+
+.msg-add-car-success {
+    color: green;
+    background-color: #c2e3c2;
+}
+
+.input-form {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #757575;
+    width: 100%;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.my-car {
+    margin-top: 20px;
+    height: 200px;
+    align-content: center;
+}
