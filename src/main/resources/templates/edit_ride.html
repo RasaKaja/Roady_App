@@ -12,12 +12,12 @@
 
 <body>
 <header class="main-header">
-	
+
 	<div class="logo-and-name">
 		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
 		<h1>Roady</h1>
 	</div>
-	
+
 	<nav class="navigation">
 		<ul class="navigation-list">
 			<li>
@@ -72,6 +72,7 @@
 </section>
 
 <div class="page-content">
+
 	
 	<div class="container">
 		<h2 class="search-title">Edit Ride Offer</h2>
@@ -79,32 +80,33 @@
 			
 			<form action="/save_transport_updates" method="post">
 				
+
 				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Departure:</label>
 					<input class="info-field" type="text" name="departurePoint" th:value="${ride.getDeparturePoint()}" required/>
 				</div>
-				
+
 				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Destination:</label>
 					<input class="info-field" type="text" name="destinationPoint" th:value="${ride.getDestinationPoint()}"
 					       required minlength="2" maxlength="20"/>
 				</div>
-				
+
 				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Date:</label>
 					<input class="info-field" type="date" name="departureDate" th:value="${ride.getDepartureDate()}"/>
 				</div>
-				
+
 				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Time:</label>
 					<input class="info-field" type="time" name="departureTime" th:value="${ride.getDepartureTime()}"/>
 				</div>
-				
+
 				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Price:</label>
 					<input class="info-field" type="text" name="ridePrice" th:value="${ride.getRidePrice()}"/>
 				</div>
-				
+
 				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Payment Type:</label>
 					<select class="info-field" id="paymentType" name="paymentType">
@@ -114,8 +116,7 @@
 						<option value="FREE">FREE</option>
 					</select>
 				</div>
-				
-				
+
 				<div class="form-row grid--2-cols-inside">
 					<button class="register-button" type="submit">Edit</button>
 					
@@ -127,7 +128,7 @@
 			
 			</form>
 		</div>
-	
+
 	</div>
 
 </div>

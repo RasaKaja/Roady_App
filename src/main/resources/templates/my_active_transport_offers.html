@@ -12,12 +12,12 @@
 
 <body>
 <header class="main-header">
-	
+
 	<div class="logo-and-name">
 		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
 		<h1>Roady</h1>
 	</div>
-	
+
 	<nav class="navigation">
 		<ul class="navigation-list">
 			<li>
@@ -71,6 +71,7 @@
 </section>
 
 <div class="page-content">
+
 	
 	<div class="container-wider">
 		
@@ -89,7 +90,7 @@
 					<th class="lb-sm">Seats in Car <span th:text="${plateNumber}"></span></th>
 				</tr>
 				</thead>
-				
+
 				<tbody>
 				<tr th:each="ride: ${driverPendingRides}">
 					<form action="send_info_for_transport_offer_editing" method="post">
@@ -109,7 +110,7 @@
 				</tbody>
 			</table>
 		</div>
-		
+
 		<div>
 			<h2 class="search-title">My finished transport offers</h2>
 			<table class="pending-request">
@@ -127,7 +128,7 @@
 					<th class="lb-sm">Received rating</th>
 				</tr>
 				</thead>
-				
+
 				<tbody>
 				<tr th:each="ride: ${driverFinishedRides}">
 					<form action="send_info_for_ride_overview" method="post">
@@ -139,7 +140,7 @@
 						<td class="info-field box-sm" th:text="${ride.paymentType}"></td>
 						<td class="info-field box-sm" th:text="${ride.car.getAvailableSeats()}"></td>
 						<td class="info-field box-sm" th:text="${ride.getPassenger().getFirstName()}"></td>
-						
+
 						<td  class="info-field box-sm">
 							<div th:if="${ride.getDriverReview()}!=null">
 								<p th:text="${ride.getDriverReview().getReview()}"></p>
@@ -148,7 +149,7 @@
 								<p>Please rate!</p>
 							</div>
 						</td>
-						
+
 						<td  class="info-field box-sm">
 							<div th:if="${ride.getPassengerReview()}!=null">
 								<p th:text="${ride.getPassengerReview().getReview()}"></p>
@@ -166,9 +167,11 @@
 				</tr>
 				</tbody>
 			</table>
+
 		
 		</div>
 	
+
 	</div>
 
 </div>
