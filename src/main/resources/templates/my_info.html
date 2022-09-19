@@ -55,34 +55,35 @@
 
 <div class="page-content">
 	
-	<div class="container">
+	<div class="container form-one-column">
 		
-		<h2 class="search-title">Update my info</h2>
+		<h2 class="search-title title-place">Update my info</h2>
 		
 		<div class="form-one-column">
 			<form action="/update_profile" method="post">
 				
-					<div class="form-row grid--2-cols-inside">
+					<div class="form-one-column grid--2-cols-inside">
 						<label class="table-label">Username</label>
 						<input class="info-field" type="email" name="email" th:value="${email}"/>
 					</div>
 
-					<div class="form-row grid--2-cols-inside">
+					<div class="form-one-column grid--2-cols-inside">
 						<label class="table-label">First Name</label>
 						<input class="info-field" type="text" name="firstName" th:value="${firstName}"/>
 					</div>
 
-					<div class="form-row grid--2-cols-inside">
+					<div class="form-one-column grid--2-cols-inside">
 						<label class="table-label">Last Name</label>
 						<input class="info-field" type="text" name="lastName" th:value="${lastName}"/>
 					</div>
 
-					<div class="form-row grid--2-cols-inside">
+					<div class="form-one-column grid--2-cols-inside">
 						<label class="table-label">Phone</label>
 						<input class="info-field" type="text" name="phone" th:value="${phoneNumber}"/>
 					</div>
 
-					<div>
+					<div class="form-one-column grid--2-cols-inside">
+						<p></p>
 						<button class="register-button" type="submit">Update</button>
 					</div>
 

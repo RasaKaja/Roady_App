@@ -66,23 +66,21 @@
 			<!--				<a class="nav-list-link-text" href="/my_active_ride_requests">My ride requests</a>-->
 			<!--			</li>-->
 			<li>
-				<a class="nav-list-link-text" href="/return_to_previous_page">Back</a>
+				<form action="return_to_previous_page" method="post">
+					<input type="hidden" name="link" th:value="${status}">
+					<button type="submit">Back</button>
+				</form>
 			</li>
 		</ul>
 	</nav>
 </section>
-
-<!--<form action="return_to_previous_page" method="post">-->
-<!--	<input type="hidden" name="link" th:value="${status}">-->
-<!--	<button type="submit">Back</button>-->
-<!--</form>-->
 
 <div class="page-content">
 
 <div class="container grid grid--2-cols">
 	<h2 class="search-title title-place">Finished ride info</h2>
 	
-	<div class="ride-info">
+	<div class="route-info search-title">
 		<h4 class="my-profile-title">Ride information</h4>
 		<table>
 			<div class="form-row grid--2-cols-inside">
