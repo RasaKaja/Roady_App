@@ -11,21 +11,17 @@ import java.util.List;
 @Service
 public class UserService {
 
-
     UserRepository userRepository;
     @Autowired
     public UserService(UserRepository userRepository) {this.userRepository=userRepository;}
 
 
-// C R U D operations
 
+
+// C R U D operations
     public void saveUser(User user){
         userRepository.save(user);
     }
-
-//    public boolean checkIfUserExist(String email){
-//        return userRepository.findByEmail(email) != null ? true :false;
-//    }
 
     public List<User> listAll(){
         return userRepository.findAll();
@@ -50,6 +46,10 @@ public class UserService {
 
         return foundUser;
     }
+
+//    public Double getPassengerRating(Long id){
+//        return rideService.getPassengerRating(id);
+//    }
 
 
 }

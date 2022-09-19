@@ -9,12 +9,11 @@ import com.roady.app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.roady.app.repositories.RideRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
-@Transactional
+
 public class RideService {
 
     @Autowired
@@ -32,13 +31,10 @@ public class RideService {
         rideRepository.save(rideRequest);
     }
 
-    public List<Ride> allRideRequestsList(){
-        return rideRepository.findAll();
-    }
-
-    public Ride getRideRequestById(Long rideRequestId) {
+      public Ride getRideRequestById(Long rideRequestId) {
         return rideRepository.findById(rideRequestId).get();
     }
+
 
     //method still not created at rideRepository
     public void deleteRideRequest(Long rideRequestId){
@@ -56,7 +52,7 @@ public class RideService {
     }
 
     public ArrayList<Ride> getAllBySearch(String departurePoint ,String destinationPoint){
-        return rideRepository.findAllByDeparturePointAndDestinationPointAndCarIsNullAndPassengerIsNotNull(destinationPoint, departurePoint);
+          return rideRepository.findAllByDeparturePointAndDestinationPointAndCarIsNullAndPassengerIsNotNull(destinationPoint, departurePoint);
     }
 
     public ArrayList<Ride> getAllDriversBySearch(String departurePoint ,String destinationPoint){
@@ -90,12 +86,12 @@ public class RideService {
         if(passengerRidesWithRating==null){
             return 0.0;
         }else{
-            Double sum = 0.0;
-            for (Ride ride: passengerRidesWithRating){
-                sum=sum+ride.getDriverReview().getReview();
-            }
-            Double averagePassengerRating = sum/passengerRidesWithRating.size();
-            return averagePassengerRating;
+        Double sum = 0.0;
+        for (Ride ride: passengerRidesWithRating){
+            sum=sum+ride.getDriverReview().getReview();
+        }
+        Double averagePassengerRating = sum/passengerRidesWithRating.size();
+        return averagePassengerRating;
         }
     }
 
@@ -115,7 +111,7 @@ public class RideService {
         }
     }
 
-    public Integer countAllRides(){
-        return rideRepository.countAll();
-    }
+
+
+
 }

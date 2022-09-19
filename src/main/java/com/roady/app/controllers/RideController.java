@@ -27,19 +27,19 @@ public class RideController {
     @Autowired
     private RideService rideService;
 
-    @Autowired
+@Autowired
     private UserController userController;
 
-    @Autowired
-    private CarService carService;
+@Autowired
+private CarService carService;
 
-    @Autowired
-    private UserService userService;
+@Autowired
+private UserService userService;
 
-    @Autowired
-    private ReviewService reviewService;
+@Autowired
+        private ReviewService reviewService;
 
-    Long rideIdToEdit;
+Long rideIdToEdit;
 
 
     @PostMapping("ride_requests_save")
@@ -85,12 +85,12 @@ public class RideController {
         ArrayList<Ride> driverPendingRides =rideService.getAllPendingDriverRides(userController.currentUser.getCar());
         ArrayList<Ride> driverFinishedRides =rideService.getAllFinishedDriverRides(userController.currentUser.getCar());
         Long car_Id = userController.currentUser.getCar().getId();
-        String plateNumber = carService.getCarById(car_Id).getPlateNumber();
+        String platenumber = carService.getCarById(car_Id).getPlateNumber();
         System.out.println("Finished" + driverFinishedRides.size());
         System.out.println(driverPendingRides.size());
         model.addAttribute("driverPendingRides", driverPendingRides);
         model.addAttribute("driverFinishedRides", driverFinishedRides);
-        model.addAttribute("plateNumber", plateNumber);
+        model.addAttribute("plateNumber", platenumber);
         return "my_active_transport_offers";
     }
 
@@ -185,29 +185,29 @@ public class RideController {
 
     @PostMapping("/save_ride_updates")
     public String UpdateRideInformation(
-            String destinationPoint,
-            String departurePoint,
-            Date departureDate,
-            String departureTime,
-            String ridePrice,
-            String paymentType
+                String destinationPoint,
+                String departurePoint,
+                Date departureDate,
+                String departureTime,
+                String ridePrice,
+                String paymentType
     ){
-        if (userController.currentUser==null){
-            return "redirect:login";
-        }else{
-            Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
-            ride.setDeparturePoint(departurePoint);
-            ride.setDepartureDate(departureDate);
-            ride.setDestinationPoint(destinationPoint);
-            ride.setDepartureTime(departureTime);
-            ride.setRidePrice(ridePrice);
-            ride.setPaymentType(paymentType);
+            if (userController.currentUser==null){
+                return "redirect:login";
+            }else{
+                Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
+                ride.setDeparturePoint(departurePoint);
+                ride.setDepartureDate(departureDate);
+                ride.setDestinationPoint(destinationPoint);
+                ride.setDepartureTime(departureTime);
+                ride.setRidePrice(ridePrice);
+                ride.setPaymentType(paymentType);
 
-            User user = userService.getUserById(userController.currentUser.getId());
-            ride.setPassenger(user);
-            rideService.saveRideRequest(ride);
-            return "redirect:my_active_ride_requests?status=request_updated";
-        }
+                User user = userService.getUserById(userController.currentUser.getId());
+                ride.setPassenger(user);
+                rideService.saveRideRequest(ride);
+                return "redirect:my_active_ride_requests?status=request_updated";
+            }
     }
 
     @PostMapping("/save_transport_updates")

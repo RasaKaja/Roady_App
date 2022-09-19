@@ -12,4 +12,7 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     ArrayList<Car> findAllByUserId(Long id);
 
     Car findCarById(Long Id);
+
+    @Override
+    void delete(Car entity);
 }

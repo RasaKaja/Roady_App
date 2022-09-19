@@ -2,13 +2,13 @@ package com.roady.app.controllers;
 
 import com.roady.app.entities.User;
 import com.roady.app.repositories.UserRepository;
+import com.roady.app.services.RideService;
 import com.roady.app.services.UserService;
+import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +22,10 @@ public class UserController {
 
     public User currentUser;
 
+
     @Autowired
     private UserService userService;
+
 
 
 // C R U D operations
@@ -57,40 +59,24 @@ public class UserController {
         return "my_info";}
     }
 
+    //works
     @PostMapping("/process_register")
-    public String processRegistration(User user) throws Exception {
-        try {
-            userService.saveUser(user);
-            return "redirect:/register_success";
-        } catch (Exception exception) {
-            return "redirect:/index" + exception.getMessage();
-        }
+    public String processRegistration(User user){
+        userService.saveUser(user);
+        return "register_success";
     }
-//    public String processRegistration(@Valid User user, BindingResult bindingResult, Model model) throws Exception {
-//        if(bindingResult.hasErrors()){
-//            model.addAttribute(, user);
-//            return "register_success";
-//        }
-//        try {
-//            userService.saveUser(user);
-//        }catch (UserAlreadyExistException exception) {
-//            bindingResult.rejectValue("email", "user.email", "An account already exists for this email.");
-//            model.addAttribute(, user);
-//            return "index";
-//        }
-//        return "redirect:/index";
-//    }
 
     @GetMapping("/users")
-    public String viewUsersList(Model model) {
-        if (this.currentUser == null) {
+    public String viewUsersList(Model model){
+        if(this.currentUser==null){
             return "login";
-        } else {
-            List<User> listUsers = userService.listAll();
-            model.addAttribute("listUsers", listUsers);
-            return "users";
-        }
+        }else{
+        List<User> listUsers = userService.listAll();
+        model.addAttribute("listUsers", listUsers);
+        return "users";}
     }
+
+    //works
 
 
     @GetMapping("/user_profile")
@@ -106,6 +92,7 @@ public class UserController {
 
 // O T H E R  operations
 
+    //works
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
             model.addAttribute("user", new User());
@@ -124,11 +111,10 @@ public class UserController {
     @GetMapping("/login")
     public String activeUserInfo(
             @RequestParam(name="status", required = false) String status,
-            Model model){
-
+            Model model
+    ){
         model.addAttribute("status", status);
         model.addAttribute("countUsers", this.activeUsersNumber );
-
         ArrayList<User> users =  userService.getAllUsers();
         this.activeUsersNumber = users.size();
         model.addAttribute("users", activeUsersNumber);
@@ -146,29 +132,8 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user_form")
-    public String showUserFormPage(Model model){
-        if(this.currentUser==null){
-            return "login";
-        }else{
-        model.addAttribute("email", currentUser.getEmail() );
-        model.addAttribute("firstName", currentUser.getFirstName() );
-        model.addAttribute("lastName", currentUser.getLastName() );
-        model.addAttribute("phoneNumber", currentUser.getPhoneNumber() );
-        model.addAttribute("avrRating", currentUser.getAvrRating() );
-        model.addAttribute("registredAt", currentUser.getRegisteredAt() );
-        model.addAttribute("countUsers", this.activeUsersNumber );
-        return"user_form";
-        }
-    }
+    //works
 
-    //Need to check which one is correct
-//    @GetMapping("/register")
-//    public String showRegistrationForm(Model model){
-//        model.addAttribute("user", new User());
-//        model.addAttribute("countUsers", this.activeUsersNumber );
-//        return "signup_form";
-//    }
 
     @GetMapping("/register_success")
     public String RegistrationWasSuccessful(){
@@ -205,7 +170,5 @@ public class UserController {
         else{
             return"redirect:password_change?status=incorrect_password";
         }
-
     }
-
 }

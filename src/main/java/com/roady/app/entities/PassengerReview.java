@@ -25,4 +25,42 @@ public class PassengerReview {
 
     @Column(name = "review")
     private double review;
+
+//    @Override
+//    public double getReview() {
+//        return review;
+//    }
+//
+//    @Override
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    @Override
+//    public void setId(Long id) {
+//        this.id=id;
+//    }
+//
+//    @Override
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    @Override
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
+//
+//    @Override
+//    public void setReview(double review) {
+//        this.review = review;
+//    }
+//
+//    public Long getRideId() {
+//        return rideId;
+//    }
+//
+//    public void setRideId(Long rideId) {
+//        this.rideId = rideId;
+//    }
 }

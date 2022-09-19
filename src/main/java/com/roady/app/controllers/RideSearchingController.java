@@ -32,7 +32,7 @@ public class RideSearchingController {
     private UserService userService;
 
     @Autowired
-    private ReviewService reviewService;
+            private ReviewService reviewService;
 
     String departure;
     String destination;
@@ -68,13 +68,13 @@ public class RideSearchingController {
 
     @GetMapping("/search_passengers")
     public String searchPassengersPage(Model model) {
-        String destination = this.destination;
-        String departure = this.departure;
-        this.departure = this.destination = null;
-        ArrayList<Ride> searchedRides = rideService.getAllBySearch(destination, departure);
-        model.addAttribute("searchedRides", searchedRides);
-        return "search_passengers";
-    }
+                String destination = this.destination;
+                String departure = this.departure;
+                this.departure = this.destination = null;
+                ArrayList<Ride> searchedRides = rideService.getAllBySearch(destination, departure);
+                model.addAttribute("searchedRides", searchedRides);
+                return "search_passengers";
+        }
 
     @GetMapping("/search_driver")
     public String searchDriverPage(Model model) {
@@ -181,4 +181,5 @@ public class RideSearchingController {
     }
 
 
-}
+    }
+

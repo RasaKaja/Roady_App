@@ -51,19 +51,19 @@
 
     <div>
       <h3>My pending ride requests</h3>
-      <table>
-        <thead >
-        <tr>
-          <th>Departure</th>
-          <th>Destination</th>
-          <th>Departure Date</th>
-          <th>Departure Time</th>
-          <th>Price</th>
-          <th>Payment</th>
-        </tr>
-        </thead>
+    <table>
+      <thead >
+      <tr>
+        <th>Departure</th>
+        <th>Destination</th>
+        <th>Departure Date</th>
+        <th>Departure Time</th>
+        <th>Price</th>
+        <th>Payment</th>
+      </tr>
+      </thead>
 
-        <tbody>
+      <tbody>
         <tr th:each="ride: ${userPendingRideRequests}">
 
           <form action="send_info_for_ride_editing" method="post">
@@ -78,15 +78,15 @@
           </form>
 
         </tr>
-        </tr>
-        </tbody>
+      </tr>
+      </tbody>
 
-      </table>
+    </table>
     </div>
 
     <br>
     <div>
-      <h3>My finished ride requests</h3>
+    <h3>My finished ride requests</h3>
       <table>
         <thead >
         <tr>
@@ -115,12 +115,12 @@
             <td th:text="${ride.paymentType}"></td>
             <td th:text="${ride.getCar().getUser().getFirstName()}"></td>
             <td>
-              <div th:if="${ride.getDriverReview()}!=null">
-                <p th:text="${ride.getDriverReview().getReview()}"></p>
-              </div>
-              <div th:if="${ride.getDriverReview()}==null">
-                <p>No rating yet!</p>
-              </div>
+            <div th:if="${ride.getDriverReview()}!=null">
+              <p th:text="${ride.getDriverReview().getReview()}"></p>
+            </div>
+            <div th:if="${ride.getDriverReview()}==null">
+              <p>No rating yet!</p>
+            </div>
 
             </td>
             <td >

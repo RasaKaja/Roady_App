@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class CarController {
@@ -25,23 +26,21 @@ public class CarController {
     private UserService userService;
 
     @Autowired
+    private UserController userController;
+
+    @Autowired
     private RideService rideService;
 
     @Autowired
     private RideSearchingController rideSearchingController;
-    @Autowired
-    private UserController userController;
-//    @GetMapping
-//    public String viewAllCarsList(Model model){
-//        List<Car> carList = carService.allCarsList();
-//        model.addAttribute("carList", carList);
-//        return "allCars";
-//    }
+
+
 
     @GetMapping("/cars")
     public String showYourCarsPage(
             @RequestParam(name = "status", required = false) String status,
-            Model model){
+            Model model
+    ){
         try{
             Long car_id = userController.currentUser.getCar().getId();
             String car_type =carService.getCarById(car_id).getCarType();
@@ -56,14 +55,16 @@ public class CarController {
         }catch (Exception e){
             model.addAttribute("car", null);
         }
+
+
         return "cars";
     }
 
     @GetMapping("/updateAvailableSeatsNumber")
     public String updateSeatNumbers(
             @RequestParam(name = "status", required = false) String status,
-            Model model){
-
+            Model model
+    ){
         Long car_id = userController.currentUser.getCar().getId();
         String car_type =carService.getCarById(car_id).getCarType();
         String plate_Number =carService.getCarById(car_id).getPlateNumber();
@@ -100,8 +101,11 @@ public class CarController {
         return "/cars";
     }
 
+
+
     @PostMapping("/cars")
     public String addCar(String carType, String plateNumber, Integer availableSeats){
+
         try{
 
             Car car = new Car();
@@ -154,4 +158,6 @@ public class CarController {
             return "redirect:cars?status=no_car";
         }
     }
+
+
 }

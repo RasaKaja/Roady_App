@@ -6,6 +6,7 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,18 +27,14 @@ public class Ride {
     private Date departureDate;
     @Column(nullable = false)
     private String departureTime;
-    @Column(columnDefinition = "double default 0")
+    @Column(length = 20)
     private String ridePrice;
-    @Column
-   // @Enumerated(EnumType.STRING)
-    //private PaymentType paymentType;
+    @Column (length = 20)
+//    @Enumerated(EnumType.STRING)
     private String paymentType;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "DriverId")
+    @JoinColumn(name = "CarId")
     private Car car;
-    @Column
-//    @Enumerated(EnumType.STRING)
-//    private RideStatus rideStatus;
     @ColumnDefault("false")
     private Boolean isFinished;
 
@@ -48,5 +45,6 @@ public class Ride {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "PassengerReviewId")
     private PassengerReview passengerReview;
+
 
 }

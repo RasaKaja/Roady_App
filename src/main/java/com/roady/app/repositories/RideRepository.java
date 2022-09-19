@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public interface RideRepository extends JpaRepository<Ride, Long> {
+
 
     ArrayList<Ride> findAllByCar_Id(Long id);
 
@@ -35,5 +37,5 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
 
     ArrayList<Ride> findAll();
 
-    Integer countAll();
+
 }
