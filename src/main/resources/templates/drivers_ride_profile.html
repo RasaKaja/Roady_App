@@ -128,10 +128,10 @@
 				<label class="table-label">Phone:</label>
 				<p class="info-field" th:text="${ride.getCar().getUser().getPhoneNumber()}"></p>
 			</div>
-			<div>
-				<label class="table-label">Member since:</label>
-				<p class="info-field" th:text="${ride.getCar().getUser().getRegisteredAt()}"></p>
-			</div>
+<!--			<div>-->
+<!--				<label class="table-label">Member since:</label>-->
+<!--				<p class="info-field" th:text="${ride.getCar().getUser().getRegisteredAt()}"></p>-->
+<!--			</div>-->
 		</div>
 		
 		<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">

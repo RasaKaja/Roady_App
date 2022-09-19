@@ -73,38 +73,38 @@
 	
 	<div class="container">
 		<h2 class="search-title">Edit Ride Request</h2>
-		<div class="form-one-row">
-
+		<div class="form-one-column">
+			
 			<form action="/save_ride_updates" method="post">
 				
-				<div class="form-row">
+				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Departure:</label>
 					<input class="info-field" type="text" name="departurePoint" th:value="${departurePoint}" required/>
 				</div>
 				
-				<div class="form-row">
+				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Destination:</label>
 					<input class="info-field" type="text" name="destinationPoint" th:value="${destinationPoint}" required
 					       minlength="2"
 					       maxlength="20"/>
 				</div>
 				
-				<div class="form-row">
+				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Departure date:</label>
 					<input class="info-field" type="date" name="departureDate" th:value="${departureDate}"/>
 				</div>
 				
-				<div class="form-row">
+				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Departure time:</label>
 					<input class="info-field" type="time" name="departureTime" th:value="${departureTime}"/>
 				</div>
 				
-				<div class="form-row">
+				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Ride price:</label>
 					<input class="info-field" type="text" name="ridePrice" th:value="${ridePrice}"/>
 				</div>
 				
-				<div class="form-row">
+				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Payment Type:</label>
 					<select class="info-field" id="paymentType" name="paymentType">
 						<option value="CASH">CASH</option>
@@ -114,19 +114,20 @@
 					</select>
 				</div>
 				
-				<div>
-					<button class="register-button" type="submit">Edit ride request</button>
+				<div class="form-row grid--2-cols-inside">
+					<button class="register-button" type="submit">Edit</button>
+					
+					
+					<form action="/remove_ride_request" method="post">
+						<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
+						<button class="register-button" type="submit">Delete DOES NOT WORK</button>
+					</form>
 				</div>
-				
-				<form action="/remove_ride_request" method="post">
-					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
-					<button class="register-button" type="submit">Delete ride request DOES NOT WORK</button>
-				</form>
 			
 			</form>
 		
 		</div>
-		
+	
 	</div>
 
 </div>
