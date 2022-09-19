@@ -65,6 +65,13 @@ aside {
     /*align-items: center;*/
 }
 
+.form-1-col {
+    display: flex;
+    justify-content: center;
+    /*gap: 40px;*/
+    margin-bottom: 100px;
+}
+
 /******************************/
 /* NAVIGATION */
 /******************************/
@@ -431,119 +438,5 @@ ul {
 /*.col--second {*/
 /*    grid-column: 2 / 3;*/
 /*}*/
-
-.form-one-row {
-    display: flex;
-    width: 400px;
-    align-items: center;
-    margin: 10px auto;
-}
-
-.form-one-column {
-    display: grid;
-    width: 450px;
-    align-items: center;
-    margin: 10px auto;
-}
-
-.form-one-row info-field {
-    width: 250px;
-}
-
-.request-link {
-    font-size: 20px;
-    text-align: left;
-}
-
-.route-info {
-    grid-row: 2 / 4;
-    grid-column: 1 / 2;
-}
-
-.driver-info {
-    grid-row: 2 / 3;
-    grid-column: 2 / 3;
-}
-
-.car-info {
-    grid-row: 3 / 4;
-    grid-column: 2 / 3;
-}
-
-.title-place {
-    margin: 20px 0;
-    grid-column: 1 / 3;
-    grid-row: 1 / 2;
-}
-
-.ride-info {
-    grid-row: 2 / 5;
-    grid-column: 1 / 2;
-    border-radius: 5px;
-    /*border: rgba(204, 204, 204, 0.54) solid 1px;*/
-}
-
-.ride-pass-info{
-    background-image: linear-gradient(to right bottom, #E84855, #FDEDEE);
-    align-content: center;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    color: #07082E;
-    grid-row: 2 / 4;
-    grid-column: 2 / 3;
-}
-
-.ride-driver-info {
-    background-image: linear-gradient(to right bottom, #0676f5, #E6F1FE);
-    align-content: center;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    color: #07082E;
-    grid-row: 4 / 6;
-    grid-column: 2 / 3;
-}
-
-.ride-car-info {
-    /*border: rgba(204, 204, 204, 0.54) solid 1px;*/
-    align-content: center;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    color: #07082E;
-    grid-row: 5 / 6;
-    grid-column: 1 / 2;
-}
-
-/*.pending-request {*/
-/*    display: inline-block;*/
-/*    justify-items: stretch;*/
-/*}*/
-
-.lb-sm {
-    font-size: 15px;
-    color: #07082E;
-}
-
-.box-sm {
-    height: 20px;
-}
-
-.pending-request {
-    table-layout: fixed;
-    width: 100%;
-    height: auto;
-    border-collapse: collapse;
-    border-color: #757575;
-}
- /*.pending-request thead th:last-child{*/
- /*    width: 50px;*/
- /*}*/
-
-.container-wider{
-    width: 1200px;
-    height: auto;
-    padding: 0 20px;
-    margin: 0 auto;
-    text-align: center;
-}
 
 
