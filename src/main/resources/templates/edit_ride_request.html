@@ -1,129 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>User profile</title>
-    <link rel="icon" type="image/x-icon" href="images/logo.png">
-
-    <link rel="stylesheet" href="styles/style1.css" >
-    <meta name="viewport" content="width=device-width; initial-scale=1.0" >
-
+	<meta charset="UTF-8"/>
+	<title>Edit ride</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
+	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
+
 <body>
-<div id="header"><h1>Welcome to the Roady!</h1>
+
+<header class="main-header">
+	
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
+		<h1>Roady</h1>
+	</div>
+	
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/passenger_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/driver_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to driver" class="icon-swap"></ion-icon>
+					<ion-icon name="car-sport" aria-label="swap to driver" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/user_form"/>
+				<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/logout"/>
+				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+		<span class="my-name" th:text="${firstName}"></span>
+	</nav>
+
+</header>
+
+<section class="second-main">
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link-text" href="/passenger_today">Find transport</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/add_ride_request">Add ride request</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/my_active_ride_requests">My ride requests</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+<div class="page-content">
+	
+	<div class="container">
+		<h2 class="search-title">Edit Ride Request</h2>
+		<div class="form-one-row">
+
+			<form action="/save_ride_updates" method="post">
+				
+				<div class="form-row">
+					<label class="table-label">Departure:</label>
+					<input class="info-field" type="text" name="departurePoint" th:value="${departurePoint}" required/>
+				</div>
+				
+				<div class="form-row">
+					<label class="table-label">Destination:</label>
+					<input class="info-field" type="text" name="destinationPoint" th:value="${destinationPoint}" required
+					       minlength="2"
+					       maxlength="20"/>
+				</div>
+				
+				<div class="form-row">
+					<label class="table-label">Departure date:</label>
+					<input class="info-field" type="date" name="departureDate" th:value="${departureDate}"/>
+				</div>
+				
+				<div class="form-row">
+					<label class="table-label">Departure time:</label>
+					<input class="info-field" type="time" name="departureTime" th:value="${departureTime}"/>
+				</div>
+				
+				<div class="form-row">
+					<label class="table-label">Ride price:</label>
+					<input class="info-field" type="text" name="ridePrice" th:value="${ridePrice}"/>
+				</div>
+				
+				<div class="form-row">
+					<label class="table-label">Payment Type:</label>
+					<select class="info-field" id="paymentType" name="paymentType">
+						<option value="CASH">CASH</option>
+						<option value="REVOLUT">REVOLUT</option>
+						<option value="BANK_TRANSACTION">BANK_TRANSACTION</option>
+						<option value="FREE">FREE</option>
+					</select>
+				</div>
+				
+				<div>
+					<button class="register-button" type="submit">Edit ride request</button>
+				</div>
+				
+				<form action="/remove_ride_request" method="post">
+					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
+					<button class="register-button" type="submit">Delete ride request DOES NOT WORK</button>
+				</form>
+			
+			</form>
+		
+		</div>
+		
+	</div>
 
 </div>
 
-<div id="pageContent">
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
 
-
-
-    <div id="firstNav">
-        <div class="logo">
-            <img title="logo" src="images/logo.png" alt="Roady logo">
-        </div>
-    </div>
-
-    <div id="Content">
-
-        <div class="myMenuButtons">
-            <form action="/logout" method="get" style ='float: left; padding: 5px;'>
-                <button type="submit">Logout</button>
-            </form>
-            <form action="/user_form" method="get" style ='float: left; padding: 5px;'>
-                <button type="submit">My profile info</button>
-            </form>
-            <form action="/user_profile" method="get" style ='float: left; padding: 5px;'>
-                <button type="submit">Select an action</button>
-            </form>
-
-            <form action="/add_ride_request" method="get" style ='float: left; padding: 5px;'>
-                <button type="submit">Add ride request</button>
-            </form>
-            <form action="/my_active_ride_requests" method="get" style ='float: left; padding: 5px;'>
-                <button type="submit">My ride requests</button>
-            </form>
-            <form action="/passenger_today" method="get" style ='float: left; padding: 5px;'>
-                <button type="submit">Find transport</button>
-            </form>
-            <br><br><br>
-        </div>
-
-
-
-        <div>
-
-            <form action="/save_ride_updates" method="post">
-                <div >
-                    <div >
-                        <label >Departure: </label>
-                        <input type="text"  name="departurePoint" th:value="${departurePoint}" required/>
-                    </div>
-                    <br>
-                    <div >
-                        <label >Destination: </label>
-                        <input type="text" name="destinationPoint" th:value="${destinationPoint}" required minlength="2" maxlength="20"/>
-                    </div> <br>
-
-                    <div>
-                        <label >Departure date: </label>
-                        <input type="date"  name="departureDate" th:value="${departureDate}"/>
-                    </div><br>
-
-                    <div >
-                        <label >Departure time</label>
-                        <input type="time"  name="departureTime" th:value="${departureTime}"/>
-                    </div><br>
-                    <div >
-                        <label >Ride price</label>
-                        <input type="text"  name="ridePrice" th:value="${ridePrice}" />
-                    </div><br>
-                    <div >
-                        <label >Payment Type</label>
-                        <select id="paymentType" name="paymentType">
-                            <option value="CASH">CASH</option>
-                            <option value="REVOLUT">REVOLUT</option>
-                            <option value="BANK_TRANSACTION">BANK_TRANSACTION</option>
-                            <option value="FREE" >FREE</option>
-                        </select>
-                    </div><br>
-                    <div>
-                        <button type="submit" >Post ride request</button>
-                    </div>
-                </div>
-
-            </form>
-            <br>
-            <form action="/remove_ride_request" method="post">
-                <input type="hidden" name="rideId"  th:value="${ride.getRideRequestId()}">
-                <button type="submit" >Delete ride request DOES NOT WORK</button>
-            </form>
-
-
-
-        </div>
-
-        <!--        th:value="${paymentType}"-->
-
-
-
-    </div>
-
-
-    <div id="secondNav">
-        <div class="logo">
-            <img title="logo" src="images/logo.png" alt="Roady logo">
-        </div>
-    </div>
-
-
-
-
-</div>
-
-<div id="footer">
-    <p>Copyrights: Forest Team Active users: <span ></span> Available rides: </p>
-</div>
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
 
 </body>
 </html>

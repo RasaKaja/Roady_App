@@ -1,164 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Driver profile</title>
-  <link rel="icon" type="image/x-icon" href="images/logo.png">
-
-  <link rel="stylesheet" href="styles/style1.css" >
-  <link rel="stylesheet" href="styles/user_form.css" >
-  <meta name="viewport" content="width=device-width; initial-scale=1.0" >
-
+	<meta charset="UTF-8"/>
+	<title>Edit ride</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
+	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
+
 <body>
-<div id="header"><h1>Welcome to the Roady!</h1></div>
 
-<div id="pageContent">
+<header class="main-header">
+	
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
+		<h1>Roady</h1>
+	</div>
+	
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/passenger_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/driver_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to driver" class="icon-swap"></ion-icon>
+					<ion-icon name="car-sport" aria-label="swap to driver" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/user_form"/>
+				<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/logout"/>
+				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+		<span class="my-name" th:text="${firstName}"></span>
+	</nav>
 
-  <div id="firstNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
+</header>
 
-  <div id="Content">
+<section class="second-main">
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<!--			<li>-->
+			<!--				<a class="nav-list-link-text" href="/passenger_today">Find transport</a>-->
+			<!--			</li>-->
+			<!--			<li>-->
+			<!--				<a class="nav-list-link-text" href="/add_ride_request">Add ride request</a>-->
+			<!--			</li>-->
+			<!--			<li>-->
+			<!--				<a class="nav-list-link-text" href="/my_active_ride_requests">My ride requests</a>-->
+			<!--			</li>-->
+			<li>
+				<a class="nav-list-link-text" href="/return_to_previous_page">Back</a>
+			</li>
+		</ul>
+	</nav>
+</section>
 
-    <form action="return_to_previous_page" method="post">
-      <input type="hidden" name="link" th:value="${status}">
-      <button type="submit">Back</button>
-    </form>
+<!--<form action="return_to_previous_page" method="post">-->
+<!--	<input type="hidden" name="link" th:value="${status}">-->
+<!--	<button type="submit">Back</button>-->
+<!--</form>-->
 
-    <div th:if="${status=='my_active_transport_offers' && isDriverRated==0}">
-      <form action="driver_rates_passenger" method="post">
-        <Label>Rate your passenger</Label>
-        <input type="number" name="rating" min="1" max="5" />
-        <input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>;
-        <button type="submit">Rate!</button>
-      </form>
-    </div>
+<div class="page-content">
+	
+	<div class="container grid grid--2-cols table-finish-ride">
+		
+		<div class="table ride-info">
+			<h4 class="my-profile-title">Ride information</h4>
+			<table>
+				<tr>
+					<td><p class="table-label">From:</p></td>
+					<td><p class="info-field" th:text="${ride.getDeparturePoint()}">From</p></td>
+				</tr>
+				<tr>
+					<td><p class="table-label">To:</p></td>
+					<td><p class="info-field" th:text="${ride.getDestinationPoint()}">To</p></td>
+				</tr>
+				<tr>
+					<td><p class="table-label">Date:</p></td>
+					<td><p class="info-field" th:text="${ride.getDepartureDate()}">Date</p></td>
+				</tr>
+				<tr>
+					<td><p class="table-label">Time:</p></td>
+					<td><p class="info-field" th:text="${ride.getDepartureTime()}">Time</p></td>
+				</tr>
+				<tr>
+					<td><p class="table-label">Price:</p></td>
+					<td><p class="info-field" th:text="${ride.getRidePrice()}">Price</p></td>
+				</tr>
+				<tr>
+					<td><p class="table-label">Payment type:</p></td>
+					<td><p class="info-field" th:text="${ride.getPaymentType()}">Payment</p></td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="ride-pass-info">
+			<h4 class="my-profile-title">Passenger information</h4>
+			<table>
+				<tr>
+					<td><p class="table-label">First Name:</p></td>
+					<td><p class="info-field" th:text="${ride.getPassenger().getFirstName()}">First Name</p></td>
+				</tr>
+				<!--          <tr>-->
+				<!--	          <td><p class="table-label">Last Name:</p></td>-->
+				<!--            <td><p class="info-field" th:text="${ride.getPassenger().getLastName()}"></p></td>-->
+				<!--          </tr>-->
+				<tr>
+					<td><p class="table-label">Phone:</p></td>
+					<td><p class="info-field" th:text="${ride.getPassenger().getPhoneNumber()}">Phone</p></td>
+				</tr>
+				<!--          <tr>-->
+				<!--	          <td><p class="table-label">Member since:</p></td>-->
+				<!--            <td><p class="info-field" th:text="${ride.getPassenger().getRegisteredAt()}"></p></td>-->
+				<!--          </tr>-->
+			</table>
+			<div th:if="${status=='my_active_transport_offers' && isDriverRated==0}">
+				<form action="driver_rates_passenger" method="post">
+					<Label>Rate your passenger</Label>
+					<input class="info-field" type="number" name="rating" min="1" max="5"/>
+					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>;
+					<button class="btn btn--passenger-trg" type="submit">Rate!</button>
+				</form>
+			</div>
+		</div>
+		
+		<div class="ride-car-info">
+			<h4 class="my-profile-title">Car information</h4>
+			<table>
+				<tr>
+					<td><p class="table-label">Car type:</p></td>
+					<td><p class="info-field" th:text="${ride.getCar().getCarType()}">Car type</p></td>
+				</tr>
+				<tr>
+					<td><p class="table-label">Plate Number:</p></td>
+					<td><p class="info-field" th:text="${ride.getCar().getPlateNumber()}">Plate Number</p></td>
+				</tr>
+				<!--            <tr>-->
+				<!--	            <td><p class="table-label">Available seats:</p></td>-->
+				<!--              <td><p class="info-field" th:text="${ride.getCar().getAvailableSeats()}"></p></td>-->
+				<!--            </tr>-->
+			</table>
+		</div>
+		
+		<div class="ride-driver-info">
+			<h4 class="my-profile-title">Driver information</h4>
+			<table>
+				<tr>
+					<td><p class="table-label">First Name:</p></td>
+					<td><p class="info-field" th:text="${ride.getCar().getUser().getFirstName()}">First Name</p></td>
+				</tr>
+				<!--            <tr>-->
+				<!--	            <td><p class="table-label">Last Name:</p></td>-->
+				<!--              <td><p class="info-field" th:text="${ride.getCar().getUser().getLastName()}"></p></td>-->
+				<!--            </tr>-->
+				<tr>
+					<td><p class="table-label">Phone:</p></td>
+					<td><p class="info-field" th:text="${ride.getCar().getUser().getPhoneNumber()}">Phone</p></td>
+				</tr>
+				<!--            <tr>-->
+				<!--	            <td><p class="table-label">Member since:</p></td>-->
+				<!--              <td><p class="info-field" th:text="${ride.getCar().getUser().getRegisteredAt()}"></p></td>-->
+				<!--            </tr>-->
+			</table>
+			<div th:if="${status=='my_active_ride_requests' && isPassengerRated==0}">
+				<form action="passenger_rates_driver" method="post">
+					<Label>Rate your driver</Label>
+					<input class="info-field" type="number" name="rating" min="1" max="5"/>
+					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>;
+					<button class="btn btn--driver" type="submit">Rate!</button>
+				</form>
+			</div>
+		</div>
+	
+	</div>
 
-    <div th:if="${status=='my_active_ride_requests' && isPassengerRated==0}" >
-      <form action="passenger_rates_driver" method="post">
-        <Label>Rate your driver</Label>
-        <input type="number" name="rating" min="1" max="5" />
-        <input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>;
-        <button type="submit">Rate!</button>
-      </form>
-    </div>
-
-
-    <div>
-      <div>
-        <h2>Ride information</h2>
-        <table>
-          <tr>
-            <td><h6>Departure: </h6></td>
-            <td><p th:text="${ride.getDeparturePoint()}"></p></td>
-          </tr>
-          <tr>
-            <td><h6>Destination: </h6></td>
-            <td><p th:text="${ride.getDestinationPoint()}"></p></td>
-          </tr>
-          <tr>
-            <td><h6>Departure Date: </h6></td>
-            <td><p th:text="${ride.getDepartureDate()}"></p></td>
-          </tr>
-          <tr>
-            <td><h6>Departure Time: </h6></td>
-            <td><p th:text="${ride.getDepartureTime()}" ></p></td>
-          </tr>
-          <tr>
-            <td><h6>Price: </h6> </td>
-            <td><p th:text="${ride.getRidePrice()}"></p></td>
-          </tr>
-          <tr>
-            <td>Payment type: </td>
-            <td><p th:text="${ride.getPaymentType()}"></p></td>
-          </tr>
-        </table>
-      </div>
-
-      <div >
-        <h2>Passenger information</h2>
-        <table>
-          <tr>
-            <td><h6>First Name: </h6></td>
-            <td><p th:text="${ride.getPassenger().getFirstName()}"></p></td>
-          </tr>
-          <tr>
-            <td><h6>Last Name: </h6></td>
-            <td><p th:text="${ride.getPassenger().getLastName()}"></p></td>
-          </tr>
-          <tr>
-            <td><h6>Phone: </h6></td>
-            <td><p th:text="${ride.getPassenger().getPhoneNumber()}"></p></td>
-          </tr>
-          <tr>
-            <td><h6>Member since: </h6></td>
-            <td><p th:text="${ride.getPassenger().getRegisteredAt()}"></p></td>
-          </tr>
-        </table>
-      </div>
-      <div >
-        <div>
-          <h2 >Car information</h2>
-          <table>
-            <tr>
-              <td><h6>Car type: </h6></td>
-              <td><p th:text="${ride.getCar().getCarType()}"></p></td>
-            </tr>
-            <tr>
-              <td><h6>Plate Number: </h6></td>
-              <td><p th:text="${ride.getCar().getPlateNumber()}" ></p></td>
-            </tr>
-            <tr>
-              <td><h6>Available seats: </h6></td>
-              <td><p th:text="${ride.getCar().getAvailableSeats()}"></p></td>
-            </tr>
-          </table>
-        </div>
-
-        <div>
-          <h2>Driver information</h2>
-          <table>
-            <tr>
-              <td><h6>First Name: </h6></td>
-              <td><p th:text="${ride.getCar().getUser().getFirstName()}"></p></td>
-            </tr>
-            <tr>
-              <td><h6>Last Name: </h6></td>
-              <td><p th:text="${ride.getCar().getUser().getLastName()}"></p></td>
-            </tr>
-            <tr>
-              <td><h6>Phone: </h6></td>
-              <td><p th:text="${ride.getCar().getUser().getPhoneNumber()}"></p></td>
-            </tr>
-            <tr>
-              <td><h6>Member since: </h6></td>
-              <td><p th:text="${ride.getCar().getUser().getRegisteredAt()}"></p></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-
-
-    </div>
-  </div>
-
-
-
-  <div id="secondNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
 </div>
 
-<div id="footer">
-  <p>Copyrights: Forest Team Active users: <span ></span> Available rides: </p>
-</div>
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
 
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
 
 </body>
 </html>
