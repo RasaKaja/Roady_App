@@ -80,7 +80,7 @@ input{
 }
 
 button:hover, a:hover {
-    opacity: 80%;
+    font-weight: bold;
 }
 
 td{
@@ -132,9 +132,6 @@ form>div>.likeButton{
     -webkit-text-fill-color: #2d0521;
 }
 
-.myMenuButtons>form>button{
-background: #1E4294;
-    -webkit-text-fill-color: #AEBBD8;
-    width: fit-content;
-    padding: 10px 10px;
+.myMenuButtons{
+
 }

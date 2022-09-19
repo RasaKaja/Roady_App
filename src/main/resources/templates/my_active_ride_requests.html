@@ -1,172 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>User profile</title>
-  <link rel="icon" type="image/x-icon" href="images/logo.png">
-
-  <link rel="stylesheet" href="styles/style1.css" >
-  <meta name="viewport" content="width=device-width; initial-scale=1.0" >
-
+	<meta charset="UTF-8"/>
+	<title>Add ride request</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
+	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
+
 <body>
-<div id="header"><h1>Welcome to the Roady!</h1>
+<header class="main-header">
+
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
+		<h1>Roady</h1>
+	</div>
+
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/passenger_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/driver_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to driver" class="icon-swap"></ion-icon>
+					<ion-icon name="car-sport" aria-label="swap to driver" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/user_form"/>
+				<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/logout"/>
+				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+		<span class="my-name" th:text="${firstName}"></span>
+	</nav>
+
+</header>
+
+<section class="second-main">
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link-text" href="/passenger_today">Find transport</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/add_ride_request">Add ride request</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/my_active_ride_requests">My ride requests</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+
+<div class="page-content">
+
+	<div class="container-wider">
+
+		<div>
+			<h2 class="search-title">My pending ride requests</h2>
+			<table class="pending-request">
+				<thead>
+				<tr>
+					<th class="lb-sm">Departure</th>
+					<th class="lb-sm">Destination</th>
+					<th class="lb-sm">Date</th>
+					<th class="lb-sm">Time</th>
+					<th class="lb-sm">Price</th>
+					<th class="lb-sm">Payment</th>
+				</tr>
+				</thead>
+
+				<tbody>
+				<tr th:each="ride: ${userPendingRideRequests}">
+
+					<form action="send_info_for_ride_editing" method="post">
+						<td class="info-field box-sm" th:text="${ride.departurePoint}">Panevezys</td>
+						<td class="info-field box-sm" th:text="${ride.destinationPoint}">Klaipeda</td>
+						<td class="info-field box-sm" th:text="${ride.departureDate}">2022-10-25</td>
+						<td class="info-field box-sm" th:text="${ride.departureTime}">12:15</td>
+						<td class="info-field box-sm" th:text="${ride.ridePrice}">6 Eur</td>
+						<td class="info-field box-sm" th:text="${ride.paymentType}">Revolut</td>
+						<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+						<td>
+							<button class="register-button btn-small" type="submit" name="toDo" value="edit"> Edit/Delete</button>
+						</td>
+					</form>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div>
+			<h2 class="search-title">My finished ride requests</h2>
+			<table class="pending-request">
+				<thead>
+				<tr>
+					<th class="lb-sm">Departure</th>
+					<th class="lb-sm">Destination</th>
+					<th class="lb-sm">Date</th>
+					<th class="lb-sm">Time</th>
+					<th class="lb-sm">Price</th>
+					<th class="lb-sm">Payment</th>
+					<th class="lb-sm">Driver</th>
+					<th class="lb-sm">Received rating</th>
+					<th class="lb-sm">My rating</th>
+				</tr>
+				</thead>
+
+				<tbody>
+				<tr th:each="ride: ${userFinishedRideRequests}">
+
+					<form action="send_info_for_ride_overview" method="post">
+						<td class="info-field box-sm" th:text="${ride.departurePoint}">Ignalina</td>
+						<td class="info-field box-sm" th:text="${ride.destinationPoint}">ukmerge</td>
+						<td class="info-field box-sm" th:text="${ride.departureDate}">2022-09-26</td>
+						<td class="info-field box-sm" th:text="${ride.departureTime}">08:00</td>
+						<td class="info-field box-sm" th:text="${ride.ridePrice}">FREE</td>
+						<td class="info-field box-sm" th:text="${ride.paymentType}">None</td>
+						<td class="info-field box-sm" th:text="${ride.getCar().getUser().getFirstName()}">Jonas</td>
+						<td class="info-field box-sm">
+							<div th:if="${ride.getDriverReview()}!=null">
+								<p th:text="${ride.getDriverReview().getReview()}"></p>
+							</div>
+							<div th:if="${ride.getDriverReview()}==null">
+								<p>No rating yet!</p>
+							</div>
+						</td>
+
+						<td class="info-field box-sm">
+							<div th:if="${ride.getPassengerReview()}!=null">
+								<p th:text="${ride.getPassengerReview().getReview()}"></p>
+							</div>
+							<div th:if="${ride.getPassengerReview()}==null">
+								<p>Please rate!</p>
+							</div>
+						</td>
+
+						<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+						<input type="hidden" name="link" value="my_active_ride_requests"/>
+
+						<td>
+							<button class="register-button btn-small" type="submit">Ride overview/Rating</button>
+						</td>
+					</form>
+
+				</tr>
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</div>
 
 </div>
 
-<div id="pageContent">
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
 
-
-
-  <div id="firstNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
-
-  <div id="Content">
-
-    <div class="myMenuButtons">
-      <form action="/logout" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">Logout</button>
-      </form>
-      <form action="/user_form" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">My profile info</button>
-      </form>
-      <form action="/user_profile" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">Select an action</button>
-      </form>
-
-      <form action="/add_ride_request" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">Add ride request</button>
-      </form>
-      <form action="/my_active_ride_requests" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">My ride requests</button>
-      </form>
-      <form action="/passenger_today" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">Find transport</button>
-      </form>
-      <br><br><br>
-    </div>
-
-    <div>
-      <h3>My pending ride requests</h3>
-    <table>
-      <thead >
-      <tr>
-        <th>Departure</th>
-        <th>Destination</th>
-        <th>Departure Date</th>
-        <th>Departure Time</th>
-        <th>Price</th>
-        <th>Payment</th>
-      </tr>
-      </thead>
-
-      <tbody>
-        <tr th:each="ride: ${userPendingRideRequests}">
-
-          <form action="send_info_for_ride_editing" method="post">
-            <td th:text="${ride.departurePoint}"></td>
-            <td th:text="${ride.destinationPoint}"></td>
-            <td th:text="${ride.departureDate}"></td>
-            <td th:text="${ride.departureTime}"></td>
-            <td th:text="${ride.ridePrice}"></td>
-            <td th:text="${ride.paymentType}"></td>
-            <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
-            <td><button type="submit" name="toDo" value="edit"> Edit/Delete</button></td>
-          </form>
-
-        </tr>
-      </tr>
-      </tbody>
-
-    </table>
-    </div>
-
-    <br>
-    <div>
-    <h3>My finished ride requests</h3>
-      <table>
-        <thead >
-        <tr>
-          <th>Departure</th>
-          <th>Destination</th>
-          <th>Departure Date</th>
-          <th>Departure Time</th>
-          <th>Price</th>
-          <th>Payment</th>
-          <th>Driver</th>
-          <th>Received rating</th>
-          <th>Your rating</th>
-
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="ride: ${userFinishedRideRequests}">
-
-          <form action="send_info_for_ride_overview" method="post">
-            <td th:text="${ride.departurePoint}"></td>
-            <td th:text="${ride.destinationPoint}"></td>
-            <td th:text="${ride.departureDate}"></td>
-            <td th:text="${ride.departureTime}"></td>
-            <td th:text="${ride.ridePrice}"></td>
-            <td th:text="${ride.paymentType}"></td>
-            <td th:text="${ride.getCar().getUser().getFirstName()}"></td>
-            <td>
-            <div th:if="${ride.getDriverReview()}!=null">
-              <p th:text="${ride.getDriverReview().getReview()}"></p>
-            </div>
-            <div th:if="${ride.getDriverReview()}==null">
-              <p>No rating yet!</p>
-            </div>
-
-            </td>
-            <td >
-              <div th:if="${ride.getPassengerReview()}!=null">
-                <p th:text="${ride.getPassengerReview().getReview()}"></p>
-              </div>
-              <div th:if="${ride.getPassengerReview()}==null">
-                <p>Please rate!</p>
-              </div>
-
-            </td>
-            <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
-            <input type="hidden" name="link" value="my_active_ride_requests"/>
-            <td><button type="submit" >Ride overview/Rating</button></td>
-          </form>
-
-        </tr>
-        </tr>
-        </tbody>
-
-      </table>
-
-
-    </div>
-
-
-
-
-
-  </div>
-
-
-  <div id="secondNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
-
-
-
-
-</div>
-
-<div id="footer">
-  <p>Copyrights: Forest Team Active users: <span ></span> Available rides: </p>
-</div>
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
 
 </body>
 </html>
