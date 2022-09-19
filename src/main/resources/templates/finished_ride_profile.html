@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Edit ride</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
+	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+
+<header class="main-header">
+	
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
+		<h1>Roady</h1>
+	</div>
+	
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/passenger_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/driver_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to driver" class="icon-swap"></ion-icon>
+					<ion-icon name="car-sport" aria-label="swap to driver" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/user_form"/>
+				<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/logout"/>
+				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+		<span class="my-name" th:text="${firstName}"></span>
+	</nav>
+
+</header>
+
+<section class="second-main">
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<!--			<li>-->
+			<!--				<a class="nav-list-link-text" href="/passenger_today">Find transport</a>-->
+			<!--			</li>-->
+			<!--			<li>-->
+			<!--				<a class="nav-list-link-text" href="/add_ride_request">Add ride request</a>-->
+			<!--			</li>-->
+			<!--			<li>-->
+			<!--				<a class="nav-list-link-text" href="/my_active_ride_requests">My ride requests</a>-->
+			<!--			</li>-->
+			<li>
+				<a class="nav-list-link-text" href="/return_to_previous_page">Back</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+<!--<form action="return_to_previous_page" method="post">-->
+<!--	<input type="hidden" name="link" th:value="${status}">-->
+<!--	<button type="submit">Back</button>-->
+<!--</form>-->
+
+<div class="page-content">
+
+<div class="container grid grid--2-cols">
+	<h2 class="search-title title-place">Finished ride info</h2>
+	
+	<div class="ride-info">
+		<h4 class="my-profile-title">Ride information</h4>
+		<table>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">From:</label>
+				<input class="info-field" th:text="${ride.getDeparturePoint()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">To:</label></td>
+				<input class="info-field" th:text="${ride.getDestinationPoint()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Date:</label></td>
+				<input class="info-field" th:text="${ride.getDepartureDate()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Time:</label></td>
+				<input class="info-field" th:text="${ride.getDepartureTime()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Price:</label></td>
+				<input class="info-field" th:text="${ride.getRidePrice()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Payment type:</label></td>
+				<input class="info-field" th:text="${ride.getPaymentType()}"/>
+			</div>
+		</table>
+	</div>
+	
+	<div class="ride-pass-info">
+		<h4 class="my-profile-title">Passenger information</h4>
+		<table>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">First Name:</label>
+				<p class="info-field" th:text="${ride.getPassenger().getFirstName()}">First Name</p>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Phone:</label>
+				<p class="info-field" th:text="${ride.getPassenger().getPhoneNumber()}">Phone</p>
+			</div>
+		</table>
+		<div th:if="${status=='my_active_transport_offers' && isDriverRated==0}">
+			<form action="driver_rates_passenger" method="post">
+				<label>Rate your passenger</label>
+				<input class="info-field" type="number" name="rating" min="1" max="5"/>
+				<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>
+				<button class="btn btn--passenger-trg" type="submit">Rate!</button>
+			</form>
+		</div>
+	</div>
+	
+	<div class="ride-car-info">
+		<h4 class="my-profile-title">Car information</h4>
+		<table>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Car type:</label>
+				<p class="info-field" th:text="${ride.getCar().getCarType()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Plate Number:</label>
+				<p class="info-field" th:text="${ride.getCar().getPlateNumber()}"/>
+			</div>
+		</table>
+	</div>
+	
+	<div class="ride-driver-info">
+		<h4 class="my-profile-title">Driver information</h4>
+		<table>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">First Name:</label>
+				<p class="info-field" th:text="${ride.getCar().getUser().getFirstName()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Phone:</label>
+				<p class="info-field" th:text="${ride.getCar().getUser().getPhoneNumber()}"/>
+			</div>
+		</table>
+		<div th:if="${status=='my_active_ride_requests' && isPassengerRated==0}">
+			<form action="passenger_rates_driver" method="post">
+				<label>Rate your driver</label>
+				<input class="info-field" type="number" name="rating" min="1" max="5"/>
+				<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>
+				<button class="btn btn--driver" type="submit">Rate!</button>
+			</form>
+		</div>
+	</div>
+	
+</div>
+
+</div>
+
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
+
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
+
+</body>
+</html>

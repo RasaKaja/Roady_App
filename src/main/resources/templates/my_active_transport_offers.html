@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Add ride request</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
+	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+<header class="main-header">
+	
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
+		<h1>Roady</h1>
+	</div>
+	
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/passenger_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/driver_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to driver" class="icon-swap"></ion-icon>
+					<ion-icon name="car-sport" aria-label="swap to driver" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/user_form"/>
+				<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/logout"/>
+				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+		<span class="my-name" th:text="${firstName}"></span>
+	</nav>
+
+</header>
+
+<section class="second-main">
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link-text" href="/driver_today">Find passengers</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
+			</li>
+			<li><a class="nav-list-link-text" href="/cars">Car info</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+<div class="page-content">
+	
+	<div class="container-wider">
+		
+		<div>
+			<h2 class="search-title">My pending transport offers</h2>
+			
+			<table class="pending-request">
+				<thead>
+				<tr>
+					<th class="lb-sm">Departure</th>
+					<th class="lb-sm">Destination</th>
+					<th class="lb-sm">Date</th>
+					<th class="lb-sm">Time</th>
+					<th class="lb-sm">Price</th>
+					<th class="lb-sm">Payment</th>
+					<th class="lb-sm">Seats in Car <span th:text="${plateNumber}"></span></th>
+				</tr>
+				</thead>
+				
+				<tbody>
+				<tr th:each="ride: ${driverPendingRides}">
+					<form action="send_info_for_transport_offer_editing" method="post">
+						<td class="info-field box-sm"  th:text="${ride.departurePoint}"></td>
+						<td class="info-field box-sm"  th:text="${ride.destinationPoint}"></td>
+						<td class="info-field box-sm"  th:text="${ride.departureDate}"></td>
+						<td class="info-field box-sm"  th:text="${ride.departureTime}"></td>
+						<td class="info-field box-sm"  th:text="${ride.ridePrice}"></td>
+						<td class="info-field box-sm"  th:text="${ride.paymentType}"></td>
+						<td class="info-field box-sm"  th:text="${ride.car.getAvailableSeats()}"></td>
+						<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+						<td>
+							<button class="register-button btn-small" type="submit"> Edit/Delete</button>
+						</td>
+					</form>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div>
+			<h2 class="search-title">My finished transport offers</h2>
+			<table class="pending-request">
+				<thead>
+				<tr>
+					<th class="lb-sm">Departure</th>
+					<th class="lb-sm">Destination</th>
+					<th class="lb-sm">Date</th>
+					<th class="lb-sm">Time</th>
+					<th class="lb-sm">Price</th>
+					<th class="lb-sm">Payment</th>
+					<th class="lb-sm">Seats in Car <span th:text="${plateNumber}"></span></th>
+					<th class="lb-sm">Passenger</th>
+					<th class="lb-sm">Your rating</th>
+					<th class="lb-sm">Received rating</th>
+				</tr>
+				</thead>
+				
+				<tbody>
+				<tr th:each="ride: ${driverFinishedRides}">
+					<form action="send_info_for_ride_overview" method="post">
+						<td class="info-field box-sm" th:text="${ride.departurePoint}"></td>
+						<td class="info-field box-sm" th:text="${ride.destinationPoint}"></td>
+						<td class="info-field box-sm" th:text="${ride.departureDate}"></td>
+						<td class="info-field box-sm" th:text="${ride.departureTime}"></td>
+						<td class="info-field box-sm" th:text="${ride.ridePrice}"></td>
+						<td class="info-field box-sm" th:text="${ride.paymentType}"></td>
+						<td class="info-field box-sm" th:text="${ride.car.getAvailableSeats()}"></td>
+						<td class="info-field box-sm" th:text="${ride.getPassenger().getFirstName()}"></td>
+						
+						<td  class="info-field box-sm">
+							<div th:if="${ride.getDriverReview()}!=null">
+								<p th:text="${ride.getDriverReview().getReview()}"></p>
+							</div>
+							<div th:if="${ride.getDriverReview()}==null">
+								<p>Please rate!</p>
+							</div>
+						</td>
+						
+						<td  class="info-field box-sm">
+							<div th:if="${ride.getPassengerReview()}!=null">
+								<p th:text="${ride.getPassengerReview().getReview()}"></p>
+							</div>
+							<div th:if="${ride.getPassengerReview()}==null">
+								<p>No rating yet!</p>
+							</div>
+						</td>
+						<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+						<input type="hidden" name="link" value="my_active_transport_offers"/>
+						<td>
+							<button class="register-button btn-small" type="submit">Ride overview/Rating</button>
+						</td>
+					</form>
+				</tr>
+				</tbody>
+			</table>
+		
+		</div>
+	
+	</div>
+
+</div>
+
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
+
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
+
+</body>
+</html>

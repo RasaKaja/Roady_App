@@ -267,6 +267,11 @@ ul {
     margin-top: 25px;
 }
 
+.btn--passenger-trg {
+    border-color: #E84855;
+    background-image: linear-gradient(to right bottom, #E84855, #FDEDEE);
+    align-content: center;
+}
 
 .input {
     font-size: 20px;
@@ -289,12 +294,23 @@ ul {
     border-radius: 5px;
     padding: 12px;
     text-decoration: none;
+    margin-bottom: 2px;
 }
 
 .register-button:hover {
     background-color: #E84855;
     color: #07082E;
     border: #E84855 solid;
+}
+
+.btn-small {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    height: 20px;
+    font-size: 20px;
+    padding: 20px;
+    text-decoration: none;
 }
 
 .search {
@@ -314,6 +330,13 @@ ul {
     grid-column: 1 / 2;
 }
 
+.table-finish-ride {
+    height: 450px;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 2fr 1fr;
+    align-content: center;
+}
+
 .my-profile {
     height: 400px;
     grid-template-rows: 1fr 3fr 3fr 2fr;
@@ -329,7 +352,7 @@ ul {
 }
 
 .table-label {
-    text-align: right;
+    text-align: left;
     font-size: 20px;
     color: #07082E;
 }
@@ -398,38 +421,22 @@ ul {
 }
 
 .form-row {
+    display: grid;
     margin-bottom: 10px;
+    justify-items: stretch;
 }
 
-/*.col--1 {*/
+.grid--2-cols-inside {
+    grid-template-columns: 1fr 2fr;
+    column-gap: 10px;
+}
+
+/*.col--first {*/
 /*    grid-column: 1 / 2;*/
 /*}*/
 
-/*.col--2 {*/
+/*.col--second {*/
 /*    grid-column: 2 / 3;*/
 /*}*/
 
-.msg-add-car-failed {
-    color: red;
-    background-color: #facccc;
-}
 
-.msg-add-car-success {
-    color: green;
-    background-color: #c2e3c2;
-}
-
-.input-form {
-    font-size: 20px;
-    margin-bottom: 5px;
-    color: #757575;
-    width: 100%;
-    border-radius: 5px;
-    padding: 12px;
-}
-
-.my-car {
-    margin-top: 20px;
-    height: 200px;
-    align-content: center;
-}

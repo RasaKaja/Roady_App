@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8"/>
-	<title>Driver profile</title>
+	<title>Passenger profile</title>
 	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
 	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
@@ -21,10 +21,10 @@
 	<nav class="navigation">
 		<ul class="navigation-list">
 			<li>
-				<a class="nav-list-link" href="/passenger_today"/>
+				<a class="nav-list-link" href="/driver_today"/>
 				<div class="switch-user-mode">
-					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
-					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+					<ion-icon name="swap-horizontal" aria-label="swap to driver" class="icon-swap"></ion-icon>
+					<ion-icon name="car-sport" aria-label="swap to driver" class="icon-swap-passenger"></ion-icon>
 				</div>
 				</a>
 			</li>
@@ -48,23 +48,23 @@
 	<nav class="navigation">
 		<ul class="navigation-list">
 			<li>
-				<a class="nav-list-link-text" href="/driver_today">Find passengers</a>
+				<a class="nav-list-link-text" href="/driver_today">Find transport</a>
 			</li>
 			<li>
-				<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
+				<a class="nav-list-link-text" href="/add_ride_request">Add ride request</a>
 			</li>
 			<li>
-				<a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
-			</li>
-			<li><a class="nav-list-link-text" href="/cars">Car info</a>
+				<a class="nav-list-link-text" href="/my_active_ride_requests">My ride requests</a>
 			</li>
 		</ul>
 	</nav>
 </section>
 
 <div class="page-content">
+	
+	<div class="page-content">
 		
-		<form action="send_info_for_ride_search" method="post" class="container grid grid--3-cols search">
+		<form action="send_info_for_passenger_ride_search" method="post" class="container grid grid--3-cols search">
 			<h2 class="search-title">New search</h2>
 			<div>
 				<input class="input" id="departurePoint" type="text" name="departure" placeholder="Departure" required
@@ -79,6 +79,8 @@
 			</div>
 		</form>
 	
+	</div>
+
 </div>
 
 <aside>

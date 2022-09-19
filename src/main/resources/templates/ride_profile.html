@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8"/>
-	<title>Add ride request</title>
+	<title>Edit ride</title>
 	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
 	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
 <header class="main-header">
 	
 	<div class="logo-and-name">
@@ -74,58 +75,63 @@
 <div class="page-content">
 	
 	<div class="container">
-		
-		<div>
-			<a href="my_active_transport_offers" class="request-link">
-				My transport offers (<span th:text="${userRidesCount}"></span>)</a>
-		</div>
+		<h2 class="search-title">Route information</h2>
 		
 		<div class="form-one-column">
-			
-			<form action="/ride_requests_save" method="post">
-
+		
+		<form action="confirm_booking_as_driver" method="post">
+			<div>
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Departure:</label>
-						<input class="info-field" type="text" name="departurePoint" required/>
+						<input class="info-field" th:text="${ride.getDeparturePoint()}"/>
 					</div>
-					
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Destination:</label>
-						<input class="info-field" type="text" name="destinationPoint" required minlength="2" maxlength="20"/>
-					</div>
-					
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Departure date:</label>
-						<input class="info-field" type="date" name="departureDate"/>
-					</div>
-					
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Departure time:</label>
-						<input class="info-field" type="time" name="departureTime"/>
+						<input class="info-field" th:text="${ride.getDestinationPoint()}"/>
 					</div>
 					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Ride price:</label>
-						<input class="info-field" type="text" name="ridePrice"/>
+						<label class="table-label">Departure Date:</label>
+						<input class="info-field" th:text="${ride.getDepartureDate()}"/>
 					</div>
 					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Payment Type:</label>
-						<select id="paymentType" name="paymentType" class="info-field">
-							<option value="CASH">CASH</option>
-							<option value="REVOLUT">REVOLUT</option>
-							<option value="BANK_TRANSACTION">BANK_TRANSACTION</option>
-							<option value="FREE">FREE</option>
-						</select>
-					
+						<label class="table-label">Departure Time:</label>
+						<input class="info-field" th:text="${ride.getDepartureTime()}"/>
 					</div>
-					<div>
-						<button class="register-button" type="submit">Post transport offer</button>
+					<div class="form-row grid--2-cols-inside">
+						<label class="table-label">Price:</label>
+						<input class="info-field" th:text="${ride.getRidePrice()}"/>
+					</div>
+					<div class="form-row grid--2-cols-inside">
+						<label class="table-label">Payment type:</label>
+						<input class="info-field" th:text="${ride.getPaymentType()}"/>
+					</div>
+			</div>
+			
+			<div>
+				<h2 class="search-title">Passenger</h2>
+				<div>
+					<div class="form-row grid--2-cols-inside">
+						<label class="table-label">First Name:</label>
+						<input class="info-field" th:text="${ride.getPassenger().getFirstName()}"></input>
+					</div>
+					<div class="form-row grid--2-cols-inside">
+						<label class="table-label">Last Name:</label></td>
+						<input class="info-field" th:text="${ride.getPassenger().getLastName()}"></input>
+					</div>
+					<div class="form-row grid--2-cols-inside">
+						<label class="table-label">Phone:</label></td>
+						<input class="info-field" th:text="${ride.getPassenger().getPhoneNumber()}"></input>
 					</div>
 
-			</form>
+					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
+					<button class="register-button" type="submit"> Confirm</button>
+				</div>
+			</div>
+		</form>
 		
 		</div>
-	
 	</div>
+</div>
 
 </div>
 

@@ -56,16 +56,13 @@
 	<nav class="navigation">
 		<ul class="navigation-list">
 			<li>
-				<a class="nav-list-link-text" href="/driver_today">Find passengers</a>
+				<a class="nav-list-link-text" href="/passenger_today">Find transport</a>
 			</li>
 			<li>
-				<a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
+				<a class="nav-list-link-text" href="/add_ride_request">Add ride request</a>
 			</li>
 			<li>
-				<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
-			</li>
-			</li>
-			<li><a class="nav-list-link-text" href="/cars">Car info</a>
+				<a class="nav-list-link-text" href="/my_active_ride_requests">My ride requests</a>
 			</li>
 		</ul>
 	</nav>
@@ -76,16 +73,15 @@
 	<div class="container">
 		
 		<div>
-			<a href="my_active_transport_offers" class="request-link">
-				My transport offers (<span th:text="${userRidesCount}"></span>)</a>
+			<a href="my_active_ride_requests" class="request-link">
+				My ride requests (<span th:text="${userRidesCount}"></span>)</a>
 		</div>
 		
 		<div class="form-one-column">
 			
-			<form action="/ride_requests_save" method="post">
-
+			<form action="/passenger_ride_requests_save" method="post">
 					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Departure:</label>
+						<label class="table-label">Departure: </label>
 						<input class="info-field" type="text" name="departurePoint" required/>
 					</div>
 					
@@ -108,23 +104,21 @@
 						<input class="info-field" type="text" name="ridePrice"/>
 					</div>
 					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Payment Type:</label>
+						<label class="table-label">Payment type:</label>
+						
 						<select id="paymentType" name="paymentType" class="info-field">
 							<option value="CASH">CASH</option>
 							<option value="REVOLUT">REVOLUT</option>
 							<option value="BANK_TRANSACTION">BANK_TRANSACTION</option>
 							<option value="FREE">FREE</option>
 						</select>
-					
 					</div>
 					<div>
-						<button class="register-button" type="submit">Post transport offer</button>
+						<button class="register-button" type="submit">Post ride request</button>
 					</div>
-
 			</form>
 		
 		</div>
-	
 	</div>
 
 </div>
