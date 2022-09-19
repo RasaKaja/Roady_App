@@ -70,14 +70,18 @@
 
 <div class="page-content">
 
+	
 	<div class="container">
+		
 
 		<div>
 			<a href="my_active_ride_requests" class="request-link">
 				My ride requests (<span th:text="${userRidesCount}"></span>)</a>
 		</div>
 
+		
 		<div class="form-one-column">
+			
 
 			<form action="/passenger_ride_requests_save" method="post">
 					<div class="form-row grid--2-cols-inside">
@@ -90,10 +94,14 @@
 						<input class="info-field" type="text" name="destinationPoint" required minlength="2" maxlength="20"/>
 					</div>
 
+					
+
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Departure date:</label>
 						<input class="info-field" type="date" name="departureDate"/>
 					</div>
+
+					
 
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Departure time:</label>

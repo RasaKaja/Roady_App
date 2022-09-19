@@ -13,12 +13,12 @@
 <body>
 
 <header class="main-header">
-
+	
 	<div class="logo-and-name">
 		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
 		<h1>Roady</h1>
 	</div>
-
+	
 	<nav class="navigation">
 		<ul class="navigation-list">
 			<li>
@@ -62,10 +62,10 @@
 </section>
 
 <div class="page-content">
-
+	
 	<div class="container grid grid--2-cols">
 		<h2 class="search-title title-place">Are you taking this transport?</h2>
-
+		
 		<div class="route-info search-title">
 			<h2>Route information</h2>
 			<div>
@@ -93,11 +93,11 @@
 				<p class="info-field" th:text="${ride.getPaymentType()}"></p>
 			</div>
 		</div>
-
+		
 		<div class="car-info search-title">
-
+			
 			<h2>Car information</h2>
-
+			
 			<div>
 				<label class="table-label">Car type:</label>
 				<p class="info-field" th:text="${ride.getCar().getCarType()}"></p>
@@ -110,12 +110,12 @@
 				<label class="table-label">Available seats:</label>
 				<p class="info-field" th:text="${ride.getCar().getAvailableSeats()}"></p>
 			</div>
-
+		
 		</div>
-
+		
 		<div class="driver-info search-title">
 			<h2>Driver information</h2>
-
+			
 			<div>
 				<label class="table-label">First Name:</label>
 				<p class="info-field" th:text="${ride.getCar().getUser().getFirstName()}"></p>
@@ -133,12 +133,12 @@
 <!--				<p class="info-field" th:text="${ride.getCar().getUser().getRegisteredAt()}"></p>-->
 <!--			</div>-->
 		</div>
-
+		
 		<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
 		<button class="register-button title-place" type="submit" href="/confirm_booking_as_passenger">Confirm</button>
-
+	
 	</div>
-
+	
 </div>
 
 <aside>

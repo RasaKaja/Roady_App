@@ -70,9 +70,9 @@
 
 
 <div class="page-content">
-
+	
 	<div class="container-wider">
-
+		
 		<div>
 			<h2 class="search-title">My pending ride requests</h2>
 			<table class="pending-request">
@@ -86,10 +86,10 @@
 					<th class="lb-sm">Payment</th>
 				</tr>
 				</thead>
-
+				
 				<tbody>
 				<tr th:each="ride: ${userPendingRideRequests}">
-
+					
 					<form action="send_info_for_ride_editing" method="post">
 						<td class="info-field box-sm" th:text="${ride.departurePoint}">Panevezys</td>
 						<td class="info-field box-sm" th:text="${ride.destinationPoint}">Klaipeda</td>
@@ -124,9 +124,10 @@
 				</tr>
 				</thead>
 
+				
 				<tbody>
 				<tr th:each="ride: ${userFinishedRideRequests}">
-
+					
 					<form action="send_info_for_ride_overview" method="post">
 						<td class="info-field box-sm" th:text="${ride.departurePoint}">Ignalina</td>
 						<td class="info-field box-sm" th:text="${ride.destinationPoint}">ukmerge</td>
@@ -153,21 +154,25 @@
 							</div>
 						</td>
 
+						
 						<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
 						<input type="hidden" name="link" value="my_active_ride_requests"/>
+						
 
 						<td>
 							<button class="register-button btn-small" type="submit">Ride overview/Rating</button>
 						</td>
 					</form>
 
+					
 				</tr>
-
+				
 				</tbody>
-
+			
 			</table>
-
+		
 		</div>
+	
 
 	</div>
 

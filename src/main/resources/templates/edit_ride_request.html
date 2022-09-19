@@ -74,9 +74,9 @@
 	<div class="container">
 		<h2 class="search-title">Edit Ride Request</h2>
 		<div class="form-one-column">
-
+			
 			<form action="/save_ride_updates" method="post">
-
+				
 				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Departure:</label>
 					<input class="info-field" type="text" name="departurePoint" th:value="${departurePoint}" required/>
@@ -114,20 +114,20 @@
 					</select>
 				</div>
 
+				
 				<div class="form-row grid--2-cols-inside">
 					<button class="register-button" type="submit">Edit</button>
-
-
+					
 					<form action="/remove_ride_request" method="post">
 						<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
 						<button class="register-button" type="submit">Delete DOES NOT WORK</button>
 					</form>
 				</div>
-
+			
 			</form>
-
+		
 		</div>
-
+	
 	</div>
 
 </div>

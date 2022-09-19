@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>User profile</title>
-  <link rel="icon" type="image/x-icon" href="images/logo.png">
-
-  <link rel="stylesheet" href="styles/style1.css" >
-  <meta name="viewport" content="width=device-width; initial-scale=1.0" >
-
+	<meta charset="UTF-8"/>
+	<title>Driver profile</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
+	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
+
 <div id="header"><h1>Welcome to the Roady!</h1>
 
 </div>
@@ -140,13 +141,165 @@
   </div>
 
 
+<header class="main-header">
+	
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
+		<h1>Roady</h1>
+	</div>
+	
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/passenger_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/user_form"/>
+				<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/logout"/>
+				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+		<span class="my-name" th:text="${firstName}"></span>
+	</nav>
 
+</header>
+
+<section class="second-main">
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link-text" href="/driver_today">Find passengers</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
+			</li>
+			<li><a class="nav-list-link-text" href="/cars">Car info</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+<div class="page-content form-1-col">
+	
+	<div class="container grid grid--1-cols">
+		
+		<div th:if="${carType!=null}">
+		<table class="table my-car">
+			
+				<h2 class="my-profile-title">My Car</h2>
+				
+				<tr>
+					<td>
+						<p class="table-label">Car type:</p>
+					</td>
+					<td>
+						<p class="info-field" th:text="${carType}">Car type</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<p class="table-label">Plate number:</p>
+					</td>
+					<td>
+						<p class="info-field" th:text="${plateNumber}">Plate number</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<p class="table-label">Available seats:</p>
+					</td>
+					<td>
+						<p class="info-field" th:text="${availableSeats}">Available seats</p>
+					</td>
+				</tr>
+			
+		
+		
+		<div class="profile-btn">
+			<tr>
+				<a class="register-button" href="updateAvailableSeatsNumber">Update Seat number</a>
+				<!--				<form action="/remove_car" method="post">-->
+				<!--					<button class="register-button" type="submit">Remove car</button>-->
+				<!--				</form>-->
+				<a class="register-button" href="/remove_car">Remove car</a>
+			</tr>
+		</div>
+		</table>
+		</div>
+		
+		<div>
+			<p th:if="${status == 'no_car'}" class="msg-add-car-failed">
+				<span>Add a car information. Then you can add a transportation offer</span>
+			</p>
+		</div>
+		
+		<div th:if="${car==null}">
+			
+			<div>
+				<p class="msg-add-car-failed">
+					Add a car information. Then you can add a transportation offer
+				</p>
+			</div>
+			
+			<table class="table" action="/cars" method="post">
+				
+				<div>
+					<input class="input-form" type="text" id="car_type" name="carType" placeholder="Enter car type"/>
+				</div>
+				
+				<div>
+					<input class="input-form" type="text" id="plate_number" name="plateNumber" placeholder="Plate number"/>
+				</div>
+				
+				<div>
+					<input class="input-form" type="number" id="availableSeats" name="availableSeats" placeholder="No of seats"/>
+				</div>
+				
+				<div>
+					<button class="register-button" type="submit">Add a car</button>
+				</div>
+				
+				<div>
+					<p class="msg-add-car-failed" th:if="${status == 'failed'}">Failed</p>
+					<p class="msg-add-car-success" th:if="${status == 'success'}">Car added successfully</p>
+				</div>
+			
+			</table>
+		
+		</div>
+	
+	</div>
 
 </div>
 
 <div id="footer">
   <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>
+
 </div>
+
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
+
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
 
 </body>
 </html>
