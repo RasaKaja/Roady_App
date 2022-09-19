@@ -78,118 +78,99 @@
 <!--</form>-->
 
 <div class="page-content">
+
+<div class="container grid grid--2-cols">
+	<h2 class="search-title title-place">Finished ride info</h2>
 	
-	<div class="container grid grid--2-cols table-finish-ride">
-		
-		<div class="table ride-info">
-			<h4 class="my-profile-title">Ride information</h4>
-			<table>
-				<tr>
-					<td><p class="table-label">From:</p></td>
-					<td><p class="info-field" th:text="${ride.getDeparturePoint()}">From</p></td>
-				</tr>
-				<tr>
-					<td><p class="table-label">To:</p></td>
-					<td><p class="info-field" th:text="${ride.getDestinationPoint()}">To</p></td>
-				</tr>
-				<tr>
-					<td><p class="table-label">Date:</p></td>
-					<td><p class="info-field" th:text="${ride.getDepartureDate()}">Date</p></td>
-				</tr>
-				<tr>
-					<td><p class="table-label">Time:</p></td>
-					<td><p class="info-field" th:text="${ride.getDepartureTime()}">Time</p></td>
-				</tr>
-				<tr>
-					<td><p class="table-label">Price:</p></td>
-					<td><p class="info-field" th:text="${ride.getRidePrice()}">Price</p></td>
-				</tr>
-				<tr>
-					<td><p class="table-label">Payment type:</p></td>
-					<td><p class="info-field" th:text="${ride.getPaymentType()}">Payment</p></td>
-				</tr>
-			</table>
-		</div>
-		
-		<div class="ride-pass-info">
-			<h4 class="my-profile-title">Passenger information</h4>
-			<table>
-				<tr>
-					<td><p class="table-label">First Name:</p></td>
-					<td><p class="info-field" th:text="${ride.getPassenger().getFirstName()}">First Name</p></td>
-				</tr>
-				<!--          <tr>-->
-				<!--	          <td><p class="table-label">Last Name:</p></td>-->
-				<!--            <td><p class="info-field" th:text="${ride.getPassenger().getLastName()}"></p></td>-->
-				<!--          </tr>-->
-				<tr>
-					<td><p class="table-label">Phone:</p></td>
-					<td><p class="info-field" th:text="${ride.getPassenger().getPhoneNumber()}">Phone</p></td>
-				</tr>
-				<!--          <tr>-->
-				<!--	          <td><p class="table-label">Member since:</p></td>-->
-				<!--            <td><p class="info-field" th:text="${ride.getPassenger().getRegisteredAt()}"></p></td>-->
-				<!--          </tr>-->
-			</table>
-			<div th:if="${status=='my_active_transport_offers' && isDriverRated==0}">
-				<form action="driver_rates_passenger" method="post">
-					<Label>Rate your passenger</Label>
-					<input class="info-field" type="number" name="rating" min="1" max="5"/>
-					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>;
-					<button class="btn btn--passenger-trg" type="submit">Rate!</button>
-				</form>
+	<div class="ride-info">
+		<h4 class="my-profile-title">Ride information</h4>
+		<table>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">From:</label>
+				<input class="info-field" th:text="${ride.getDeparturePoint()}"/>
 			</div>
-		</div>
-		
-		<div class="ride-car-info">
-			<h4 class="my-profile-title">Car information</h4>
-			<table>
-				<tr>
-					<td><p class="table-label">Car type:</p></td>
-					<td><p class="info-field" th:text="${ride.getCar().getCarType()}">Car type</p></td>
-				</tr>
-				<tr>
-					<td><p class="table-label">Plate Number:</p></td>
-					<td><p class="info-field" th:text="${ride.getCar().getPlateNumber()}">Plate Number</p></td>
-				</tr>
-				<!--            <tr>-->
-				<!--	            <td><p class="table-label">Available seats:</p></td>-->
-				<!--              <td><p class="info-field" th:text="${ride.getCar().getAvailableSeats()}"></p></td>-->
-				<!--            </tr>-->
-			</table>
-		</div>
-		
-		<div class="ride-driver-info">
-			<h4 class="my-profile-title">Driver information</h4>
-			<table>
-				<tr>
-					<td><p class="table-label">First Name:</p></td>
-					<td><p class="info-field" th:text="${ride.getCar().getUser().getFirstName()}">First Name</p></td>
-				</tr>
-				<!--            <tr>-->
-				<!--	            <td><p class="table-label">Last Name:</p></td>-->
-				<!--              <td><p class="info-field" th:text="${ride.getCar().getUser().getLastName()}"></p></td>-->
-				<!--            </tr>-->
-				<tr>
-					<td><p class="table-label">Phone:</p></td>
-					<td><p class="info-field" th:text="${ride.getCar().getUser().getPhoneNumber()}">Phone</p></td>
-				</tr>
-				<!--            <tr>-->
-				<!--	            <td><p class="table-label">Member since:</p></td>-->
-				<!--              <td><p class="info-field" th:text="${ride.getCar().getUser().getRegisteredAt()}"></p></td>-->
-				<!--            </tr>-->
-			</table>
-			<div th:if="${status=='my_active_ride_requests' && isPassengerRated==0}">
-				<form action="passenger_rates_driver" method="post">
-					<Label>Rate your driver</Label>
-					<input class="info-field" type="number" name="rating" min="1" max="5"/>
-					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>;
-					<button class="btn btn--driver" type="submit">Rate!</button>
-				</form>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">To:</label></td>
+				<input class="info-field" th:text="${ride.getDestinationPoint()}"/>
 			</div>
-		</div>
-	
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Date:</label></td>
+				<input class="info-field" th:text="${ride.getDepartureDate()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Time:</label></td>
+				<input class="info-field" th:text="${ride.getDepartureTime()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Price:</label></td>
+				<input class="info-field" th:text="${ride.getRidePrice()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Payment type:</label></td>
+				<input class="info-field" th:text="${ride.getPaymentType()}"/>
+			</div>
+		</table>
 	</div>
+	
+	<div class="ride-pass-info">
+		<h4 class="my-profile-title">Passenger information</h4>
+		<table>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">First Name:</label>
+				<p class="info-field" th:text="${ride.getPassenger().getFirstName()}">First Name</p>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Phone:</label>
+				<p class="info-field" th:text="${ride.getPassenger().getPhoneNumber()}">Phone</p>
+			</div>
+		</table>
+		<div th:if="${status=='my_active_transport_offers' && isDriverRated==0}">
+			<form action="driver_rates_passenger" method="post">
+				<label>Rate your passenger</label>
+				<input class="info-field" type="number" name="rating" min="1" max="5"/>
+				<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>
+				<button class="btn btn--passenger-trg" type="submit">Rate!</button>
+			</form>
+		</div>
+	</div>
+	
+	<div class="ride-car-info">
+		<h4 class="my-profile-title">Car information</h4>
+		<table>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Car type:</label>
+				<p class="info-field" th:text="${ride.getCar().getCarType()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Plate Number:</label>
+				<p class="info-field" th:text="${ride.getCar().getPlateNumber()}"/>
+			</div>
+		</table>
+	</div>
+	
+	<div class="ride-driver-info">
+		<h4 class="my-profile-title">Driver information</h4>
+		<table>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">First Name:</label>
+				<p class="info-field" th:text="${ride.getCar().getUser().getFirstName()}"/>
+			</div>
+			<div class="form-row grid--2-cols-inside">
+				<label class="table-label">Phone:</label>
+				<p class="info-field" th:text="${ride.getCar().getUser().getPhoneNumber()}"/>
+			</div>
+		</table>
+		<div th:if="${status=='my_active_ride_requests' && isPassengerRated==0}">
+			<form action="passenger_rates_driver" method="post">
+				<label>Rate your driver</label>
+				<input class="info-field" type="number" name="rating" min="1" max="5"/>
+				<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>
+				<button class="btn btn--driver" type="submit">Rate!</button>
+			</form>
+		</div>
+	</div>
+	
+</div>
 
 </div>
 

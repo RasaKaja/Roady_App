@@ -1,94 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Update profile</title>
-    <link rel="icon" type="image/x-icon" href="images/logo.jpg">
-
-    <link rel="stylesheet" href="styles/style1.css" >
-    <meta name="viewport" content="width=device-width; initial-scale=1.0" >
-
+	<meta charset="UTF-8"/>
+	<title>My profile</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
+	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
+
 <body>
-<div id="header"><h1>Welcome to the Roady!</h1></div>
 
-<div id="pageContent">
+<header class="main-header">
+	
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
+		<h1>Roady</h1>
+	</div>
+	
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/driver_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="car-sport" aria-label="swap to driver" class="icon-swap-driver"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/passenger_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/user_form"/>
+				<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/logout"/>
+				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+		<span class="my-name" th:text="${firstName}"></span>
+	</nav>
 
-    <div id="firstNav">
-        <div class="logo">
-            <img title="logo" src="images/logo.jpg" alt="Roady logo">
-        </div>
-    </div>
+</header>
 
-    <div id="Content">
+<div class="page-content">
+	
+	<div class="container">
+		
+		<h2 class="search-title">Update my info</h2>
+		
+		<div class="form-one-column">
+			<form action="/update_profile" method="post">
+				
+					<div class="form-row grid--2-cols-inside">
+						<label class="table-label">Username</label>
+						<input class="info-field" type="email" name="email" th:value="${email}"/>
+					</div>
 
-        <myMenyButtons>
+					<div class="form-row grid--2-cols-inside">
+						<label class="table-label">First Name</label>
+						<input class="info-field" type="text" name="firstName" th:value="${firstName}"/>
+					</div>
 
-            <form action="/logout" method="get">
-                <button type="submit">Logout</button>
+					<div class="form-row grid--2-cols-inside">
+						<label class="table-label">Last Name</label>
+						<input class="info-field" type="text" name="lastName" th:value="${lastName}"/>
+					</div>
 
-            </form>
-            <form action="/user_form" method="get">
-                <button type="submit">My profile info</button>
+					<div class="form-row grid--2-cols-inside">
+						<label class="table-label">Phone</label>
+						<input class="info-field" type="text" name="phone" th:value="${phoneNumber}"/>
+					</div>
 
-            </form>
-            <form action="/user_profile" method="get">
-                <button type="submit">Select an action</button>
+					<div>
+						<button class="register-button" type="submit">Update</button>
+					</div>
 
-            </form>
-
-        </myMenyButtons>
-
-        <h1>Update your profile info</h1>
-
-        <div>
-            <form action="/update_profile" method="post"
-                  style="max-width: 500px; margin: 0 auto;">
-
-                <div >
-                    <div >
-                        <label>Username</label>
-                        <input type="email" name="email" th:value="${email}" />
-                    </div> <br>
-                    <div >
-                        <label >First Name</label>
-                        <input type="text" name="firstName" th:value="${firstName}" />
-                    </div> <br>
-                    <div >
-                        <label  >Last Name</label>
-                        <input type="text" name="lastName" th:value="${lastName}" />
-                    </div>   <br>
-                    <div >
-                        <label>Phone</label>
-                        <input type="text" name="phone" th:value="${phoneNumber}" />
-                    </div> <br>
-                    <div>
-                        <button type="submit" >Update</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        </div>
-
-
-
-
-
-    <div id="secondNav">
-        <div class="logo">
-            <img title="logo" src="images/logo.jpg" alt="Roady logo">
-        </div>
-    </div>
-
-
-
+			</form>
+			
+		</div>
+		
+	</div>
 
 </div>
 
-<div id="footer">
-    <p>Active users: <span th:text="${countUsers}"></span> Available rides: </p>
-    <p>Forest Team &copy; 2022</p>
-</div>
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
+
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
 
 </body>
 </html>

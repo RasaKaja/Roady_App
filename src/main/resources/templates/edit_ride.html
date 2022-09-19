@@ -74,39 +74,39 @@
 <div class="page-content">
 	
 	<div class="container">
-		
-		<div class="form-one-row">
+		<h2 class="search-title">Edit Ride Offer</h2>
+		<div class="form-one-column">
 			
 			<form action="/save_transport_updates" method="post">
 				
-				<div class="form-row">
+				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Departure:</label>
 					<input class="info-field" type="text" name="departurePoint" th:value="${ride.getDeparturePoint()}" required/>
 				</div>
 				
-				<div class="form-row">
-					<label class="table-label">Destination: </label>
+				<div class="form-row grid--2-cols-inside">
+					<label class="table-label">Destination:</label>
 					<input class="info-field" type="text" name="destinationPoint" th:value="${ride.getDestinationPoint()}"
 					       required minlength="2" maxlength="20"/>
 				</div>
 				
-				<div class="form-row">
-					<label class="table-label">Departure date: </label>
+				<div class="form-row grid--2-cols-inside">
+					<label class="table-label">Date:</label>
 					<input class="info-field" type="date" name="departureDate" th:value="${ride.getDepartureDate()}"/>
 				</div>
 				
-				<div class="form-row">
-					<label class="table-label">Departure time</label>
+				<div class="form-row grid--2-cols-inside">
+					<label class="table-label">Time:</label>
 					<input class="info-field" type="time" name="departureTime" th:value="${ride.getDepartureTime()}"/>
 				</div>
 				
-				<div class="form-row">
-					<label class="table-label">Ride price</label>
+				<div class="form-row grid--2-cols-inside">
+					<label class="table-label">Price:</label>
 					<input class="info-field" type="text" name="ridePrice" th:value="${ride.getRidePrice()}"/>
 				</div>
 				
-				<div class="form-row">
-					<label class="table-label">Payment Type</label>
+				<div class="form-row grid--2-cols-inside">
+					<label class="table-label">Payment Type:</label>
 					<select class="info-field" id="paymentType" name="paymentType">
 						<option value="CASH">CASH</option>
 						<option value="REVOLUT">REVOLUT</option>
@@ -115,14 +115,15 @@
 					</select>
 				</div>
 				
-				<div class="form-row">
-					<button class="register-button" type="submit">Edit transport offer</button>
-				</div>
 				
-				<form action="remove_transport_offer" method="post">
-					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
-					<button class="register-button" type="submit">Delete transport offer</button>
-				</form>
+				<div class="form-row grid--2-cols-inside">
+					<button class="register-button" type="submit">Edit</button>
+					
+					<form action="remove_transport_offer" method="post">
+						<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>
+						<button class="register-button" type="submit">Delete</button>
+					</form>
+				<div>
 			
 			</form>
 		</div>
