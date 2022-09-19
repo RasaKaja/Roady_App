@@ -37,7 +37,5 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
 
     ArrayList<Ride> findAll();
 
-    Integer countAll();
-
 
 }
