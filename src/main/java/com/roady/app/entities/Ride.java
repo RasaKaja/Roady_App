@@ -26,17 +26,25 @@ public class Ride {
     @Column(nullable = false)
     private Date departureDate;
     @Column(nullable = false)
-    private Time departureTime;
-    @Column(columnDefinition = "double default 0")
-    private Double ridePrice;
-    @Column
-    @Enumerated(EnumType.STRING)
-    private PaymentType paymentType;
+    private String departureTime;
+    @Column(length = 20)
+    private String ridePrice;
+    @Column (length = 20)
+//    @Enumerated(EnumType.STRING)
+    private String paymentType;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "DriverId")
+    @JoinColumn(name = "CarId")
     private Car car;
-    @Column
-    @Enumerated(EnumType.STRING)
-    private RideStatus rideStatus;
+    @ColumnDefault("false")
+    private Boolean isFinished;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "DriverReviewId")
+    private DriverReview driverReview;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "PassengerReviewId")
+    private PassengerReview passengerReview;
+
 
 }

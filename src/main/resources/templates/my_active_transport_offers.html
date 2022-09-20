@@ -12,12 +12,12 @@
 
 <body>
 <header class="main-header">
-	
+
 	<div class="logo-and-name">
 		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
 		<h1>Roady</h1>
 	</div>
-	
+
 	<nav class="navigation">
 		<ul class="navigation-list">
 			<li>
@@ -71,6 +71,7 @@
 </section>
 
 <div class="page-content">
+
 	
 
 		
@@ -90,7 +91,7 @@
 					<th>Select</th>
 				</tr>
 				</thead>
-				
+
 				<tbody>
 				<tr th:each="ride: ${driverPendingRides}">
 					<form action="send_info_for_transport_offer_editing" method="post">
@@ -110,7 +111,7 @@
 				</tbody>
 			</table>
 		</div>
-		
+
 		<div>
 			<h2 class="search-title  title-place">My finished transport offers</h2>
 			<table class="search-table">
@@ -129,10 +130,11 @@
 					<th>Select</th>
 				</tr>
 				</thead>
-				
+
 				<tbody>
 				<tr th:each="ride: ${driverFinishedRides}">
 					<form action="send_info_for_ride_overview" method="post">
+
 						<td th:text="${ride.departurePoint}">Ignalina</td>
 						<td th:text="${ride.destinationPoint}">ukmerge</td>
 						<td th:text="${ride.departureDate}">2022-09-26</td>
@@ -143,6 +145,7 @@
 						<td th:text="${ride.getPassenger().getFirstName()}">Jonas</td>
 						
 						<td>
+
 							<div th:if="${ride.getDriverReview()}!=null">
 								<p th:text="${ride.getDriverReview().getReview()}"></p>
 							</div>
@@ -152,6 +155,7 @@
 						</td>
 						
 						<td>
+
 							<div th:if="${ride.getPassengerReview()}!=null">
 								<p th:text="${ride.getPassengerReview().getReview()}"></p>
 							</div>
@@ -168,6 +172,7 @@
 				</tr>
 				</tbody>
 			</table>
+
 		
 		</div>
 	
