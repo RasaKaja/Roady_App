@@ -21,29 +21,29 @@
 	<nav class="navigation">
 		<ul class="navigation-list">
 			<li>
-				<a class="nav-list-link" href="/passenger_today"/>
-				<div class="switch-user-mode">
-					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
-					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
-				</div>
+				<a class="nav-list-link" href="/passenger_today">
+					<div class="switch-user-mode">
+						<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+						<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+					</div>
 				</a>
 			</li>
 			<li>
-				<a class="nav-list-link" href="/driver_today"/>
-				<div class="switch-user-mode">
-					<ion-icon name="swap-horizontal" aria-label="swap to driver" class="icon-swap"></ion-icon>
-					<ion-icon name="car-sport" aria-label="swap to driver" class="icon-swap-passenger"></ion-icon>
-				</div>
+				<a class="nav-list-link" href="/driver_today">
+					<div class="switch-user-mode">
+						<ion-icon name="swap-horizontal" aria-label="swap to driver" class="icon-swap"></ion-icon>
+						<ion-icon name="car-sport" aria-label="swap to driver" class="icon-swap-passenger"></ion-icon>
+					</div>
 				</a>
 			</li>
 			<li>
-				<a class="nav-list-link" href="/user_form"/>
-				<ion-icon name="person" class="nav-icon"></ion-icon>
+				<a class="nav-list-link" href="/user_form">
+					<ion-icon name="person" class="nav-icon"></ion-icon>
 				</a>
 			</li>
 			<li>
-				<a class="nav-list-link" href="/logout"/>
-				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				<a class="nav-list-link" href="/logout">
+					<ion-icon name="Log-out" class="nav-icon"></ion-icon>
 				</a>
 			</li>
 		</ul>
@@ -62,7 +62,8 @@
 				<a class="nav-list-link-text" href="/add_ride_request">Add ride request</a>
 			</li>
 			<li>
-				<a class="nav-list-link-text" href="/my_active_ride_requests">My ride requests</a>
+				<a class="nav-list-link-text" href="/my_active_ride_requests">My ride requests(<span
+						 th:text="${userRidesCount}"></span>)</a>
 			</li>
 		</ul>
 	</nav>
@@ -71,62 +72,52 @@
 <div class="page-content">
 
 	
-	<div class="container">
-		
+	<div class="container form-one-column">
 
-		<div>
-			<a href="my_active_ride_requests" class="request-link">
-				My ride requests (<span th:text="${userRidesCount}"></span>)</a>
-		</div>
-
+		<h2 class="search-title title-place">Add ride request</h2>
 		
-		<div class="form-one-column">
+		<form action="/passenger_ride_requests_save" method="post">
 			
-
-			<form action="/passenger_ride_requests_save" method="post">
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Departure: </label>
-						<input class="info-field" type="text" name="departurePoint" required/>
-					</div>
-
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Destination:</label>
-						<input class="info-field" type="text" name="destinationPoint" required minlength="2" maxlength="20"/>
-					</div>
-
-					
-
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Departure date:</label>
-						<input class="info-field" type="date" name="departureDate"/>
-					</div>
-
-					
-
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Departure time:</label>
-						<input class="info-field" type="time" name="departureTime"/>
-					</div>
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Ride price:</label>
-						<input class="info-field" type="text" name="ridePrice"/>
-					</div>
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Payment type:</label>
-
-						<select id="paymentType" name="paymentType" class="info-field">
-							<option value="CASH">CASH</option>
-							<option value="REVOLUT">REVOLUT</option>
-							<option value="BANK_TRANSACTION">BANK_TRANSACTION</option>
-							<option value="FREE">FREE</option>
-						</select>
-					</div>
-					<div>
-						<button class="register-button" type="submit">Post ride request</button>
-					</div>
-			</form>
-
-		</div>
+			<div class="form-one-column grid--2-cols-inside">
+				<label class="table-label">Departure: </label>
+				<input class="info-field" type="text" name="departurePoint" required/>
+			</div>
+			
+			<div class="form-one-column grid--2-cols-inside">
+				<label class="table-label">Destination:</label>
+				<input class="info-field" type="text" name="destinationPoint" required minlength="2" maxlength="20"/>
+			</div>
+			
+			<div class="form-one-column grid--2-cols-inside">
+				<label class="table-label">Departure date:</label>
+				<input class="info-field" type="date" name="departureDate"/>
+			</div>
+			
+			<div class="form-one-column grid--2-cols-inside">
+				<label class="table-label">Departure time:</label>
+				<input class="info-field" type="time" name="departureTime"/>
+			</div>
+			<div class="form-one-column grid--2-cols-inside">
+				<label class="table-label">Ride price:</label>
+				<input class="info-field" type="text" name="ridePrice"/>
+			</div>
+			<div class="form-one-column grid--2-cols-inside">
+				<label class="table-label">Payment type:</label>
+				<select id="paymentType" name="paymentType" class="info-field">
+					<option value="CASH">CASH</option>
+					<option value="REVOLUT">REVOLUT</option>
+					<option value="BANK_TRANSACTION">BANK_TRANSACTION</option>
+					<option value="FREE">FREE</option>
+				</select>
+			</div>
+			
+			<div class="form-one-column grid--2-cols-inside">
+				<p></p>
+				<button class="register-button" type="submit">Add ride request</button>
+			</div>
+			
+		</form>
+	
 	</div>
 
 </div>

@@ -73,37 +73,38 @@
 <div class="page-content">
 
 	
-	<div class="container-wider">
+
 		
 		<div>
-			<h2 class="search-title">My pending transport offers</h2>
+			<h2 class="search-title title-place">My pending transport offers</h2>
 			
-			<table class="pending-request">
+			<table class="search-table">
 				<thead>
 				<tr>
-					<th class="lb-sm">Departure</th>
-					<th class="lb-sm">Destination</th>
-					<th class="lb-sm">Date</th>
-					<th class="lb-sm">Time</th>
-					<th class="lb-sm">Price</th>
-					<th class="lb-sm">Payment</th>
-					<th class="lb-sm">Seats in Car <span th:text="${plateNumber}"></span></th>
+					<th>Departure</th>
+					<th>Destination</th>
+					<th class="date">Date</th>
+					<th class="time">Time</th>
+					<th>Price</th>
+					<th>Payment</th>
+					<th>Seats in Car <span th:text="${plateNumber}"></span></th>
+					<th>Select</th>
 				</tr>
 				</thead>
 
 				<tbody>
 				<tr th:each="ride: ${driverPendingRides}">
 					<form action="send_info_for_transport_offer_editing" method="post">
-						<td class="info-field box-sm"  th:text="${ride.departurePoint}"></td>
-						<td class="info-field box-sm"  th:text="${ride.destinationPoint}"></td>
-						<td class="info-field box-sm"  th:text="${ride.departureDate}"></td>
-						<td class="info-field box-sm"  th:text="${ride.departureTime}"></td>
-						<td class="info-field box-sm"  th:text="${ride.ridePrice}"></td>
-						<td class="info-field box-sm"  th:text="${ride.paymentType}"></td>
-						<td class="info-field box-sm"  th:text="${ride.car.getAvailableSeats()}"></td>
+						<td th:text="${ride.departurePoint}">Panevezys</td>
+						<td th:text="${ride.destinationPoint}">Klaipeda</td>
+						<td th:text="${ride.departureDate}">2022-10-25</td>
+						<td th:text="${ride.departureTime}">12:15</td>
+						<td th:text="${ride.ridePrice}">6 Eur</td>
+						<td th:text="${ride.paymentType}">Revolut</td>
+						<td th:text="${ride.car.getAvailableSeats()}">3</td>
 						<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
 						<td>
-							<button class="register-button btn-small" type="submit"> Edit/Delete</button>
+							<button class="choose-btn" type="submit"> Edit/Delete</button>
 						</td>
 					</form>
 				</tr>
@@ -112,36 +113,39 @@
 		</div>
 
 		<div>
-			<h2 class="search-title">My finished transport offers</h2>
-			<table class="pending-request">
+			<h2 class="search-title  title-place">My finished transport offers</h2>
+			<table class="search-table">
 				<thead>
 				<tr>
-					<th class="lb-sm">Departure</th>
-					<th class="lb-sm">Destination</th>
-					<th class="lb-sm">Date</th>
-					<th class="lb-sm">Time</th>
-					<th class="lb-sm">Price</th>
-					<th class="lb-sm">Payment</th>
-					<th class="lb-sm">Seats in Car <span th:text="${plateNumber}"></span></th>
-					<th class="lb-sm">Passenger</th>
-					<th class="lb-sm">Your rating</th>
-					<th class="lb-sm">Received rating</th>
+					<th>Departure</th>
+					<th>Destination</th>
+					<th class="date">Date</th>
+					<th class="time">Time</th>
+					<th>Price</th>
+					<th>Payment</th>
+					<th>Seats in Car <span th:text="${plateNumber}"></span></th>
+					<th>Passenger</th>
+					<th>Your rating</th>
+					<th>Received rating</th>
+					<th>Select</th>
 				</tr>
 				</thead>
 
 				<tbody>
 				<tr th:each="ride: ${driverFinishedRides}">
 					<form action="send_info_for_ride_overview" method="post">
-						<td class="info-field box-sm" th:text="${ride.departurePoint}"></td>
-						<td class="info-field box-sm" th:text="${ride.destinationPoint}"></td>
-						<td class="info-field box-sm" th:text="${ride.departureDate}"></td>
-						<td class="info-field box-sm" th:text="${ride.departureTime}"></td>
-						<td class="info-field box-sm" th:text="${ride.ridePrice}"></td>
-						<td class="info-field box-sm" th:text="${ride.paymentType}"></td>
-						<td class="info-field box-sm" th:text="${ride.car.getAvailableSeats()}"></td>
-						<td class="info-field box-sm" th:text="${ride.getPassenger().getFirstName()}"></td>
 
-						<td  class="info-field box-sm">
+						<td th:text="${ride.departurePoint}">Ignalina</td>
+						<td th:text="${ride.destinationPoint}">ukmerge</td>
+						<td th:text="${ride.departureDate}">2022-09-26</td>
+						<td th:text="${ride.departureTime}">08:00</td>
+						<td th:text="${ride.ridePrice}">FREE</td>
+						<td th:text="${ride.paymentType}">None</td>
+						<td th:text="${ride.car.getAvailableSeats()}">3</td>
+						<td th:text="${ride.getPassenger().getFirstName()}">Jonas</td>
+						
+						<td>
+
 							<div th:if="${ride.getDriverReview()}!=null">
 								<p th:text="${ride.getDriverReview().getReview()}"></p>
 							</div>
@@ -149,8 +153,9 @@
 								<p>Please rate!</p>
 							</div>
 						</td>
+						
+						<td>
 
-						<td  class="info-field box-sm">
 							<div th:if="${ride.getPassengerReview()}!=null">
 								<p th:text="${ride.getPassengerReview().getReview()}"></p>
 							</div>
@@ -161,7 +166,7 @@
 						<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
 						<input type="hidden" name="link" value="my_active_transport_offers"/>
 						<td>
-							<button class="register-button btn-small" type="submit">Ride overview/Rating</button>
+							<button class="choose-btn" type="submit">Ride overview/Rating</button>
 						</td>
 					</form>
 				</tr>
@@ -171,9 +176,6 @@
 		
 		</div>
 	
-
-	</div>
-
 </div>
 
 <aside>

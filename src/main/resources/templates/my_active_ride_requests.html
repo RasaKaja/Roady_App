@@ -71,19 +71,21 @@
 
 <div class="page-content">
 	
-	<div class="container-wider">
+	<div>
+		
+		<h2 class="search-title title-place">My pending ride requests</h2>
 		
 		<div>
-			<h2 class="search-title">My pending ride requests</h2>
-			<table class="pending-request">
+			<table class="search-table">
 				<thead>
 				<tr>
-					<th class="lb-sm">Departure</th>
-					<th class="lb-sm">Destination</th>
-					<th class="lb-sm">Date</th>
-					<th class="lb-sm">Time</th>
-					<th class="lb-sm">Price</th>
-					<th class="lb-sm">Payment</th>
+					<th>Departure</th>
+					<th>Destination</th>
+					<th class="date">Date</th>
+					<th class="time">Time</th>
+					<th>Price</th>
+					<th>Payment</th>
+					<th>Select</th>
 				</tr>
 				</thead>
 				
@@ -91,15 +93,15 @@
 				<tr th:each="ride: ${userPendingRideRequests}">
 					
 					<form action="send_info_for_ride_editing" method="post">
-						<td class="info-field box-sm" th:text="${ride.departurePoint}">Panevezys</td>
-						<td class="info-field box-sm" th:text="${ride.destinationPoint}">Klaipeda</td>
-						<td class="info-field box-sm" th:text="${ride.departureDate}">2022-10-25</td>
-						<td class="info-field box-sm" th:text="${ride.departureTime}">12:15</td>
-						<td class="info-field box-sm" th:text="${ride.ridePrice}">6 Eur</td>
-						<td class="info-field box-sm" th:text="${ride.paymentType}">Revolut</td>
+						<td th:text="${ride.departurePoint}">Panevezys</td>
+						<td th:text="${ride.destinationPoint}">Klaipeda</td>
+						<td th:text="${ride.departureDate}">2022-10-25</td>
+						<td th:text="${ride.departureTime}">12:15</td>
+						<td th:text="${ride.ridePrice}">6 Eur</td>
+						<td th:text="${ride.paymentType}">Revolut</td>
 						<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
 						<td>
-							<button class="register-button btn-small" type="submit" name="toDo" value="edit"> Edit/Delete</button>
+							<button class="choose-btn" type="submit" name="toDo" value="edit">Edit/Delete</button>
 						</td>
 					</form>
 				</tr>
@@ -108,71 +110,71 @@
 		</div>
 
 		<div>
-			<h2 class="search-title">My finished ride requests</h2>
-			<table class="pending-request">
-				<thead>
-				<tr>
-					<th class="lb-sm">Departure</th>
-					<th class="lb-sm">Destination</th>
-					<th class="lb-sm">Date</th>
-					<th class="lb-sm">Time</th>
-					<th class="lb-sm">Price</th>
-					<th class="lb-sm">Payment</th>
-					<th class="lb-sm">Driver</th>
-					<th class="lb-sm">Received rating</th>
-					<th class="lb-sm">My rating</th>
-				</tr>
-				</thead>
-
-				
-				<tbody>
-				<tr th:each="ride: ${userFinishedRideRequests}">
-					
-					<form action="send_info_for_ride_overview" method="post">
-						<td class="info-field box-sm" th:text="${ride.departurePoint}">Ignalina</td>
-						<td class="info-field box-sm" th:text="${ride.destinationPoint}">ukmerge</td>
-						<td class="info-field box-sm" th:text="${ride.departureDate}">2022-09-26</td>
-						<td class="info-field box-sm" th:text="${ride.departureTime}">08:00</td>
-						<td class="info-field box-sm" th:text="${ride.ridePrice}">FREE</td>
-						<td class="info-field box-sm" th:text="${ride.paymentType}">None</td>
-						<td class="info-field box-sm" th:text="${ride.getCar().getUser().getFirstName()}">Jonas</td>
-						<td class="info-field box-sm">
-							<div th:if="${ride.getDriverReview()}!=null">
-								<p th:text="${ride.getDriverReview().getReview()}"></p>
-							</div>
-							<div th:if="${ride.getDriverReview()}==null">
-								<p>No rating yet!</p>
-							</div>
-						</td>
-
-						<td class="info-field box-sm">
-							<div th:if="${ride.getPassengerReview()}!=null">
-								<p th:text="${ride.getPassengerReview().getReview()}"></p>
-							</div>
-							<div th:if="${ride.getPassengerReview()}==null">
-								<p>Please rate!</p>
-							</div>
-						</td>
-
-						
-						<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
-						<input type="hidden" name="link" value="my_active_ride_requests"/>
-						
-
-						<td>
-							<button class="register-button btn-small" type="submit">Ride overview/Rating</button>
-						</td>
-					</form>
-
-					
-				</tr>
-				
-				</tbody>
+    
+			<h2 class="search-title title-place">My finished ride requests</h2>
 			
-			</table>
+			<div>
+				<table class="search-table">
+					<thead>
+					<tr>
+						<th>Departure</th>
+						<th>Destination</th>
+						<th class="date">Date</th>
+						<th class="time">Time</th>
+						<th>Price</th>
+						<th>Payment</th>
+						<th>Driver</th>
+						<th>Received rating</th>
+						<th>My rating</th>
+						<th>Select</th>
+					</tr>
+					</thead>
+					
+					<tbody>
+					<tr th:each="ride: ${userFinishedRideRequests}">
+						
+						<form action="send_info_for_ride_overview" method="post">
+							<td th:text="${ride.departurePoint}">Ignalina</td>
+							<td th:text="${ride.destinationPoint}">ukmerge</td>
+							<td th:text="${ride.departureDate}">2022-09-26</td>
+							<td th:text="${ride.departureTime}">08:00</td>
+							<td th:text="${ride.ridePrice}">FREE</td>
+							<td th:text="${ride.paymentType}">None</td>
+							<td th:text="${ride.getCar().getUser().getFirstName()}">Jonas</td>
+							<td>
+								<div th:if="${ride.getDriverReview()}!=null">
+									<p th:text="${ride.getDriverReview().getReview()}"></p>
+								</div>
+								<div th:if="${ride.getDriverReview()}==null">
+									<p>No rating yet!</p>
+								</div>
+							</td>
+							
+							<td>
+								<div th:if="${ride.getPassengerReview()}!=null">
+									<p th:text="${ride.getPassengerReview().getReview()}"></p>
+								</div>
+								<div th:if="${ride.getPassengerReview()}==null">
+									<p>Please rate!</p>
+								</div>
+							</td>
+							
+							<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+							<input type="hidden" name="link" value="my_active_ride_requests"/>
+							
+							<td>
+								<button class="choose-btn" type="submit">Ride overview/Rating</button>
+							</td>
+						</form>
+					
+					</tr>
+					
+					</tbody>
+				
+				</table>
+			</div>
 		
 		</div>
-	
 
 	</div>
 
