@@ -86,8 +86,6 @@ Long rideIdToEdit;
         ArrayList<Ride> driverFinishedRides =rideService.getAllFinishedDriverRides(userController.currentUser.getCar());
         Long car_Id = userController.currentUser.getCar().getId();
         String platenumber = carService.getCarById(car_Id).getPlateNumber();
-        System.out.println("Finished" + driverFinishedRides.size());
-        System.out.println(driverPendingRides.size());
         model.addAttribute("driverPendingRides", driverPendingRides);
         model.addAttribute("driverFinishedRides", driverFinishedRides);
         model.addAttribute("plateNumber", platenumber);
@@ -163,11 +161,11 @@ Long rideIdToEdit;
     public String showRideEditRequestPage(Model model){
         Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
         model.addAttribute("ride", ride);
-//        model.addAttribute("departurePoint", ride.getDeparturePoint());
-//        model.addAttribute("destinationPoint", ride.getDestinationPoint());
-//        model.addAttribute("departureDate", ride.getDepartureDate());
-//        model.addAttribute("departureTime", ride.getDepartureTime());
-//        model.addAttribute("ridePrice", ride.getRidePrice());
+        model.addAttribute("departurePoint", ride.getDeparturePoint());
+        model.addAttribute("destinationPoint", ride.getDestinationPoint());
+        model.addAttribute("departureDate", ride.getDepartureDate());
+        model.addAttribute("departureTime", ride.getDepartureTime());
+        model.addAttribute("ridePrice", ride.getRidePrice());
         return "edit_ride_request";
     }
 

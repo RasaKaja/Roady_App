@@ -113,16 +113,18 @@
 				</div>
 
 				
-				<div class="form-row grid--2-cols-inside">
-					<button class="register-button" type="submit">Edit</button>
-					
-					<form action="/remove_ride_request" method="post">
-						<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
-						<button class="register-button" type="submit">Delete DOES NOT WORK</button>
-					</form>
-				</div>
+
 			
 			</form>
+
+		<div class="form-row grid--2-cols-inside">
+			<button class="register-button" type="submit">Edit</button>
+
+			<form action="/remove_ride_request" method="post">
+				<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
+				<button class="register-button" type="submit">Delete</button>
+			</form>
+		</div>
 	
 	</div>
 

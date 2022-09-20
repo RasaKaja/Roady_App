@@ -64,6 +64,7 @@
 <div class="page-content">
 	
 	<div class="container grid grid--2-cols">
+		<form action="confirm_booking_as_passenger" method="post">
 		<h2 class="search-title title-place">Are you taking this transport?</h2>
 		
 		<div class="route-info search-title">
@@ -135,8 +136,8 @@
 		</div>
 		
 		<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
-		<button class="register-button title-place" type="submit" href="/confirm_booking_as_passenger">Confirm</button>
-	
+		<button class="register-button title-place" type="submit" >Confirm</button>
+		</form>
 	</div>
 	
 </div>

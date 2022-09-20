@@ -11,143 +11,13 @@
 </head>
 <body>
 
-<div id="header"><h1>Welcome to the Roady!</h1>
-
-</div>
-
-<div id="pageContent">
-
-
-
-  <div id="firstNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
-
-  <div id="Content">
-
-    <div class="myMenuButtons">
-      <form action="/logout" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">Logout</button>
-      </form>
-      <form action="/user_form" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">My profile info</button>
-      </form>
-      <form action="/user_profile" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">Select an action</button>
-      </form>
-      <form action="/cars" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">Your car</button>
-      </form>
-      <form action="/transport_offer" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">Post available transport</button>
-      </form>
-      <form action="/my_active_transport_offers" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">My transport offers</button>
-      </form>
-      <form action="/driver_today" method="get" style ='float: left; padding: 5px;'>
-        <button type="submit">Find passengers</button>
-      </form>
-      <br><br><br>
-    </div>
-
-
-    <div th:if="${carType!=null}">
-    <h3>Your car</h3>
-      <div>
-              <table>
-                <tr>
-                  <td>
-                    <h4>Car type: </h4>
-                  </td>
-                  <td>
-                    <p th:text="${carType}"></p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h4>Plate number: </h4>
-                  </td>
-                  <td>
-                    <p th:text="${plateNumber}"></p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h4>Available seats: </h4>
-                  </td>
-                  <td>
-                    <p th:text="${availableSeats}"></p>
-                  </td>
-                </tr>
-              </table>
-      </div>
-      <a class="likeButton" href="updateAvailableSeatsNumber">Update Seat numbers</a>
-      <form action="/remove_car" method="post" >
-        <button type="submit">Remove car</button>
-      </form>
-
-    </div>
-
-    <div>
-      <p th:if="${status == 'no_car'}" style="color: red; background: #facccc">
-        <span>Add a car information. Then you can add a transportation offer</span>
-      </p>
-      </div>
-
-    <div th:if="${car==null}">
-      <div>
-        <p style="color: red; background: #facccc">
-          Add a car information. Then you can add a transportation offer
-        </p>
-      </div>
-      <form action="/cars" method="post"
-           style="max-width: 500px; margin: 0 auto">
-        <div>
-            <label>Enter car type </label>
-            <input type="text" id="car_type" name="carType" />
-        </div>
-        <div>
-          <label>Enter plate number </label>
-          <input type="text" id="plate_number" name="plateNumber"  />
-        </div>
-        <div>
-          <label>How many seats available? </label>
-          <input type="number" id="availableSeats" name="availableSeats"  />
-        </div>
-        <div>
-          <button id="signupButton" type="submit" >Add a car</button>
-        </div>
-        <div>
-          <p th:if="${status == 'failed'}" style="color: red; background: #facccc">
-            Failed
-          </p>
-          <p th:if="${status == 'success'}" style="color: green; background: #c2e3c2">
-            Car added successfully
-          </p>
-        </div>
-      </form>
-      <br><br>
-    </div>
-
-  </div>
-
-
-  <div id="secondNav">
-    <div class="logo">
-      <img title="logo" src="images/logo.png" alt="Roady logo">
-    </div>
-  </div>
-
-
 <header class="main-header">
-	
+
 	<div class="logo-and-name">
 		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
 		<h1>Roady</h1>
 	</div>
-	
+
 	<nav class="navigation">
 		<ul class="navigation-list">
 			<li>
@@ -193,86 +63,88 @@
 </section>
 
 <div class="page-content">
-	
+
 	<div class="container form-one-column">
-		
+
 		<div th:if="${carType!=null}">
 			<h2 class="search-title title-place">My Car</h2>
 			<form>
 				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Car type:</label>
-					<input class="info-field" th:text="${carType}"/>
+					<p class="info-field" th:text="${carType}"/>
 				</div>
-				
+
 				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Plate number:</label>
-					<input class="info-field" th:text="${plateNumber}"/>
+					<p class="info-field" th:text="${plateNumber}"/>
 				</div>
-				
+
 				<div class="form-row grid--2-cols-inside">
 					<label class="table-label">Available seats:</label>
-					<input class="info-field" th:text="${availableSeats}"/>
+					<p class="info-field" th:text="${availableSeats}"/>
 				</div>
-				
+
 				<div class="form-row grid--2-cols-inside">
 					<tr>
 						<a class="register-button" href="updateAvailableSeatsNumber">Update</a>
-						<!--				<form action="/remove_car" method="post">-->
-						<!--					<button class="register-button" type="submit">Remove car</button>-->
-						<!--				</form>-->
-						<a class="register-button" href="/remove_car">Remove car</a>
+						<!--						<a class="register-button" href="/remove_car">Remove car</a>-->
+					</tr>
+					<tr>
+						<form action="/remove_car" method="post">
+							<button class="register-button" type="submit">Remove car</button>
+						</form>
 					</tr>
 				</div>
 			</form>
 		</div>
-		
+
 		<div>
 			<p th:if="${status == 'no_car'}" class="msg-add-car-failed">
 				<span>Add a car information. Then you can add a transportation offer</span>
 			</p>
 		</div>
-		
-<!-- if do not have a car -->
-		
+
+		<!-- if do not have a car -->
+
 		<div th:if="${car==null}">
-			
+
 			<div>
 				<p class="msg-add-car-failed">
 					Add a car information. Then you can add a transportation offer
 				</p>
 			</div>
-			
+
 			<form action="/cars" method="post">
-				
+
 				<div class="form-one-column grid--2-cols-inside">
 					<label class="table-label">Car type:</label>
 					<input class="info-field" type="text" id="car_type" name="carType" placeholder="Enter car type"/>
 				</div>
-				
+
 				<div class="form-one-column grid--2-cols-inside">
 					<label class="table-label">Plate number:</label>
 					<input class="info-field" type="text" id="plate_number" name="plateNumber" placeholder="Plate number"/>
 				</div>
-				
+
 				<div class="form-one-column grid--2-cols-inside">
 					<label class="table-label">Available seats:</label>
 					<input class="info-field" type="number" id="availableSeats" name="availableSeats" placeholder="No of seats"/>
 				</div>
-				
+
 				<div class="form-one-column grid--2-cols-inside">
 					<p></p>
 					<button class="register-button" type="submit">Add a car</button>
 				</div>
-				
+
 				<div>
 					<p class="msg-add-car-failed" th:if="${status == 'failed'}">Failed</p>
 					<p class="msg-add-car-success" th:if="${status == 'success'}">Car added successfully</p>
 				</div>
-			
+
 			</form>
-		
+
 		</div>
-	
+
 	</div>
 
 </div>
@@ -288,73 +160,3 @@
 
 </body>
 </html>
-
-
-//From Jelena commented it, because requires to be checked
-<!--<a class="likeButton" href="updateAvailableSeatsNumber">Update Seat numbers</a>-->
-<!--<form action="/remove_car" method="post" >-->
-<!--  <button type="submit">Remove car</button>-->
-<!--</form>-->
-
-<!--</div>-->
-
-<!--<div>-->
-<!--  <p th:if="${status == 'no_car'}" style="color: red; background: #facccc">-->
-<!--    <span>Add a car information. Then you can add a transportation offer</span>-->
-<!--  </p>-->
-<!--</div>-->
-
-<!--<div th:if="${car==null}">-->
-<!--  <div>-->
-<!--    <p style="color: red; background: #facccc">-->
-<!--      Add a car information. Then you can add a transportation offer-->
-<!--    </p>-->
-<!--  </div>-->
-<!--  <form action="/cars" method="post"-->
-<!--        style="max-width: 500px; margin: 0 auto">-->
-<!--    <div>-->
-<!--      <label>Enter car type </label>-->
-<!--      <input type="text" id="car_type" name="carType" />-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <label>Enter plate number </label>-->
-<!--      <input type="text" id="plate_number" name="plateNumber"  />-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <label>How many seats available? </label>-->
-<!--      <input type="number" id="availableSeats" name="availableSeats"  />-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <button id="signupButton" type="submit" >Add a car</button>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <p th:if="${status == 'failed'}" style="color: red; background: #facccc">-->
-<!--        Failed-->
-<!--      </p>-->
-<!--      <p th:if="${status == 'success'}" style="color: green; background: #c2e3c2">-->
-<!--        Car added successfully-->
-<!--      </p>-->
-<!--    </div>-->
-<!--  </form>-->
-<!--  <br><br>-->
-<!--</div>-->
-
-<!--</div>-->
-
-
-<!--<div id="secondNav">-->
-<!--  <div class="logo">-->
-<!--    <img title="logo" src="images/logo.png" alt="Roady logo">-->
-<!--  </div>-->
-<!--</div>-->
-
-
-<!--</div>-->
-
-<!--<div id="footer">-->
-<!--  <p>Copyrights: Forest Team Active users: <span th:text="${countUsers}"></span> Available rides: </p>-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
-

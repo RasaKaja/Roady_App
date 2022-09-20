@@ -78,28 +78,28 @@
 		
 		<h2 class="search-title title-place">My car</h2>
 		
-		<form>
+
 			
 			<div class="form-row grid--2-cols-inside">
 				<label class="table-label">Car type:</label>
-				<input class="info-field" type="text" th:text="${carType}"/>
+				<p class="info-field" type="text" th:text="${carType}"/>
 			</div>
 			
 			<div class="form-row grid--2-cols-inside">
 				<label class="table-label">Plate number:</label>
-				<input class="info-field" type="text" th:text="${plateNumber}"/>
+				<p class="info-field" type="text" th:text="${plateNumber}"/>
 			</div>
 			
 			<div class="form-row grid--2-cols-inside">
 				<label class="table-label">Available seats:</label>
 				<form action="/update_seats" method="post">
-					<input type="number" name="availableSeats" th:value="${availableSeats}">
+					<input class="info-field" type="number" name="availableSeats" th:value="${availableSeats}">
 					<p></p>
 					<button class="register-button" type="submit">Submit</button>
 				</form>
 			</div>
 		
-		</form>
+
 	
 	</div>
 </div>

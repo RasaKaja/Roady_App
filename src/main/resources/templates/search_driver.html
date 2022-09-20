@@ -61,81 +61,82 @@
 	</nav>
 </section>
 
-<div class="page-content">
+<div class="page-content" style="min-height: 40rem">
 	
 	<div>
 		
 		<h2 class="search-title title-place">Search driver</h2>
 		
-		<div action="passenger_book_ride_request" method="post">
-			<table class="search-table">
-				<thead>
-				<tr>
-					<th>Departure</th>
-					<th>Destination</th>
-					<th class="date">Date</th>
-					<th class="time">Time</th>
-					<th>Price</th>
-					<th>Payment</th>
-					<th class="seats">Seats</th>
-					<th>Select</th>
-				</tr>
-				</thead>
-				
-				<tbody>
-				<tr th:each="ride: ${searchedRides}">
-					<td th:text="${ride.departurePoint}">Marijampole</td>
-					<td th:text="${ride.destinationPoint}">Ignalina</td>
-					<td th:text="${ride.departureDate}">2022-09-25</td>
-					<td th:text="${ride.departureTime}">10:45</td>
-					<td th:text="${ride.ridePrice}">Price</td>
-					<td th:text="${ride.paymentType}">BANK_TRANSACTION</td>
-					<td th:text="${ride.getCar().getAvailableSeats()}">3</td>
-					<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
-					<td>
-					<button class="choose-btn" type="submit">Select</button>
-					</td>
-				</tr>
-				</tbody>
-			
-			</table>
+<!--		<div action="passenger_book_ride_request" method="post">-->
+<!--			<table class="search-table">-->
+<!--				<thead>-->
+<!--				<tr>-->
+<!--					<th>Departure</th>-->
+<!--					<th>Destination</th>-->
+<!--					<th class="date">Date</th>-->
+<!--					<th class="time">Time</th>-->
+<!--					<th>Price</th>-->
+<!--					<th>Payment</th>-->
+<!--					<th class="seats">Seats</th>-->
+<!--					<th>Select</th>-->
+<!--				</tr>-->
+<!--				</thead>-->
+<!--				-->
+<!--				<tbody>-->
+<!--				<tr th:each="ride: ${searchedRides}">-->
+<!--					<td th:text="${ride.departurePoint}">Marijampole</td>-->
+<!--					<td th:text="${ride.destinationPoint}">Ignalina</td>-->
+<!--					<td th:text="${ride.departureDate}">2022-09-25</td>-->
+<!--					<td th:text="${ride.departureTime}">10:45</td>-->
+<!--					<td th:text="${ride.ridePrice}">Price</td>-->
+<!--					<td th:text="${ride.paymentType}">BANK_TRANSACTION</td>-->
+<!--					<td th:text="${ride.getCar().getAvailableSeats()}">3</td>-->
+<!--					<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>-->
+<!--					<td>-->
+<!--					<button class="choose-btn" type="submit">Select</button>-->
+<!--					</td>-->
+<!--				</tr>-->
+<!--				</tbody>-->
+<!--			-->
+<!--			</table>-->
+<!--		-->
+<!--		</div>-->
 		
-		</div>
+		      <div>
+		        <table class="search-table">>
+		          <thead>
+		          <tr>
+		            <th>Departure</th>
+		            <th>Destination</th>
+		            <th>Departure Date</th>
+		            <th>Departure Time</th>
+		            <th>Price</th>
+		            <th>Payment</th>
+		            <th>Seats</th>
+					  <th>Select</th>
+		          </tr>
+		          </thead>
 		
-		<!--      <div>-->
-		<!--        <table>-->
-		<!--          <thead>-->
-		<!--          <tr>-->
-		<!--            <th>Departure</th>-->
-		<!--            <th>Destination</th>-->
-		<!--            <th>Departure Date</th>-->
-		<!--            <th>Departure Time</th>-->
-		<!--            <th>Price</th>-->
-		<!--            <th>Payment</th>-->
-		<!--            <th>Seats</th>-->
-		<!--          </tr>-->
-		<!--          </thead>-->
+		          <tbody>
+		          <tr th:each="ride: ${searchedRides}">
+		            <form action="passenger_book_ride_request" method="post">
+		              <td th:text="${ride.departurePoint}"></td>
+		              <td th:text="${ride.destinationPoint}"></td>
+		              <td th:text="${ride.departureDate}"></td>
+		              <td th:text="${ride.departureTime}"></td>
+		              <td th:text="${ride.ridePrice}"></td>
+		              <td th:text="${ride.paymentType}"></td>
+		              <td th:text="${ride.getCar().getAvailableSeats()}" ></td>
+		              <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+		              <td><button class="choose-btn" type="submit"> Select</button></td>
+		            </form>
+		          </tr>
+
+		          </tbody>
 		
-		<!--          <tbody>-->
-		<!--          <tr th:each="ride: ${searchedRides}">-->
-		<!--            <form action="passenger_book_ride_request" method="post">-->
-		<!--              <td th:text="${ride.departurePoint}"></td>-->
-		<!--              <td th:text="${ride.destinationPoint}"></td>-->
-		<!--              <td th:text="${ride.departureDate}"></td>-->
-		<!--              <td th:text="${ride.departureTime}"></td>-->
-		<!--              <td th:text="${ride.ridePrice}"></td>-->
-		<!--              <td th:text="${ride.paymentType}"></td>-->
-		<!--              <td th:text="${ride.getCar().getAvailableSeats()}" ></td>-->
-		<!--              <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>-->
-		<!--              <td><button type="submit"> Take this transport</button></td>-->
-		<!--            </form>-->
-		<!--          </tr>-->
-		<!--          -->
-		<!--          </tbody>-->
+		        </table>
 		
-		<!--        </table>-->
-		
-		<!--      </div>-->
+		      </div>
 	
 	</div>
 

@@ -115,16 +115,23 @@
 				</select>
 			</div>
 			
-			<div class="form-row grid--2-cols-inside">
+			<div class="form-row grid--4-cols-inside">
 				<button class="register-button" type="submit">Edit</button>
-				
-				<div action="remove_transport_offer" method="post">
-					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>
-					<button class="register-button" type="submit">Delete</button>
-				</div>
+
 			</div>
+
 		
 		</form>
+
+		<div class="form-row grid--4-cols-inside">
+			<form action="remove_transport_offer" method="post">
+				<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}"/>
+				<button class="register-button" type="submit">Delete</button>
+			</form>
+
+		</div>
+
+
 	
 	</div>
 
