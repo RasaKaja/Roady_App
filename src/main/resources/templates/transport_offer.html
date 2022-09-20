@@ -60,7 +60,7 @@
 			</li>
 			<li>
 				<a class="nav-list-link-text" href="/my_active_transport_offers">My offers(<span
-						 th:text="${userRidesCount}"></span>)</a>
+						th:text="${userRidesCount}"></span>)</a>
 			</li>
 			<li>
 				<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
@@ -73,28 +73,28 @@
 </section>
 
 <div class="page-content">
-	
+
 	<div class="container form-one-column">
-		
+
 		<h2 class="search-title title-place">My transport offer</h2>
-		
+
 		<form action="/ride_requests_save" method="post">
-			
+
 			<div class="form-one-column grid--2-cols-inside">
 				<label class="table-label">Departure:</label>
 				<input class="info-field" type="text" name="departurePoint" required/>
 			</div>
-			
+
 			<div class="form-one-column grid--2-cols-inside">
 				<label class="table-label">Destination:</label>
 				<input class="info-field" type="text" name="destinationPoint" required minlength="2" maxlength="20"/>
 			</div>
-			
+
 			<div class="form-one-column grid--2-cols-inside">
 				<label class="table-label">Departure date:</label>
 				<input class="info-field" type="date" name="departureDate"/>
 			</div>
-			
+
 			<div class="form-one-column grid--2-cols-inside">
 				<label class="table-label">Departure time:</label>
 				<input class="info-field" type="time" name="departureTime"/>
@@ -112,14 +112,14 @@
 					<option value="FREE">FREE</option>
 				</select>
 			</div>
-			
+
 			<div class="form-one-column grid--2-cols-inside">
 				<p></p>
 				<button class="register-button" type="submit">Post offer</button>
 			</div>
-		
+
 		</form>
-	
+
 	</div>
 
 </div>

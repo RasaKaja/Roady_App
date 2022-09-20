@@ -2,9 +2,7 @@ package com.roady.app.controllers;
 
 import com.roady.app.entities.User;
 import com.roady.app.repositories.UserRepository;
-import com.roady.app.services.RideService;
 import com.roady.app.services.UserService;
-import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,8 +73,6 @@ public class UserController {
         model.addAttribute("listUsers", listUsers);
         return "users";}
     }
-
-    //works
 
 
     @GetMapping("/user_profile")

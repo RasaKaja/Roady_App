@@ -27,19 +27,19 @@ public class RideController {
     @Autowired
     private RideService rideService;
 
-@Autowired
+    @Autowired
     private UserController userController;
 
-@Autowired
-private CarService carService;
+    @Autowired
+    private CarService carService;
 
-@Autowired
-private UserService userService;
+    @Autowired
+    private UserService userService;
 
-@Autowired
-        private ReviewService reviewService;
+    @Autowired
+    private ReviewService reviewService;
 
-Long rideIdToEdit;
+    Long rideIdToEdit;
 
 
     @PostMapping("ride_requests_save")
@@ -55,6 +55,7 @@ Long rideIdToEdit;
             return "ride_request?status=no_car";
         }else{
             Ride ride = new Ride();
+            System.out.println(destinationPoint + departurePoint + departureDate + departureTime + ridePrice + paymentType);
             ride.setDeparturePoint(departurePoint);
             ride.setDepartureDate(departureDate);
             ride.setDestinationPoint(destinationPoint);
@@ -64,7 +65,9 @@ Long rideIdToEdit;
 
             User user = userController.currentUser;
             Car car = carService.getCarById(user.getCar().getId());
+            System.out.println(1);
             ride.setCar(car);
+            System.out.println(2);
             rideService.saveRideRequest(ride);
             return "redirect:transport_offer?status=request_added";
         }}
@@ -85,10 +88,10 @@ Long rideIdToEdit;
         ArrayList<Ride> driverPendingRides =rideService.getAllPendingDriverRides(userController.currentUser.getCar());
         ArrayList<Ride> driverFinishedRides =rideService.getAllFinishedDriverRides(userController.currentUser.getCar());
         Long car_Id = userController.currentUser.getCar().getId();
-        String platenumber = carService.getCarById(car_Id).getPlateNumber();
+        String plateNumber = carService.getCarById(car_Id).getPlateNumber();
         model.addAttribute("driverPendingRides", driverPendingRides);
         model.addAttribute("driverFinishedRides", driverFinishedRides);
-        model.addAttribute("plateNumber", platenumber);
+        model.addAttribute("plateNumber", plateNumber);
         return "my_active_transport_offers";
     }
 
@@ -143,7 +146,8 @@ Long rideIdToEdit;
             ride.setPassenger(user);
             rideService.saveRideRequest(ride);
             return "redirect:add_ride_request?status=request_added";
-        }}
+        }
+    }
 
     @GetMapping("/my_active_ride_requests")
     public String showMyRideRequestsPage(Model model){
