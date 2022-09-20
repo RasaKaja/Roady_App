@@ -11,150 +11,152 @@
 </head>
 <body>
 
-	<header class="main-header">
+<header class="main-header">
 
-		<div class="logo-and-name">
-			<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
-			<h1>Roady</h1>
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
+		<h1>Roady</h1>
+	</div>
+
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/passenger_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/user_form"/>
+				<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/logout"/>
+				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+		<span class="my-name" th:text="${firstName}"></span>
+	</nav>
+
+</header>
+
+<section class="second-main">
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link-text" href="/driver_today">Find passengers</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
+			</li>
+			<li><a class="nav-list-link-text" href="/cars">Car info</a>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+<div class="page-content">
+
+	<div class="container form-one-column">
+
+		<div th:if="${carType!=null}">
+			<h2 class="search-title title-place">My Car</h2>
+			<form>
+				<div class="form-row grid--2-cols-inside">
+					<label class="table-label">Car type:</label>
+					<p class="info-field" th:text="${carType}"/>
+				</div>
+
+				<div class="form-row grid--2-cols-inside">
+					<label class="table-label">Plate number:</label>
+					<p class="info-field" th:text="${plateNumber}"/>
+				</div>
+
+				<div class="form-row grid--2-cols-inside">
+					<label class="table-label">Available seats:</label>
+					<p class="info-field" th:text="${availableSeats}"/>
+				</div>
+
+				<div class="form-row grid--2-cols-inside">
+					<tr>
+						<a class="register-button" href="updateAvailableSeatsNumber">Update</a>
+						<!--						<a class="register-button" href="/remove_car">Remove car</a>-->
+					</tr>
+					<tr>
+						<form action="/remove_car" method="post">
+							<button class="register-button" type="submit">Remove car</button>
+						</form>
+					</tr>
+				</div>
+			</form>
 		</div>
 
-		<nav class="navigation">
-			<ul class="navigation-list">
-				<li>
-					<a class="nav-list-link" href="/passenger_today"/>
-					<div class="switch-user-mode">
-						<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
-						<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
-					</div>
-					</a>
-				</li>
-				<li>
-					<a class="nav-list-link" href="/user_form"/>
-					<ion-icon name="person" class="nav-icon"></ion-icon>
-					</a>
-				</li>
-				<li>
-					<a class="nav-list-link" href="/logout"/>
-					<ion-icon name="Log-out" class="nav-icon"></ion-icon>
-					</a>
-				</li>
-			</ul>
-			<span class="my-name" th:text="${firstName}"></span>
-		</nav>
+		<div>
+			<p th:if="${status == 'no_car'}" class="msg-add-car-failed">
+				<span>Add a car information. Then you can add a transportation offer</span>
+			</p>
+		</div>
 
-	</header>
+		<!-- if do not have a car -->
 
-	<section class="second-main">
-		<nav class="navigation">
-			<ul class="navigation-list">
-				<li>
-					<a class="nav-list-link-text" href="/driver_today">Find passengers</a>
-				</li>
-				<li>
-					<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
-				</li>
-				<li>
-					<a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
-				</li>
-				<li><a class="nav-list-link-text" href="/cars">Car info</a>
-				</li>
-			</ul>
-		</nav>
-	</section>
-
-	<div class="page-content">
-
-		<div class="container form-one-column">
-
-			<div th:if="${carType!=null}">
-				<h2 class="search-title title-place">My Car</h2>
-				<form>
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Car type:</label>
-						<input class="info-field" th:text="${carType}"/>
-					</div>
-
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Plate number:</label>
-						<input class="info-field" th:text="${plateNumber}"/>
-					</div>
-
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Available seats:</label>
-						<input class="info-field" th:text="${availableSeats}"/>
-					</div>
-
-					<div class="form-row grid--2-cols-inside">
-						<tr>
-							<a class="register-button" href="updateAvailableSeatsNumber">Update</a>
-							<!--				<form action="/remove_car" method="post">-->
-							<!--					<button class="register-button" type="submit">Remove car</button>-->
-							<!--				</form>-->
-							<a class="register-button" href="/remove_car">Remove car</a>
-						</tr>
-					</div>
-				</form>
-			</div>
+		<div th:if="${car==null}">
 
 			<div>
-				<p th:if="${status == 'no_car'}" class="msg-add-car-failed">
-					<span>Add a car information. Then you can add a transportation offer</span>
+				<p class="msg-add-car-failed">
+					Add a car information. Then you can add a transportation offer
 				</p>
 			</div>
 
-			<!-- if do not have a car -->
+			<form action="/cars" method="post">
 
-			<div th:if="${car==null}">
-
-				<div>
-					<p class="msg-add-car-failed">
-						Add a car information. Then you can add a transportation offer
-					</p>
+				<div class="form-one-column grid--2-cols-inside">
+					<label class="table-label">Car type:</label>
+					<input class="info-field" type="text" id="car_type" name="carType" placeholder="Enter car type"/>
 				</div>
 
-				<form action="/cars" method="post">
+				<div class="form-one-column grid--2-cols-inside">
+					<label class="table-label">Plate number:</label>
+					<input class="info-field" type="text" id="plate_number" name="plateNumber" placeholder="Plate number"/>
+				</div>
 
-					<div class="form-one-column grid--2-cols-inside">
-						<label class="table-label">Car type:</label>
-						<input class="info-field" type="text" id="car_type" name="carType" placeholder="Enter car type"/>
-					</div>
+				<div class="form-one-column grid--2-cols-inside">
+					<label class="table-label">Available seats:</label>
+					<input class="info-field" type="number" id="availableSeats" name="availableSeats" placeholder="No of seats"/>
+				</div>
 
-					<div class="form-one-column grid--2-cols-inside">
-						<label class="table-label">Plate number:</label>
-						<input class="info-field" type="text" id="plate_number" name="plateNumber" placeholder="Plate number"/>
-					</div>
+				<div class="form-one-column grid--2-cols-inside">
+					<p></p>
+					<button class="register-button" type="submit">Add a car</button>
+				</div>
 
-					<div class="form-one-column grid--2-cols-inside">
-						<label class="table-label">Available seats:</label>
-						<input class="info-field" type="number" id="availableSeats" name="availableSeats" placeholder="No of seats"/>
-					</div>
+				<div>
+					<p class="msg-add-car-failed" th:if="${status == 'failed'}">Failed</p>
+					<p class="msg-add-car-success" th:if="${status == 'success'}">Car added successfully</p>
+				</div>
 
-					<div class="form-one-column grid--2-cols-inside">
-						<p></p>
-						<button class="register-button" type="submit">Add a car</button>
-					</div>
-
-					<div>
-						<p class="msg-add-car-failed" th:if="${status == 'failed'}">Failed</p>
-						<p class="msg-add-car-success" th:if="${status == 'success'}">Car added successfully</p>
-					</div>
-
-				</form>
-
-			</div>
+			</form>
 
 		</div>
 
 	</div>
 
-	<aside>
-		<p>Active users: <span th:text="${users}"></span>
-		<p>Available rides: <span th:text="${countUsers}"></span></p>
-	</aside>
+</div>
 
-	<footer>
-		<p class="copyrights">Forest Team &copy; 2022</p>
-	</footer>
+<aside>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
+</aside>
+
+<footer>
+	<p class="copyrights">Forest Team &copy; 2022</p>
+</footer>
 
 </body>
 </html>

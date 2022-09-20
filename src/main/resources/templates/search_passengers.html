@@ -1,120 +1,120 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8"/>
-  <title>Driver ride profile</title>
-  <link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
-  <link href="/styles/other-pages-style.css" rel="stylesheet"/>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0"/>
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	<meta charset="UTF-8"/>
+	<title>Driver ride profile</title>
+	<link rel="icon" type="image/x-icon" href="images/logo.jpg"/>
+	<link href="/styles/other-pages-style.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body>
 
 <header class="main-header">
-
-  <div class="logo-and-name">
-    <img src="images/logo.jpg" alt="Roady logo" class="logo"/>
-    <h1>Roady</h1>
-  </div>
-
-  <nav class="navigation">
-    <ul class="navigation-list">
-      <li>
-        <a class="nav-list-link" href="/passenger_today"/>
-        <div class="switch-user-mode">
-          <ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
-          <ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
-        </div>
-        </a>
-      </li>
-      <li>
-        <a class="nav-list-link" href="/user_form"/>
-        <ion-icon name="person" class="nav-icon"></ion-icon>
-        </a>
-      </li>
-      <li>
-        <a class="nav-list-link" href="/logout"/>
-        <ion-icon name="Log-out" class="nav-icon"></ion-icon>
-        </a>
-      </li>
-    </ul>
-    <span class="my-name" th:text="${firstName}"></span>
-  </nav>
+	
+	<div class="logo-and-name">
+		<img src="images/logo.jpg" alt="Roady logo" class="logo"/>
+		<h1>Roady</h1>
+	</div>
+	
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link" href="/passenger_today"/>
+				<div class="switch-user-mode">
+					<ion-icon name="swap-horizontal" aria-label="swap to passenger" class="icon-swap"></ion-icon>
+					<ion-icon name="walk" aria-label="swap to passenger" class="icon-swap-passenger"></ion-icon>
+				</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/user_form"/>
+				<ion-icon name="person" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+			<li>
+				<a class="nav-list-link" href="/logout"/>
+				<ion-icon name="Log-out" class="nav-icon"></ion-icon>
+				</a>
+			</li>
+		</ul>
+		<span class="my-name" th:text="${firstName}"></span>
+	</nav>
 
 </header>
 
 <section class="second-main">
-  <nav class="navigation">
-    <ul class="navigation-list">
-      <li>
-        <a class="nav-list-link-text" href="/driver_today">Find passengers</a>
-      </li>
-      <li>
-        <a class="nav-list-link-text" href="/transport_offer">Available transport</a>
-      </li>
-      <li>
-        <a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
-      </li>
-      <li><a class="nav-list-link-text" href="/cars">Car info</a>
-      </li>
-    </ul>
-  </nav>
+	<nav class="navigation">
+		<ul class="navigation-list">
+			<li>
+				<a class="nav-list-link-text" href="/driver_today">Find passengers</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
+			</li>
+			<li>
+				<a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
+			</li>
+			<li><a class="nav-list-link-text" href="/cars">Car info</a>
+			</li>
+		</ul>
+	</nav>
 </section>
 
 <div class="page-content">
-
-  <div>
-
-    <h2 class="search-title title-place">Search passenger</h2>
-
-    <div action="book_ride_request" method="post">
-      <table class="search-table">
-        <thead>
-        <tr>
-          <th>Departure</th>
-          <th>Destination</th>
-          <th class="date">Date</th>
-          <th class="time">Time</th>
-          <th>Price</th>
-          <th>Payment</th>
-          <th>Select</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="ride: ${searchedRides}">
-          <!--            <form action="book_ride_request" method="post">-->
-          <td th:text="${ride.departurePoint}">Marijampole</td>
-          <td th:text="${ride.destinationPoint}">Ignalina</td>
-          <td th:text="${ride.departureDate}">2022-09-25</td>
-          <td th:text="${ride.departureTime}">10:45</td>
-          <td th:text="${ride.ridePrice}">Price</td>
-          <td th:text="${ride.paymentType}">BANK_TRANSACTION</td>
-          <input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
-          <td>
-            <button class="choose-btn" type="submit">Offer your transport</button>
-          </td>
-          <!--            </form>-->
-        </tr>
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
+	
+	<div>
+		
+		<h2 class="search-title title-place">Search passenger</h2>
+		
+		<div action="book_ride_request" method="post">
+			<table class="search-table">
+				<thead>
+				<tr>
+					<th>Departure</th>
+					<th>Destination</th>
+					<th class="date">Date</th>
+					<th class="time">Time</th>
+					<th>Price</th>
+					<th>Payment</th>
+					<th>Select</th>
+				</tr>
+				</thead>
+				
+				<tbody>
+				<tr th:each="ride: ${searchedRides}">
+					<!--            <form action="book_ride_request" method="post">-->
+					<td th:text="${ride.departurePoint}">Marijampole</td>
+					<td th:text="${ride.destinationPoint}">Ignalina</td>
+					<td th:text="${ride.departureDate}">2022-09-25</td>
+					<td th:text="${ride.departureTime}">10:45</td>
+					<td th:text="${ride.ridePrice}">Price</td>
+					<td th:text="${ride.paymentType}">BANK_TRANSACTION</td>
+					<input type="hidden" name="rideId" th:value="${ride.rideRequestId}"/>
+					<td>
+						<button class="choose-btn" type="submit">Offer your transport</button>
+					</td>
+					<!--            </form>-->
+				</tr>
+				</tbody>
+			
+			</table>
+		
+		</div>
+	
+	</div>
 
 </div>
 
 <aside>
-  <p>Active users: <span th:text="${users}"></span>
-  <p>Available rides: <span th:text="${countUsers}"></span></p>
+	<p>Active users: <span th:text="${users}"></span>
+	<p>Available rides: <span th:text="${countUsers}"></span></p>
 </aside>
 
 <footer>
-  <p class="copyrights">Forest Team &copy; 2022</p>
+	<p class="copyrights">Forest Team &copy; 2022</p>
 </footer>
 </body>
 </html>

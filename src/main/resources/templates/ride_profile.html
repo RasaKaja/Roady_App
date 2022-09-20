@@ -74,13 +74,13 @@
 
 <div class="page-content">
 	
-	<div class="container">
+	<div class="container form-one-column">
 		<h2 class="search-title">Route information</h2>
 		
 		<div class="form-one-column">
-		
-		<form action="confirm_booking_as_driver" method="post">
-			<div>
+			
+			<form action="confirm_booking_as_driver" method="post">
+				<div>
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Departure:</label>
 						<input class="info-field" th:text="${ride.getDeparturePoint()}"/>
@@ -105,29 +105,33 @@
 						<label class="table-label">Payment type:</label>
 						<input class="info-field" th:text="${ride.getPaymentType()}"/>
 					</div>
-			</div>
-			
-			<div>
-				<h2 class="search-title">Passenger</h2>
-				<div>
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">First Name:</label>
-						<input class="info-field" th:text="${ride.getPassenger().getFirstName()}"></input>
-					</div>
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Last Name:</label></td>
-						<input class="info-field" th:text="${ride.getPassenger().getLastName()}"></input>
-					</div>
-					<div class="form-row grid--2-cols-inside">
-						<label class="table-label">Phone:</label></td>
-						<input class="info-field" th:text="${ride.getPassenger().getPhoneNumber()}"></input>
-					</div>
-
-					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
-					<button class="register-button" type="submit"> Confirm</button>
 				</div>
-			</div>
-		</form>
+				
+				<div>
+					<h2 class="search-title">Passenger</h2>
+					<div>
+						<div class="form-row grid--2-cols-inside">
+							<label class="table-label">First Name:</label>
+							<input class="info-field" th:text="${ride.getPassenger().getFirstName()}"></input>
+						</div>
+						<div class="form-row grid--2-cols-inside">
+							<label class="table-label">Last Name:</label></td>
+							<input class="info-field" th:text="${ride.getPassenger().getLastName()}"></input>
+						</div>
+						<div class="form-row grid--2-cols-inside">
+							<label class="table-label">Phone:</label></td>
+							<input class="info-field" th:text="${ride.getPassenger().getPhoneNumber()}"></input>
+						</div>
+						
+						<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
+						
+						<div class="form-one-column grid--2-cols-inside">
+							<p></p>
+							<button class="register-button" type="submit"> Confirm</button>
+						</div>
+					</div>
+				</div>
+			</form>
 		
 		</div>
 	</div>

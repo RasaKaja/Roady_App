@@ -94,11 +94,14 @@ public class CarController {
 
     @PostMapping("/remove_car")
     public String removeCar(){
-        Car car = userController.currentUser.getCar();
-        userController.currentUser.setCar(null);
-        userService.saveUser(userController.currentUser);
+//        Car car = userController.currentUser.getCar();
+//        userController.currentUser.setCar(null);
+        User user = userService.getUserById(userController.currentUser.getId());
+        user.setCar(null);
+        userController.currentUser = user;
+        userService.saveUser(user);
 //        carService.removeCar(car);
-        return "/cars";
+        return "redirect:cars";
     }
 
 
