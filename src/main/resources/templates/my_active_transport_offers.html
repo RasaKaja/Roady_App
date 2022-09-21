@@ -59,10 +59,11 @@
 				<a class="nav-list-link-text" href="/driver_today">Find passengers</a>
 			</li>
 			<li>
-				<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
+				<a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
 			</li>
 			<li>
-				<a class="nav-list-link-text" href="/my_active_transport_offers">My offers</a>
+				<a class="nav-list-link-text" href="/transport_offer">Available transport</a>
+			</li>
 			</li>
 			<li><a class="nav-list-link-text" href="/cars">Car info</a>
 			</li>
@@ -70,7 +71,7 @@
 	</nav>
 </section>
 
-<div class="page-content">
+<div class="page-content" style="min-height: 40rem">
 
 	
 
@@ -87,7 +88,7 @@
 					<th class="time">Time</th>
 					<th>Price</th>
 					<th>Payment</th>
-					<th>Seats in Car <span th:text="${plateNumber}"></span></th>
+					<th>Seats in Car</th>
 					<th>Select</th>
 				</tr>
 				</thead>
@@ -179,8 +180,8 @@
 </div>
 
 <aside>
-	<p>Active users: <span th:text="${users}"></span>
-	<p>Available rides: <span th:text="${countUsers}"></span></p>
+	<p>Active users: <span th:text="${users}"></span>&nbsp</p>
+	<p> Available rides: <span th:text="${rides}"></span></p>
 </aside>
 
 <footer>

@@ -95,6 +95,12 @@ public class RideService {
         }
     }
 
+    public Integer countRides(){
+        ArrayList<Ride> rides = rideRepository.findAll();
+        Integer size = rides.size();
+        return size;
+    }
+
 
     public Double getDriverRating(Long id){
 

@@ -55,7 +55,6 @@ public class RideController {
             return "ride_request?status=no_car";
         }else{
             Ride ride = new Ride();
-            System.out.println(destinationPoint + departurePoint + departureDate + departureTime + ridePrice + paymentType);
             ride.setDeparturePoint(departurePoint);
             ride.setDepartureDate(departureDate);
             ride.setDestinationPoint(destinationPoint);
@@ -65,11 +64,10 @@ public class RideController {
 
             User user = userController.currentUser;
             Car car = carService.getCarById(user.getCar().getId());
-            System.out.println(1);
             ride.setCar(car);
-            System.out.println(2);
             rideService.saveRideRequest(ride);
-            return "redirect:transport_offer?status=request_added";
+            userController.ridesNumber++;
+            return "redirect:my_active_transport_offers?status=request_added";
         }}
 
     @GetMapping("/my_active_transport_offers")
@@ -92,6 +90,9 @@ public class RideController {
         model.addAttribute("driverPendingRides", driverPendingRides);
         model.addAttribute("driverFinishedRides", driverFinishedRides);
         model.addAttribute("plateNumber", plateNumber);
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         return "my_active_transport_offers";
     }
 
@@ -99,17 +100,18 @@ public class RideController {
     public String displayEditRidePage(Model model){
         Ride ride = rideService.getRideRequestById(this.rideIdToEdit);
         model.addAttribute("ride", ride);
-        model.addAttribute("departurePoint", ride.getDeparturePoint());
-        model.addAttribute("destinationPoint", ride.getDestinationPoint());
-        model.addAttribute("departureDate", ride.getDepartureDate());
-        model.addAttribute("departureTime", ride.getDepartureTime());
-        model.addAttribute("ridePrice", ride.getRidePrice());
-        model.addAttribute("paymentType", ride.getPaymentType());
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         return "edit_ride";
     }
 
     @GetMapping("/passenger_today")
-    public String displayPassengerTodayPage(){
+    public String displayPassengerTodayPage(Model model){
+
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         return "passenger_today";
     }
 
@@ -119,6 +121,9 @@ public class RideController {
         Integer userRideRequestCount = userRideRequests.size();
 
         model.addAttribute("userRidesCount", userRideRequestCount);
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         return "add_ride_request";
     }
 
@@ -145,7 +150,8 @@ public class RideController {
             User user = userService.getUserById(userController.currentUser.getId());
             ride.setPassenger(user);
             rideService.saveRideRequest(ride);
-            return "redirect:add_ride_request?status=request_added";
+            userController.ridesNumber++;
+            return "redirect:my_active_ride_requests?status=request_added";
         }
     }
 
@@ -158,6 +164,9 @@ public class RideController {
         ArrayList<Ride> userFinishedRideRequests = rideService.getAllFinishedPassengerRides(userController.currentUser.getId());
         model.addAttribute("userPendingRideRequests", userPendingRideRequests);
         model.addAttribute("userFinishedRideRequests", userFinishedRideRequests);
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         return "my_active_ride_requests";
     }
 
@@ -170,6 +179,9 @@ public class RideController {
         model.addAttribute("departureDate", ride.getDepartureDate());
         model.addAttribute("departureTime", ride.getDepartureTime());
         model.addAttribute("ridePrice", ride.getRidePrice());
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         return "edit_ride_request";
     }
 
@@ -280,6 +292,9 @@ public class RideController {
             model.addAttribute("avrDriverRating", driverAverageRating );
             model.addAttribute("registredAt", userController.currentUser.getRegisteredAt() );
             model.addAttribute("countUsers", userController.activeUsersNumber );
+
+            model.addAttribute("users", userController.activeUsersNumber);
+            model.addAttribute("rides", userController.ridesNumber);
             return"user_form";
         }
     }

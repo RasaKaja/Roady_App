@@ -51,7 +51,9 @@ public class CarController {
             model.addAttribute("carType", car_type);
             model.addAttribute("plateNumber", plate_Number);
             model.addAttribute("availableSeats", available_seats);
-            model.addAttribute("car", 1);
+            model.addAttribute("users", userController.activeUsersNumber);
+            model.addAttribute("rides", userController.ridesNumber);
+            model.addAttribute("firstName", userController.currentUser.getFirstName());
         }catch (Exception e){
             model.addAttribute("car", null);
         }
@@ -74,6 +76,9 @@ public class CarController {
         model.addAttribute("carType", car_type);
         model.addAttribute("plateNumber", plate_Number);
         model.addAttribute("availableSeats", available_seats);
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
 
         return "updateAvailableSeatsNumber";
     }
@@ -133,14 +138,19 @@ public class CarController {
     public String userIsDriver(
             @RequestParam(name = "status", required = false) String status,
             Model model){
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         if (rideSearchingController.departure!=null){
             String destination = rideSearchingController.destination;
             String departure = rideSearchingController.departure;
             rideSearchingController.departure = rideSearchingController.destination = null;
             ArrayList<Ride> searchedRides= rideService.getAllBySearch(destination, departure);
             model.addAttribute("searchedRides", searchedRides);
-            model.addAttribute("test", searchedRides.size());
             model.addAttribute("status", status);
+            model.addAttribute("firstName", userController.currentUser.getFirstName());
+
+
             return "redirect:driver_today?status=search_displayed";
         }
         return "driver_today";
@@ -151,11 +161,15 @@ public class CarController {
             @RequestParam(name = "status", required = false) String status,
             Model model
     ){
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
         try{
             ArrayList<Ride> userRides = rideService.getAllUsersRides(userController.currentUser.getCar().getId());
             Integer userRidesCount = userRides.size();
             model.addAttribute("status", status);
             model.addAttribute("userRidesCount", userRidesCount);
+            model.addAttribute("firstName", userController.currentUser.getFirstName());
+
             return "transport_offer";
         }catch (Exception e){
             return "redirect:cars?status=no_car";

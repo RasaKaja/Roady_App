@@ -17,6 +17,7 @@ public class UserController {
     UserRepository userRepository;
 
     int activeUsersNumber;
+    Integer ridesNumber;
 
     public User currentUser;
 
@@ -54,6 +55,8 @@ public class UserController {
         model.addAttribute("lastName", user.getLastName() );
         model.addAttribute("phoneNumber", user.getPhoneNumber() );
         model.addAttribute("user", currentUser);
+            model.addAttribute("users", this.activeUsersNumber);
+            model.addAttribute("rides", this.ridesNumber);
         return "my_info";}
     }
 
@@ -71,6 +74,9 @@ public class UserController {
         }else{
         List<User> listUsers = userService.listAll();
         model.addAttribute("listUsers", listUsers);
+            model.addAttribute("users", this.activeUsersNumber);
+            model.addAttribute("rides", this.ridesNumber);
+            model.addAttribute("firstName", this.currentUser.getFirstName());
         return "users";}
     }
 
@@ -82,6 +88,8 @@ public class UserController {
         }else{
         model.addAttribute("firstName", currentUser.getFirstName() );
         model.addAttribute("lastName", currentUser.getLastName() );
+            model.addAttribute("users", this.activeUsersNumber);
+            model.addAttribute("rides", this.ridesNumber);
         return "user_profile";}
     }
 
@@ -93,6 +101,8 @@ public class UserController {
     public String showRegistrationForm(Model model){
             model.addAttribute("user", new User());
             model.addAttribute("countUsers", this.activeUsersNumber );
+        model.addAttribute("users", this.activeUsersNumber);
+        model.addAttribute("rides", this.ridesNumber);
             return "signup_form";
     }
 
@@ -101,21 +111,11 @@ public class UserController {
         ArrayList<User> users =  userService.getAllUsers();
         this.activeUsersNumber = users.size();
         model.addAttribute("users", users);
+        model.addAttribute("rides", this.ridesNumber);
         return "register";
     }
 
-    @GetMapping("/login")
-    public String activeUserInfo(
-            @RequestParam(name="status", required = false) String status,
-            Model model
-    ){
-        model.addAttribute("status", status);
-        model.addAttribute("countUsers", this.activeUsersNumber );
-        ArrayList<User> users =  userService.getAllUsers();
-        this.activeUsersNumber = users.size();
-        model.addAttribute("users", activeUsersNumber);
-        return "login";
-    }
+
 
     @PostMapping("/login")
     public String successfulLogin(User user){
@@ -132,14 +132,18 @@ public class UserController {
 
 
     @GetMapping("/register_success")
-    public String RegistrationWasSuccessful(){
+    public String RegistrationWasSuccessful(Model model){
+        model.addAttribute("users", this.activeUsersNumber);
+        model.addAttribute("rides", this.ridesNumber);
         return "register_success";
     }
 
     @GetMapping("/logout")
-    public String handleLogout(){
+    public String handleLogout(Model model){
         currentUser=null;
-        return "login";
+        model.addAttribute("users", this.activeUsersNumber);
+        model.addAttribute("rides", this.ridesNumber);
+        return "redirect:login";
     }
 
     @GetMapping("/password_change")
@@ -151,6 +155,9 @@ public class UserController {
             return "login";
         }else{
         model.addAttribute("status", status);
+            model.addAttribute("users", this.activeUsersNumber);
+            model.addAttribute("rides", this.ridesNumber);
+            model.addAttribute("firstName", this.currentUser.getFirstName());
         return "password_change";}
     }
 
@@ -167,4 +174,5 @@ public class UserController {
             return"redirect:password_change?status=incorrect_password";
         }
     }
+
 }

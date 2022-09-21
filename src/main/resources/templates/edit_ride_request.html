@@ -69,7 +69,7 @@
 	</nav>
 </section>
 
-<div class="page-content">
+<div class="page-content" style="min-height: 40rem">
 
 	<div class="container">
 		<h2 class="search-title">Edit Ride Request</h2>
@@ -114,17 +114,20 @@
 					</select>
 				</div>
 
-				
-				<div class="form-row grid--2-cols-inside">
+				<div class="form-row grid--4-cols-inside">
 					<button class="register-button" type="submit">Edit</button>
-					
-					<form action="/remove_ride_request" method="post">
-						<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
-						<button class="register-button" type="submit">Delete DOES NOT WORK</button>
-					</form>
 				</div>
 			
 			</form>
+
+
+<!--			don't put "Delete" in upper form. It won't work! -->
+			<div>
+				<form action="/remove_ride_request" method="post">
+					<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
+					<button class="register-button" type="submit">Delete</button>
+				</form>
+			</div>
 		
 		</div>
 	
@@ -133,8 +136,8 @@
 </div>
 
 <aside>
-	<p>Active users: <span th:text="${users}"></span>
-	<p>Available rides: <span th:text="${countUsers}"></span></p>
+	<p>Active users: <span th:text="${users}"></span>&nbsp</p>
+	<p> Available rides: <span th:text="${rides}"></span></p>
 </aside>
 
 <footer>

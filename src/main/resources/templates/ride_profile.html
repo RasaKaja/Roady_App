@@ -72,7 +72,7 @@
 	</nav>
 </section>
 
-<div class="page-content">
+<div class="page-content" style="min-height: 40rem">
 	
 	<div class="container form-one-column">
 		<h2 class="search-title">Route information</h2>
@@ -83,27 +83,27 @@
 				<div>
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Departure:</label>
-						<input class="info-field" th:text="${ride.getDeparturePoint()}"/>
+						<p class="info-field" th:text="${ride.getDeparturePoint()}"/>
 					</div>
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Destination:</label>
-						<input class="info-field" th:text="${ride.getDestinationPoint()}"/>
+						<p class="info-field" th:text="${ride.getDestinationPoint()}"/>
 					</div>
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Departure Date:</label>
-						<input class="info-field" th:text="${ride.getDepartureDate()}"/>
+						<p class="info-field" th:text="${ride.getDepartureDate()}"/>
 					</div>
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Departure Time:</label>
-						<input class="info-field" th:text="${ride.getDepartureTime()}"/>
+						<p class="info-field" th:text="${ride.getDepartureTime()}"/>
 					</div>
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Price:</label>
-						<input class="info-field" th:text="${ride.getRidePrice()}"/>
+						<p class="info-field" th:text="${ride.getRidePrice()}"/>
 					</div>
 					<div class="form-row grid--2-cols-inside">
 						<label class="table-label">Payment type:</label>
-						<input class="info-field" th:text="${ride.getPaymentType()}"/>
+						<p class="info-field" th:text="${ride.getPaymentType()}"/>
 					</div>
 				</div>
 				
@@ -112,15 +112,15 @@
 					<div>
 						<div class="form-row grid--2-cols-inside">
 							<label class="table-label">First Name:</label>
-							<input class="info-field" th:text="${ride.getPassenger().getFirstName()}"></input>
+							<p class="info-field" th:text="${ride.getPassenger().getFirstName()}"></p>
 						</div>
 						<div class="form-row grid--2-cols-inside">
 							<label class="table-label">Last Name:</label></td>
-							<input class="info-field" th:text="${ride.getPassenger().getLastName()}"></input>
+							<p class="info-field" th:text="${ride.getPassenger().getLastName()}"></p>
 						</div>
 						<div class="form-row grid--2-cols-inside">
 							<label class="table-label">Phone:</label></td>
-							<input class="info-field" th:text="${ride.getPassenger().getPhoneNumber()}"></input>
+							<p class="info-field" th:text="${ride.getPassenger().getPhoneNumber()}"></p>
 						</div>
 						
 						<input type="hidden" name="rideId" th:value="${ride.getRideRequestId()}">
@@ -140,8 +140,8 @@
 </div>
 
 <aside>
-	<p>Active users: <span th:text="${users}"></span>
-	<p>Available rides: <span th:text="${countUsers}"></span></p>
+	<p>Active users: <span th:text="${users}"></span>&nbsp</p>
+	<p> Available rides: <span th:text="${rides}"></span></p>
 </aside>
 
 <footer>

@@ -3,6 +3,7 @@ package com.roady.app.controllers;
 import com.roady.app.entities.DriverReview;
 import com.roady.app.entities.PassengerReview;
 import com.roady.app.entities.Ride;
+import com.roady.app.entities.User;
 import com.roady.app.services.CarService;
 import com.roady.app.services.ReviewService;
 import com.roady.app.services.RideService;
@@ -73,6 +74,9 @@ public class RideSearchingController {
                 this.departure = this.destination = null;
                 ArrayList<Ride> searchedRides = rideService.getAllBySearch(destination, departure);
                 model.addAttribute("searchedRides", searchedRides);
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
                 return "search_passengers";
         }
 
@@ -83,6 +87,9 @@ public class RideSearchingController {
         this.departure = this.destination = null;
         ArrayList<Ride> searchedRides = rideService.getAllDriversBySearch(destination, departure);
         model.addAttribute("searchedRides", searchedRides);
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         return "search_driver";
     }
 
@@ -90,6 +97,9 @@ public class RideSearchingController {
     public String showRideProfile(Model model){
         Ride ride = rideService.getRideRequestById(this.bookedRideId);
         model.addAttribute("ride", ride);
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         return "ride_profile";
     }
 
@@ -97,6 +107,9 @@ public class RideSearchingController {
     public String showDriversRideProfile(Model model){
         Ride ride = rideService.getRideRequestById(this.bookedRideId);
         model.addAttribute("ride", ride);
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         return "drivers_ride_profile";
     }
 
@@ -112,7 +125,7 @@ public class RideSearchingController {
     @PostMapping("/confirm_booking_as_driver")
     public String driverConfirmsBooking(Long rideId){
         Ride ride = rideService.lookUpRideById(rideId);
-        ride.setCar(carService.getCarById(userController.currentUser.getId()));
+        ride.setCar(carService.getCarById(userController.currentUser.getCar().getId()));
         ride.setIsFinished(true);
         rideService.saveRideRequest(ride);
         return "redirect:my_active_transport_offers";
@@ -145,6 +158,9 @@ public class RideSearchingController {
         model.addAttribute("status", status);
         model.addAttribute("isPassengerRated", isPassengerRated);
         model.addAttribute("isDriverRated", isDriverRated);
+        model.addAttribute("users", userController.activeUsersNumber);
+        model.addAttribute("rides", userController.ridesNumber);
+        model.addAttribute("firstName", userController.currentUser.getFirstName());
         return "finished_ride_profile";
     }
 
@@ -178,6 +194,23 @@ public class RideSearchingController {
         ride.setPassengerReview(passengerReview);
         rideService.saveRideRequest(ride);
         return "redirect:my_active_ride_requests?status=rated";
+    }
+
+
+    @GetMapping("/login")
+    public String activeUserInfo(
+            @RequestParam(name="status", required = false) String status,
+            Model model
+    ){
+        model.addAttribute("status", status);
+        ArrayList<User> users =  userService.getAllUsers();
+        userController.activeUsersNumber = users.size();
+        model.addAttribute("users", userController.activeUsersNumber);
+        userController.ridesNumber = rideService.countRides();
+        model.addAttribute("rides", userController.ridesNumber);
+
+
+        return "login";
     }
 
 
