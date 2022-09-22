@@ -85,18 +85,20 @@
 					<p class="info-field" th:text="${availableSeats}"/>
 				</div>
 
-				<div class="form-row grid--2-cols-inside">
+				<div class="form-row grid--4-cols-inside">
 					<tr>
 						<a class="register-button" href="updateAvailableSeatsNumber">Update</a>
 						<!--						<a class="register-button" href="/remove_car">Remove car</a>-->
 					</tr>
-					<tr>
-						<form action="/remove_car" method="post">
-							<button class="register-button" type="submit">Remove car</button>
-						</form>
-					</tr>
+
 				</div>
 			</form>
+
+			<div class="form-row grid--4-cols-inside" >
+				<form action="/remove_car" method="post">
+					<button class="register-button" type="submit">Remove car</button>
+				</form>
+			</div>
 		</div>
 
 		<div>
